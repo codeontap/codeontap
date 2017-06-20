@@ -75,7 +75,12 @@ Start tomcat:
 service tomcat7 start
 ```
 5) **Setup docker**
+
+The softlink ensures docker images don't fill up the root partition.
 ```
+cp -rp /var/lib/docker /codeontap
+rm -rf /var/lib/docker
+ln -s /codeontap/docker /var/lib/docker
 service docker start
 ```
 6) **Setup httpd**
