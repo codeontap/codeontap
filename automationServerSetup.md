@@ -369,8 +369,14 @@ and add the following line to the very end of file:
 and change tomcat shell in `/etc/passwd` to `/bin/bash`
  
 > *NOTE: This is not necessary if sudo is only required to be able to run docker assuming tomcat added to the docker group as shown above*
-
-13) ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
+13) **Install npm based tools if required (e.g., for swagger)**
+```
+npm install -g yamljs
+npm install -g ajv
+npm install -g swagger
+npm install -g swagger-tools
+```
+14) ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
   1. Open jenkins URL(since it is not setup yet, it should allow anonymous login)
   2. Go to Manage Jenkins -> Configure Global Security
   3. There you will need to check Enable Security box and then select LDAP as security Realm
