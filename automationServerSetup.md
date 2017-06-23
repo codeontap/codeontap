@@ -152,7 +152,6 @@ version: '2'
 services:
   redis:
     image: redis:3.0
-    restart: always
 
   postgres:
     image: postgres
@@ -160,7 +159,6 @@ services:
     volumes:
       - /codeontap/sentry/var/pg_data/:/var/lib/postgresql/data
       - /codeontap/sentry/var/pg_backups/:/backups
-    restart: always
 
   sentry:
     image: sentry
@@ -170,7 +168,6 @@ services:
       - redis
       - postgres
     env_file: sentry.env
-    restart: always
 
   celerybeat:
     image: sentry
@@ -179,7 +176,6 @@ services:
       - postgres
     command: sentry run cron
     env_file: sentry.env
-    restart: always
 
   celeryworker:
     image: sentry
@@ -188,7 +184,6 @@ services:
       - postgres
     command: sentry run worker
     env_file: sentry.env
-    restart: always
 ```
 First time run docker-compose without -d option to confirm it is starting OK and create a super user:
 ```
@@ -206,13 +201,69 @@ Install GitHub Auth for Sentry:
 ```
 docker-compose exec sentry bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 ```
-Disable registration if needed:
-```
-docker-compose exec sentry bash -c "echo SENTRY_FEATURES[\'auth:register\'] = False >> /etc/sentry/sentry.conf.py"
-```
 Restart sentry:
 ```
 docker-compose restart
+```
+Create '/etc/init.d/sentry' script:
+```
+#!/bin/sh
+#
+#       /etc/rc.d/init.d/sentry
+#
+#       Daemon for docker.com
+#
+# chkconfig:   2345 96 04
+# description: Daemon for sentry
+
+### BEGIN INIT INFO
+# Provides:             sentry
+# Required-Start:       $docker
+# Required-Stop:        $docker
+# Default-Start:        2 3 4 5
+# Short-Description:    Sentry Docker-Compose Daemon Service
+### END INIT INFO
+
+
+set -e
+
+PROJECT_NAME=sentry
+YAMLFILE=/opt/sentry/docker-compose.yml
+
+case "$1" in
+    start)
+        echo "Starting Docker Compose with $PROJECT_NAME" >&2
+        docker-compose -f $YAMLFILE up -d
+        docker-compose -f $YAMLFILE exec $PROJECT_NAME bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+        docker-compose -f $YAMLFILE restart
+        ;;
+
+    stop)
+        echo "Stopping Docker Compose with $PROJECT_NAME" >&2
+        docker-compose -f $YAMLFILE stop
+        ;;
+
+    restart)
+        echo "Restarting Docker Compose with $PROJECT_NAME" >&2
+        docker-compose -f $YAMLFILE restart
+        ;;
+
+    *)
+        echo "Usage: service sentry {start|stop|restart}" || true
+        exit 1
+        ;;
+esac
+
+exit 0
+```
+Make it exacutable:
+```
+chmode +x /etc/init.d/sentry
+```
+Make sure it is correctly configured in chkconfig to be loaded after docker (default order for sentry 96 and 04 ), enable it and start the service:
+```
+chkconfig sentry on
+service sentry start
 ```
 Create backup script in `/root/backup_sentry_data.sh` - replace `{domain}` to required domain:
 ```
