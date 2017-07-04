@@ -2,6 +2,8 @@
 
 In general ALM consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
 
+_**Note: it is highly recommended to use 2.46.2 Jenkins version or higher and disable the remoting based cli, if it was enabled in the previous version installation.**_
+
 1) **Run up ALM server, and create DNS entry for it - `automation.{domain}`** 
 
 If Sentry to be installed, do not forget about `sentry.{domain}` A-record.
