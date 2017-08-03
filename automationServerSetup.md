@@ -90,7 +90,7 @@ service docker start
 ```
 
 6) **Setup sentry**
-Install docker-compose replacing $dockerComposeVersion
+Install docker-compose replacing $dockerComposeVersion. Check https://github.com/docker/compose/releases for the latest version.
 ```
 curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
 ```
