@@ -360,7 +360,7 @@ Check renewal will work ok - need to reconfigure to allow for running http serve
 ./certbot-auto --apache certonly --debug
 ./certbot-auto renew --dry-run
 ```
-> *NOTE: For installation choose Spin up temprorary webserver, but for renew - running http server.*
+> *Important: Configuration must be updated for each name. Make sure to ru renew --dry-run.*
 
 If you have installed Sentry, make the same steps for sentry.{domain}.
 
