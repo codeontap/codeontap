@@ -74,6 +74,9 @@ Create a crontab file '/var/spool/cron/root':
 #
 # Keep SSL certificate up to date
 5 0,8,16 * * * /root/certbot-auto renew >> /var/log/renew_cert_check.log 2>&1
+#
+# Remove docker stopped containers/dangling images
+0 3 * * 6 docker system prune -f >> /var/log/docker_system_prune.log 2>&1
 ```
 Start tomcat:
 ```
