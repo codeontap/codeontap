@@ -18,6 +18,17 @@ yum install -y docker
 yum groupinstall "Development Tools"
 ```
 3) **Configure tomcat7**
+Install OpenJDK 8
+
+```
+yum install java-1.8.0-openjdk
+```
+
+Update alternatives config and set OpenJDK 8 as current java version
+
+```
+alternatives --config java
+```
 
 Put the following line just before to trailing tag to `/etc/tomcat7/context.xml`:
 ```
