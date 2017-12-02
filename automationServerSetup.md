@@ -18,6 +18,7 @@ yum install -y docker
 yum groupinstall "Development Tools"
 ```
 3) **Configure tomcat7**
+
 Install OpenJDK 8
 
 ```
@@ -213,9 +214,11 @@ Upgrade sentry:
 ```
 docker-compose exec sentry sentry upgrade
 ```
-Install GitHub Auth for Sentry:
+Install GitHub Auth for all Sentry services:
 ```
 docker-compose exec sentry bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+docker-compose exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+docker-compose exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 ```
 Restart sentry:
 ```
@@ -251,6 +254,8 @@ case "$1" in
         echo "Starting Docker Compose with $PROJECT_NAME" >&2
         docker-compose -f $YAMLFILE up -d
         docker-compose -f $YAMLFILE exec $PROJECT_NAME bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+        docker-compose -f $YAMLFILE exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+        docker-compose -f $YAMLFILE exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
         docker-compose -f $YAMLFILE restart
         ;;
 
@@ -274,7 +279,7 @@ exit 0
 ```
 Make it exacutable:
 ```
-chmode +x /etc/init.d/sentry
+chmod +x /etc/init.d/sentry
 ```
 Make sure it is correctly configured in chkconfig to be loaded after docker (default order for sentry 96 and 04 ), enable it and start the service:
 ```
