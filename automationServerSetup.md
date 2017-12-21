@@ -1,15 +1,27 @@
-## ALM Setup
+# Amazon Linux Machine Setup
 
-In general ALM consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
+In general Amazon Linux Machine (ALM) consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
 
 _**Note: it is highly recommended to use 2.46.2 Jenkins version or higher and disable the remoting based cli, if it was enabled in the previous version installation.**_
 
-1) **Run up ALM server, and create DNS entry for it - `automation.{domain}`** 
+1. **Run up ALM server**
 
-If Sentry to be installed, do not forget about `sentry.{domain}` A-record.
+Create an IAM Role and attach to the instance on startup 
+The automation server will need access to a wide range of AWS services 
 
-2) **Install the required packages**
-```
+2. **Load Balancing Setup**
+
+Create a network load balancer. This is mainly used for a static DNS endpoint in AWS.
+
+3. **DNS Entries**
+
+create CNAME DNS entries for the following using the Load balancer A record as the domain name
+  Automation Server - `automation.{domain}`
+  Sentry - `sentry.{domain}`
+
+4. **Install the required packages**
+
+```bash
 yum -y update
 yum install -y git jq dos2unix
 yum install -y httpd24  mod24_ssl
@@ -17,27 +29,31 @@ yum install -y tomcat7
 yum install -y docker
 yum groupinstall "Development Tools"
 ```
-3) **Configure tomcat7**
+
+5. **Configure tomcat7**
 
 Put the following line just before to trailing tag to `/etc/tomcat7/context.xml`:
 ```
 <Environment name="JENKINS_HOME" value="/codeontap/jenkins/" type="java.lang.String"/>
 ```
+
 Put the following lines for `JAVA_OPTS` in `/etc/tomcat7/tomcat7.conf`:
 ```
 JAVA_OPTS="${JAVA_OPTS} -Dhudson.DNSMultiCast.disabled=true"
-
 JAVA_OPTS="${JAVA_OPTS} -Dorg.apache.commons.jelly.tags.fmt.timeZone=Australia/Sydney"
 ```
+
 Configure `UTF8` as base encoding, thus add the following attribute to `Connector` section of `/etc/tomcat7/server.xml` file:
 ```
 URIEncoding="UTF-8"
 ```
+
 Add tomcat user to docker group to access docker:
 ```
 usermod -aG docker tomcat
 ```
-4) **Setup jenkins**
+
+6. **Setup jenkins**
 
 Download the latest stable version to `/root` directory, rename it to `jenkins-{version}.war`, copy it to `webapps` dir as `ROOT.war`:
 ```
@@ -65,6 +81,7 @@ Change mode for backup script to make it executable:
 chmod 755 /root/backup_data.sh
 ```
 Create a crontab file '/var/spool/cron/root':
+
 ```
 # Copy key data to S3 each day
 0  2 * * * /root/backup_data.sh
@@ -78,29 +95,38 @@ Create a crontab file '/var/spool/cron/root':
 # Remove docker stopped containers/dangling images
 0 3 * * 6 docker system prune -f >> /var/log/docker_system_prune.log 2>&1
 ```
+
 Start tomcat:
-```
+
+```bash
 service tomcat7 start
 ```
-5) **Setup docker**
+
+5. **Setup docker**
 
 The softlink ensures docker images don't fill up the root partition.
-```
+
+```bash
 cp -rp /var/lib/docker /codeontap
 rm -rf /var/lib/docker
 ln -s /codeontap/docker /var/lib/docker
 service docker start
 ```
 
-6) **Setup sentry**
+6. **Setup sentry**
+
 Install docker-compose replacing $dockerComposeVersion. Check https://github.com/docker/compose/releases for the latest version.
-```
+
+```bash
 curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
 ```
+
 Apply executable permissions to the binary:
-```
+
+```bash
 sudo chmod +x /usr/bin/docker-compose
 ```
+
 Add an Oauth app to github organisation with a callback url `https://sentry.{domain}`
 Get smtp credentials.
 Create sentry.env 
@@ -427,51 +453,52 @@ and add the following line to the very end of file:
 and change tomcat shell in `/etc/passwd` to `/bin/bash`
  
 > *NOTE: This is not necessary if sudo is only required to be able to run docker assuming tomcat added to the docker group as shown above*
-13) **Install npm based tools if required (e.g., for swagger)**
+
+13. **Install npm based tools if required (e.g., for swagger)**
 ```
 npm install -g yamljs
 npm install -g ajv
 npm install -g swagger
 npm install -g swagger-tools
 ```
-14) ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
-  1. Open jenkins URL(since it is not setup yet, it should allow anonymous login)
-  2. Go to Manage Jenkins -> Configure Global Security
-  3. There you will need to check Enable Security box and then select LDAP as security Realm
-  4. Once it is done you will need to click on Advanced box under LDAP security realm and configure LDAP with the following values:
-```
-Server: alm.gosource.com.au
-root DN: dc=gosource,dc=com,dc=au
-User search base: ou=Users
-User search filter: uid={0}
-Group search base: ou=Groups,ou=env01,ou=accounts,ou=env,ou=organisations (it depends on the organization name)
-Group search filter:
-Group membership: select Parse user attribute for list of groups from dropdown and put memberOf as Group membership attribute
-Manager DN: this one should be populated with the alm CN created for the organization
-Manager Password: this one should be populated with the alm password
-Display Name LDAP attribute: displayname
-Email Address LDAP attribute: mail
-```
-  5. After LDAP is configured you will need to choose the proper Authorization, it is Project-based Matrix Authorization Strategy, configure local-alm group with the full access and other LDAP groups with the Read Permissions as required
- 
- 
-13) Adding docker images to the private registry
 
-  1. First you need to login to the instance with the running docker daemon(alm fits best for this purpose) and login to the private registry:
+14. ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
+    1. Open jenkins URL(since it is not setup yet, it should allow anonymous login)
+    2. Go to Manage Jenkins -> Configure Global Security
+    3. There you will need to check Enable Security box and then select LDAP as security Realm
+    4. Once it is done you will need to click on Advanced box under LDAP security realm and configure LDAP with the following values:
+    ```
+    Server: alm.gosource.com.au
+    root DN: dc=gosource,dc=com,dc=au
+    User search base: ou=Users
+    User search filter: uid={0}
+    Group search base: ou=Groups,ou=env01,ou=accounts,ou=env,ou=organisations (it depends on the organization name)
+    Group search filter:
+    Group membership: select Parse user attribute for list of groups from dropdown and put memberOf as Group membership attribute
+    Manager DN: this one should be populated with the alm CN created for the organization
+    Manager Password: this one should be populated with the alm password
+    Display Name LDAP attribute: displayname
+    Email Address LDAP attribute: mail
+    ```
+    5. After LDAP is configured you will need to choose the proper Authorization, it is Project-based Matrix Authorization Strategy, configure local-alm group with the full access and other LDAP groups with the Read Permissions as required
 
-`docker login -u USER -p PASS -e USER docker.env01.gosource.com.au:443`
+13. Adding docker images to the private registry
 
-  2. Then you need to pull or build the image that needs to be added to the registry, e.g.:
+    1. First you need to login to the instance with the running docker daemon(alm fits best for this purpose) and login to the private registry:
 
-`docker pull logstash`
+    `docker login -u USER -p PASS -e USER docker.env01.gosource.com.au:443`
 
-  3. After the image is built/pulled, it needs to be tagged properly, e.g.:
+    2. Then you need to pull or build the image that needs to be added to the registry, e.g.:
 
-`docker tag logstash docker.env01.gosource.com.au:443/logstash`
+    `docker pull logstash`
 
-  4. And then it could be pushed to the registry:
+    3. After the image is built/pulled, it needs to be tagged properly, e.g.:
 
-`docker push docker.env01.gosource.com.au:443/logstash`
+    `docker tag logstash docker.env01.gosource.com.au:443/logstash`
+
+    4. And then it could be pushed to the registry:
+
+    `docker push docker.env01.gosource.com.au:443/logstash`
 
 
 15) Google email domains and addresses
