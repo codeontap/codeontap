@@ -2,7 +2,7 @@
 
 ## Devops
 
-Devops folder defines how the code is built using the codeontap platform. The Devops folder defines how to build and host the code contained within the repo.
+Devops folder defines how the code is built using the codeontap platform including how to build and host the code contained within the repo.
 
 * **devops** - Contains application build and deployment description
 		* **resource build tools**
