@@ -59,10 +59,25 @@ infrastructure/ ____________________ # the provisioned infrastructure for the so
 
 ### Accounts
 
-The accounts CMDB is a seperate repository to the domain level CMDB respostiory as it can be shared across multiple domains/applications.
+The accounts CMDB is a seperate repository to the domain level CMDB respostiory as it can be shared across multiple domains/applications. Accounts can be grouped into subdirectories inorder to classify them.
 
-* **tenant** 
-
-** 
-
-* **account role** - The role of the account
+````
+<tenant>/ _________________________ # the organsisation details over all
+|    |- domains.json ______________ # DNS zone details used for service naming and resolution
+|    |- tenant.json _______________ # default settings for the organisation
+|    |- ipaddressgroups_<name>.json # IP address collections used for access control
+|    |- countrygroups.json ________ # country collections used for access control
+|
+<account>/ ________________________ # a cloud provider account
+|
+|    |- config/ ___________________ # account level configuration details
+|        |- account.json __________ # account specifc details
+|
+|        |- appsettings/
+|            |- appsettings.json __ # account level application settings
+|
+|    |- infrastructure/
+|
+|        |- credentials/
+|            |- credentials.json __ # account level credentials
+````
