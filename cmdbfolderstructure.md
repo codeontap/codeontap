@@ -65,7 +65,7 @@ infrastructure/ ______________________ # the provisioned infrastructure for the 
 
 ## Accounts
 
-The accounts CMDB is a separate repository to the domain level CMDB repository as it can be shared across multiple domains/applications. Accounts can be grouped into subdirectories in order to classify them.
+The accounts CMDB is a separate repository to the product level CMDB as it can be shared across multiple domains/applications. Accounts can be grouped into subdirectories in order to classify them.
 
 ````text
 <tenant>/ ____________________________ # the organisation details over all

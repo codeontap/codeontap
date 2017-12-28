@@ -4,7 +4,7 @@ Environment variables are used for a number of functions within codeontap. This 
 
 ## Generation Variables
 
-* **GENERATION_DIR** - The local copy of the generation framework git repository
+* **GENERATION_DIR** - The local copy of the generation framework repository
 * **ACCOUNT** - The name of the cloud provider account that the segment will be deployed to
 * **GENERATION_DEBUG** - Enable debug level output from all scripts running for generation
         * **-x** - base level debug - all outputs printed
