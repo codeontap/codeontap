@@ -1,13 +1,16 @@
-# App Code Repository Structure
+# Application Code Repository Structure
+
+The application code repository hosts the code for an application/product along with the details of how the code should be used. Like the CMDB repository the folder structure of the repository is used by the automation service to build the application.
 
 ## Product
 
 Multiple implementations can be place in the same product folder, the devops and imp directories just need to be placed inside a sub directory for each implementation.
 
-````
-<product>\ ___________________________ #
+````text
+<product>\
 |
-|    |- devops\ ______________________ # Provides product level resource details, see devops
+|    |- <resource>\
+|        |- devops\ __________________ # Provides product level resource details, see devops
 |
 |    |- imp\ _________________________ # the implementation of the product
 |
@@ -15,14 +18,15 @@ Multiple implementations can be place in the same product folder, the devops and
 |
 |        |- src\ _____________________ # the source code of the implementation
 |
-|        |- yammer.json ______________ # the yammer specification for API based products
+|        |- spec\
+|            |- swagger.yaml _________ # the swagger specification for API based products
 ````
 
 ## Devops
 
 Devops folder defines how the code is built using the codeontap platform including how to build and host the code contained within the repository.
 
-````
+````text
 devops\ ______________________________ # contains the build and deployment details
 |
 |    |- <resource build tool> ________ # contains the build tooling information for a specific build tool
