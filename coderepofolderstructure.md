@@ -7,11 +7,11 @@ Multiple implementations can be place in the same product folder, the devops and
 ````
 <product>\ ___________________________ #
 |
-|    |- devops\ ______________________ # Provides product level resource details, see [devops](#devops)
+|    |- devops\ ______________________ # Provides product level resource details, see devops
 |
 |    |- imp\ _________________________ # the implementation of the product
 |
-|        |- devops\ __________________ # implementation level resource details, see [devops](#devops)
+|        |- devops\ __________________ # implementation level resource details, see devops
 |
 |        |- src\ _____________________ # the source code of the implementation
 |
