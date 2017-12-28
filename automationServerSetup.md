@@ -257,10 +257,12 @@ Upgrade sentry:
 docker-compose exec sentry sentry upgrade
 ```
 
-Install GitHub Auth for Sentry:
+Install GitHub Auth for all Sentry services:
 
 ```bash
 docker-compose exec sentry bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+docker-compose exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+docker-compose exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 ```
 
 Restart sentry:
@@ -299,6 +301,8 @@ case "$1" in
         echo "Starting Docker Compose with $PROJECT_NAME" >&2
         docker-compose -f $YAMLFILE up -d
         docker-compose -f $YAMLFILE exec $PROJECT_NAME bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+        docker-compose -f $YAMLFILE exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+        docker-compose -f $YAMLFILE exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
         docker-compose -f $YAMLFILE restart
         ;;
 
