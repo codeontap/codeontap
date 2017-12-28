@@ -8,7 +8,7 @@
 * Scope - Tenant
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Domains" : {
             "Validation" : "codeontap.io",
@@ -28,7 +28,7 @@
 * Scope - Tenant
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Tenant" : {
             "Title" : "Code on Tap",
@@ -59,7 +59,7 @@
 * Scope - Tenant
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "IPAddressGroups" : {
             "cbroffice" : {
@@ -80,7 +80,7 @@
 * Scope - Tenant
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "CountryGroups" : {
             "Australia" : {
@@ -96,7 +96,7 @@
 * Scope - Account
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Account" : {
             "Title" : "Development Account",
@@ -113,7 +113,7 @@
 * Scope - product, segment, app
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "ChatBot" : {
             "Rest" : {
@@ -131,7 +131,7 @@
 * Scope - app
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Commit": "1730ad1e0dc0cb84a066f43836c45409212394a6a",
         "Formats": ["docker" ]
@@ -144,7 +144,7 @@
 * Scope - segment
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Segment" : {
             "Title" : "Development",
@@ -162,7 +162,7 @@
 * Scope - product, segment, app
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Solution" : {
             "Id" : "bdd"
@@ -220,7 +220,7 @@
 * Scope - product, implementation
 * Type - Config
 * Example:
-    ````json
+    ````JSON
     {
         "Units" : ["cotapp-v1"],
         "Formats" : ["spa"]
@@ -233,7 +233,7 @@
 * Scope - implementation
 * Type - Config
 * Example - apigw.json
-    ````json
+    ````JSON
     {
         "Accounts" : ["1234567890"],
         "Regions" : ["ap-southeast-2"],
@@ -251,7 +251,7 @@
 * Scope - Account, segment, app
 * Type - Artefact
 * Example:
-    ````json
+    ````JSON
     {
         "Credentials": {
             "ChatBot": {
