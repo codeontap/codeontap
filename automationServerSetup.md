@@ -1,6 +1,6 @@
-# Amazon Linux Machine Setup
+# Application Lifecyle Management Setup
 
-In general Amazon Linux Machine (ALM) consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
+In general Application Lifecyle Management (ALM) consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
 
 _**Note: it is highly recommended to use 2.46.2 Jenkins version or higher and disable the remoting based cli, if it was enabled in the previous version installation.**_
 
@@ -642,7 +642,7 @@ Technical Details: <same as admin details>
 
 Ensure the resulting certificate is provided in PEM format, and save it in S3 with the CSR as {domain}-ssl-crt.pem. It may also be necessary to capture issuer intermediary certificates, e.g. rapidssl-ssl-intermediate.pem.
 
-19. Shelf Account Creation
+19. **Shelf Account Creation**
 In order to speed up the process of organisation account creation, we maintain a few GoSource "shelf" accounts - shelf01, shelf02, ..shelfnn. These are basically fully set up AWS accounts. Importantly, they are already linked for consolidated billing and have cross-account access established via the gosource-administration role.
 
 When a customer needs a new account, a shelf account is converted into an organisation account as described below.
