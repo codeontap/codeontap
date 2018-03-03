@@ -1,3 +1,8 @@
+---
+layout: page
+title: Jenkins Property Files
+category: automation-server
+---
 # Jenkins Property Files
 
 The Repositories (AccountsCMDB, ProductCMDB, and Code ) are linked together in the application lifecyle management service (ALM).

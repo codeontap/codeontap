@@ -1,3 +1,8 @@
+---
+layout: page
+title: Automation Server Setup
+category: automation-server
+---
 # Application Lifecyle Management Setup
 
 In general Application Lifecyle Management (ALM) consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.

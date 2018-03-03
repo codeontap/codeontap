@@ -1,3 +1,8 @@
+---
+layout: page
+title: Code Folder Structure
+category: configuration
+---
 # Application Code Repository Structure
 
 The application code repository hosts the code for an application/product along with the details of how the code should be used. Like the CMDB repository the folder structure of the repository is used by the automation service to build the application.

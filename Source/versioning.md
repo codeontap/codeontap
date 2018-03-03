@@ -1,16 +1,21 @@
+---
+layout: page
+title: Versioning
+category: home
+---
 CodeOnTap releases follow the release train concept where releases are made at schedudled intervals. Two train releases are currently used, the tram and the train.
 
 # Releases
 
-## Tram Releases
+### Tram Releases
 
 The Tram release is the collection of all changes performed during the schedule time frame. CodeOnTap tram schedules are currently performed weekly.
 
-## Train Releases
+### Train Releases
 
 The train release is the latest stable release of CodeOnTap. Scheuled for every 3 months
 
-## Patch Releases
+### Patch Releases
 
 Bug fix releases for train releases. Will be released as required.
 
