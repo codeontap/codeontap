@@ -13,7 +13,7 @@ The Tram release is the collection of all changes performed during the schedule 
 
 ### Train Releases
 
-The train release is the latest stable release of CodeOnTap. Scheuled for every 3 months
+The train release is the latest stable release of CodeOnTap. Scheduled for every 3 months
 
 ### Patch Releases
 
@@ -32,6 +32,6 @@ CodeOnTap follows semver 2.0.0 (https://semver.org/spec/v2.0.0.html) with alignm
 - **Major - 1.x.x** When the CodeOnTap team determine that a significant or breaking change is being introduced
 - **Minor - x.1.x** Each train release increments the minor version number
 - **Patch - x.x.1** Urgent fixes for the most recent train release
-- **Release Candidate - x.x.x-rc1** Each tram release is treated as a release candidate
+- **Release Candidate - x.x.0-rc1** Each tram release is treated as a release candidate
 
-With this format the release candidate and minor versions will increment on a regular basis and the major and path releases are managed by the CodeOnTap team
+With this format the release candidate and minor versions will increment on a regular basis and the major and patch releases are managed by the CodeOnTap team
