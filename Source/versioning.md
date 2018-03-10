@@ -3,7 +3,7 @@ layout: page
 title: Versioning
 category: home
 ---
-CodeOnTap releases follow the release train concept where releases are made at schedudled intervals. Two train releases are currently used, the tram and the train.
+CodeOnTap releases follow the release train concept where releases are made at scheduled intervals. Two train releases are currently used, the tram and the train.
 
 # Releases
 
