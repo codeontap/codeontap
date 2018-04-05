@@ -379,7 +379,11 @@ Check renewal will work ok - need to reconfigure to allow for running http serve
 ./certbot-auto --apache certonly --debug
 ./certbot-auto renew --dry-run
 ```
-> *Important: Configuration must be updated for each name. Make sure to run renew --dry-run.*
+_**Important: Configuration must be updated for each name. Make sure to run renew --dry-run.**_
+
+_**Note: If certbot-auto is failing, install letsencrypt with pip: 
+`pip install pip install certbot certbot-apache`. 
+Call `certbot` instead of `certbot-auto` in this case and adjust crontab.**_
 
 If you have installed Sentry, make the same steps for sentry.{domain}.
 
