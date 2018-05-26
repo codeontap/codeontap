@@ -368,7 +368,7 @@ wget https://dl.eff.org/certbot-auto
 chmod +x certbot-auto
 ./certbot-auto certonly --debug
 ```
-Ignore any errors involving apachectl (config will be invalid until certificate obtained), choose `(3) (Spin up temporary webserver)` as the authentication method required, and `automation.{domain}` as the required domain.
+Ignore any errors involving apachectl (config will be invalid until certificate obtained), choose `(Spin up temporary webserver)` as the authentication method required, and `automation.{domain}` as the required domain.
 
 Start the httpd server:
 ```
@@ -380,6 +380,7 @@ Check renewal will work ok - need to reconfigure to allow for running http serve
 ./certbot-auto renew --dry-run
 ```
 > *Important: Configuration must be updated for each name. Make sure to run renew --dry-run.*
+> *Important: If you have problems with certbot-auto, install certbot via `pip install certbot`. Make sure to update the crontab properly in this case.*
 
 If you have installed Sentry, make the same steps for sentry.{domain}.
 
