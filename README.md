@@ -18,9 +18,9 @@ Obviously, this process would be analogous for different components and/or envir
 1. In AWS Workspace, start web browser by clicking the Mozilla Firefox icon at bottom. Firefox window will appear.
 1. In Firefox, go to the automation page, at: https://automation.cp1.border.gov.au/job/cotw-trade/job/cotp-blockchain/
 1. At time of writing, a warning about invalid HTTPS certificates appeared. Dismiss this warning by doing:
-  1. Click 'Add exception...'. A dialog will appear.
-  1. Deselect the checkbox labeled 'Permanently store this exception'.
-  1. Click the button labeled 'Confirm Security Exception'.
+   1. Click 'Add exception...'. A dialog will appear.
+   1. Deselect the checkbox labeled 'Permanently store this exception'.
+   1. Click the button labeled 'Confirm Security Exception'.
 1. A page reading in part 'Sign in to GitHub to continue to DIBP Automation' will appear.
 1. Log in with your GoSource GitHub credentials
 1. If a page entitled 'Authorize DIBP Automation' appears, click the green button labeled 'Authorize gs-immi' at bottom of page.
