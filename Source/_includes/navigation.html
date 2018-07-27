@@ -1,7 +1,0 @@
-<nav class="c-navigation {% if site.fixedNav == 'true' %}is-fixed{% endif %}">
-  <div class="c-navigation__container u-container">
-  {% for doc in site.pages %}
-    <a class="c-navigation__item {% if page.url == doc.url %}is-active{% endif %}" href="{{ doc.url }}">{{doc.title}}</a>
-  {% endfor %}
-  </div>
-</nav>
