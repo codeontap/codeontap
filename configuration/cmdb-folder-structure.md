@@ -1,8 +1,3 @@
----
-layout: page
-title: CMDB Folder Structure
-category: configuration
----
 # CMDB Structure
 
 The CMDB repository is used to outline the supporting infrastructure and services required for the deployment of an application. The structure of the repository is important for the generation and automation of the infrastructure.

@@ -1,8 +1,3 @@
----
-layout: page
-title: Getting Started
-category: getting-started
----
 # Getting Started
 
 This getting started guide uses codeontap to deploy the application life-cycle management (ALM) service. Once deployed this service is used to build and deploy your applications.

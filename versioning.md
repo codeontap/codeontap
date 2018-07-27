@@ -1,8 +1,3 @@
----
-layout: page
-title: Release Models
-category: home
----
 CodeOnTap releases follow the release train model [Spotify Example](https://labs.spotify.com/2014/03/27/spotify-engineering-culture-part-1/) [Agile Description](https://www.scaledagileframework.com/agile-release-train/) where releases are made at scheduled intervals. With this model all commits to the master branch should be considered release candidates.
 
 # Releases

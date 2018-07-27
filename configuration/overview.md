@@ -1,8 +1,3 @@
----
-layout: page
-title: Overall Configuration
-category: configuration
----
 # Code On Tap Configuration Files
 
 ## Configuration Files
