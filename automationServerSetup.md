@@ -1,15 +1,22 @@
-## ALM Setup
+# Application Lifecyle Management Setup
 
-In general ALM consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
+In general Application Lifecyle Management (ALM) consists of jenkins, docker and httpd as frontend. Jenkins is distributed as a war file and thus needs some container service to be run on, we use tomcat7.
 
 _**Note: it is highly recommended to use 2.46.2 Jenkins version or higher and disable the remoting based cli, if it was enabled in the previous version installation.**_
 
-1) **Run up ALM server, and create DNS entry for it - `automation.{domain}`** 
+1. **Run up ALM server, and create DNS entry for it - `automation.{domain}`** 
 
 If Sentry to be installed, do not forget about `sentry.{domain}` A-record.
 
-2) **Install the required packages**
-```
+3. **DNS Entries**
+
+create CNAME DNS entries for the following using the Load balancer A record as the domain name
+  Automation Server - `automation.{domain}`
+  Sentry - `sentry.{domain}`
+
+4. **Install the required packages**
+
+```bash
 yum -y update
 yum install -y git jq dos2unix
 yum install -y httpd24  mod24_ssl
@@ -17,7 +24,8 @@ yum install -y tomcat7
 yum install -y docker
 yum groupinstall "Development Tools"
 ```
-3) **Configure tomcat7**
+
+5. **Configure tomcat7**
 
 Install OpenJDK 8
 
@@ -32,27 +40,35 @@ alternatives --config java
 ```
 
 Put the following line just before to trailing tag to `/etc/tomcat7/context.xml`:
-```
+
+```text
 <Environment name="JENKINS_HOME" value="/codeontap/jenkins/" type="java.lang.String"/>
 ```
-Put the following lines for `JAVA_OPTS` in `/etc/tomcat7/tomcat7.conf`:
-```
-JAVA_OPTS="${JAVA_OPTS} -Dhudson.DNSMultiCast.disabled=true"
 
+Put the following lines for `JAVA_OPTS` in `/etc/tomcat7/tomcat7.conf`:
+
+```text
+JAVA_OPTS="${JAVA_OPTS} -Dhudson.DNSMultiCast.disabled=true"
 JAVA_OPTS="${JAVA_OPTS} -Dorg.apache.commons.jelly.tags.fmt.timeZone=Australia/Sydney"
 ```
+
 Configure `UTF8` as base encoding, thus add the following attribute to `Connector` section of `/etc/tomcat7/server.xml` file:
-```
+
+```text
 URIEncoding="UTF-8"
 ```
+
 Add tomcat user to docker group to access docker:
-```
+
+```bash
 usermod -aG docker tomcat
 ```
-4) **Setup jenkins**
+
+6. **Setup jenkins**
 
 Download the latest stable version to `/root` directory, rename it to `jenkins-{version}.war`, copy it to `webapps` dir as `ROOT.war`:
-```
+
+```bash
 sudo su
 cd ~
 wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
@@ -62,8 +78,10 @@ cp ~/jenkins-{version}.war ROOT.war
 mkdir -p /codeontap/jenkins
 chown tomcat:tomcat /codeontap/jenkins
 ```
+
 Create backup script in `/root/backup_data.sh` - replace `{domain}` to required domain:
-```
+
+```bash
 #!/bin/bash
 JENKINS_DIR="/codeontap/jenkins"
 REGION="ap-southeast-2"
@@ -72,12 +90,16 @@ TIMESTAMP=`date +"%Y-%m-%d-%H-%M"`
 aws s3 cp --recursive --exclude "*log" $JENKINS_DIR/jobs $BUCKET/jenkins/$TIMESTAMP/jobs --region $REGION
 aws s3 cp $JENKINS_DIR/config.xml $BUCKET/jenkins/$TIMESTAMP/config.xml --region $REGION
 ```
+
 Change mode for backup script to make it executable:
-```
+
+```bash
 chmod 755 /root/backup_data.sh
 ```
+
 Create a crontab file '/var/spool/cron/root':
-```
+
+```bash
 # Copy key data to S3 each day
 0  2 * * * /root/backup_data.sh
 #
@@ -90,41 +112,54 @@ Create a crontab file '/var/spool/cron/root':
 # Remove docker stopped containers/dangling images
 0 3 * * 6 docker system prune -f >> /var/log/docker_system_prune.log 2>&1
 ```
+
 Start tomcat:
-```
+
+```bash
 service tomcat7 start
 ```
-5) **Setup docker**
 
-The softlink ensures docker images don't fill up the root partition.
-```
+5. **Setup docker**
+
+The soft link ensures docker images don't fill up the root partition.
+
+```bash
 cp -rp /var/lib/docker /codeontap
 rm -rf /var/lib/docker
 ln -s /codeontap/docker /var/lib/docker
 service docker start
 ```
 
-6) **Setup sentry**
+6. **Setup sentry**
+
 Install docker-compose replacing $dockerComposeVersion. Check https://github.com/docker/compose/releases for the latest version.
-```
+
+```bash
 curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
 ```
+
 Apply executable permissions to the binary:
-```
+
+```bash
 sudo chmod +x /usr/bin/docker-compose
 ```
+
 Add an Oauth app to github organisation with a callback url `https://sentry.{domain}`
 Get smtp credentials.
-Create sentry.env 
-```
+Create sentry.env
+
+```bash
 mkdir -p /opt/sentry
 cd /opt/sentry
 ```
+
+```bash
+vi /opt/sentry/sentry.env
 ```
-vi /opt/sentry/sentry.env 
-```
-Add a sentry content, replacing sentry secrect key, smtp username/password and github id/secret:
-```
+
+Add a sentry content, replacing sentry secret key, smtp username/password and github id/secret:
+
+```text
 # All settings:
 # https://hub.docker.com/_/sentry/
 # make it 32 characters or longer
@@ -157,13 +192,13 @@ GITHUB_API_SECRET={github-app-secret}
 
 Create docker-compose.yml file:
 
-```
+```bash
 vi /opt/sentry/docker-compose.yml
 ```
 
 Add content:
 
-```
+```text
 version: '2'
 
 services:
@@ -202,30 +237,42 @@ services:
     command: sentry run worker
     env_file: sentry.env
 ```
+
 First time run docker-compose without -d option to confirm it is starting OK and create a super user:
-```
+
+```bash
 docker-compose up
 ```
+
 Stop it with ctrl+c and run as a daemon:
-```
+
+```bash
 docker-compose up -d
 ```
+
 Upgrade sentry:
-```
+
+```bash
 docker-compose exec sentry sentry upgrade
 ```
+
 Install GitHub Auth for all Sentry services:
-```
+
+```bash
 docker-compose exec sentry bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 docker-compose exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 docker-compose exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
 ```
+
 Restart sentry:
-```
+
+```bash
 docker-compose restart
 ```
+
 Create '/etc/init.d/sentry' script:
-```
+
+```bash
 #!/bin/sh
 #
 #       /etc/rc.d/init.d/sentry
@@ -242,7 +289,6 @@ Create '/etc/init.d/sentry' script:
 # Default-Start:        2 3 4 5
 # Short-Description:    Sentry Docker-Compose Daemon Service
 ### END INIT INFO
-
 
 set -e
 
@@ -277,17 +323,22 @@ esac
 
 exit 0
 ```
-Make it exacutable:
-```
+
+Make it executable:
+
 chmod +x /etc/init.d/sentry
 ```
+
 Make sure it is correctly configured in chkconfig to be loaded after docker (default order for sentry 96 and 04 ), enable it and start the service:
-```
+
+```bash
 chkconfig sentry on
 service sentry start
 ```
+
 Create backup script in `/root/backup_sentry_data.sh` - replace `{domain}` to required domain:
-```
+
+```bash
 #!/bin/bash
 SENTRY_DIR="/codeontap/sentry"
 REGION="ap-southeast-2"
@@ -303,23 +354,28 @@ fi
 
 aws s3 cp $SENTRY_DIR/var/pg_backups/pg-dump.sql $BUCKET/sentry/pg_backups/pg-dump-$TIMESTAMP.sql --region $REGION
 ```
+
 Change mode for backup script to make it executable:
-```
+
+```bash
 chmod 755 /root/backup_sentry_data.sh
 ```
+
 Update the crontab file '/var/spool/cron/root' with additional crons:
-```
-# Ccreate sentry pg dump and copy it to s3 each day
+
+```bash
+# create sentry pg dump and copy it to s3 each day
 20 2 * * * /root/backup_sentry_data.sh
 #
 # Clean up sentry docker container
 40 2 * * * docker-compose exec sentry sentry cleanup
 ```
 
-7) **Setup httpd**
+7. **Setup httpd**
 
 Create `jenkins.conf` vhost for http redirect to https - replacing `{domain}` with the required domain:
-```
+
+```bash
 <VirtualHost *:80>
     ServerName automation.{domain}
     RewriteEngine on
@@ -327,8 +383,10 @@ Create `jenkins.conf` vhost for http redirect to https - replacing `{domain}` wi
     RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [NC,R,L]
 </VirtualHost>
 ```
+
 Create `jenkins-ssl.conf` vhost for jenkins - replacing `{domain}` with the required domain:
-```
+
+```text
 <VirtualHost *:443>
     ServerName automation.{domain}
     SSLProxyEngine On
@@ -361,41 +419,52 @@ Create `jenkins-ssl.conf` vhost for jenkins - replacing `{domain}` with the requ
     </Proxy>
 </VirtualHost>
 ```
+
 Install let's encrypt functionality to obtain/maintain SSL certificate into root home directory:
-```
+
+```bash
 cd ~
 wget https://dl.eff.org/certbot-auto
 chmod +x certbot-auto
 ./certbot-auto certonly --debug
 ```
-Ignore any errors involving apachectl (config will be invalid until certificate obtained), choose `(Spin up temporary webserver)` as the authentication method required, and `automation.{domain}` as the required domain.
+
+Ignore any errors involving apachectl (config will be invalid until certificate obtained), choose `(3) (Spin up temporary webserver)` as the authentication method required, and `automation.{domain}` as the required domain.
+
 
 Start the httpd server:
-```
+
+```bash
 service httpd start
 ```
+
 Check renewal will work ok - need to reconfigure to allow for running http server (choose 2) to renew certificate). If this works, then crontab job should be ok as well:
-```
+
+```bash
 ./certbot-auto --apache certonly --debug
 ./certbot-auto renew --dry-run
 ```
+
 > *Important: Configuration must be updated for each name. Make sure to run renew --dry-run.*
 > *Important: If you have problems with certbot-auto, install certbot via `pip install certbot`. Make sure to update the crontab properly in this case.*
 
 If you have installed Sentry, make the same steps for sentry.{domain}.
 
-8) **configure the services in chkconfig:**
-```
+8. **configure the services in chkconfig:**
+
+```bash
   chkconfig tomcat7 on
   chkconfig httpd on
   chkconfig docker on
 ```
-9) **Configure Jenkins**
+
+9. **Configure Jenkins**
 
 Go to Jenkins at https://automation.{domain} in a browser (initial admin password in `/codeontap/jenkins/secrets/initialAdminPassword`).
 Install the recommended plugins, and **DON'T** set up an admin user - we will configure authentication using github.
 In `Configure System`, set the Jenkins `Location` to `automation.{domain}`, save and confirm proxy is now working correctly.
 In `Manage Plugins`, install non-standard plugins:
+
   1. GitHub Authentication
   2. Slack Notification 
   3. Extended Choice Parameter
@@ -403,95 +472,105 @@ In `Manage Plugins`, install non-standard plugins:
   5. Environment Injector
   6. Parameterized Trigger
 
-10) **Configure Sentry**
+10. **Configure Sentry**
 
-Go to Sentry at https://sentry.{domain} in a browser, initial admin user was created during installation process. Go to Auth tab and configure GitHub Authentification.
+Go to Sentry at https://sentry.{domain} in a browser, initial admin user was created during installation process. Go to Auth tab and configure GitHub Authentication.
 
-11) **Add GitHub Authentication**
+11. **Add GitHub Authentication**
 
 Add OAuth Application in github organisation, set callback to `https://automation.{domain}/securityRealm/finishLogin`.
 
 >If you don't have access to github organisation settings, add OAuth Application in your account (Settings -> Developer Settings -> OAuth application -> Register a new application) and request owner transfer to organisation.
 
 Select `any logged in user` for the authorisation, save, and log off/log on to confirm authentication now through github.
-Switch to `project based matrix authorisation`, add an entry for the organsiation granting general read, add an entry for the org devops group granting all permissions, save and confirm can still log in as part of devops team (create in github if not there already)..
+Switch to `project based matrix authorisation`, add an entry for the organisation granting general read, add an entry for the org devops group granting all permissions, save and confirm can still log in as part of devops team (create in github if not there already)..
 
-11) **Add Credentials**
+12. **Add Credentials**
 
-In `Jenkins->Credentials` add global credentials (Usename/Password) for GitHub and AWS. Set a 
+In `Jenkins->Credentials` add global credentials (Username/Password) for GitHub and AWS. Set a 
 Add Jenkins integration to Slack team to get a token, add a global credential (secret text) for Slack.
-Pick the credential on `Jenkins->Manage Jenkins->Configure System` screen in 'Global Slack Notifier Settings' section. Set `Team Subdomain` and `Channel`.
+Pick the credential on `Jenkins->Manage Jenkins->Configure System` screen in 'Global Slack Notifier Settings' section. Set `Team Sub-domain` and `Channel`.
 The credentials can be decrypted from `aws-accounts` repo in `gs-gs` account.
 
-12) **Run sudo commands without tty**
+13. **Run sudo commands without tty**
 
 If tomcat user needs to be able to run sudo commands without tty, you need to the following:
-```
+
+```bash
 visudo
 ```
+
 Change the line
-```
+
+```text
 Defaults    requiretty
 ```
+
 to
-```
+
+```text
 Defaults    !requiretty
 ```
+
 and add the following line to the very end of file:
-```
+
+```text
 %tomcat ALL=NOPASSWD: ALL
 ```
+
 and change tomcat shell in `/etc/passwd` to `/bin/bash`
  
 > *NOTE: This is not necessary if sudo is only required to be able to run docker assuming tomcat added to the docker group as shown above*
-13) **Install npm based tools if required (e.g., for swagger)**
+
+14. **Install npm based tools if required (e.g., for swagger)**
 ```
 npm install -g yamljs
 npm install -g ajv
 npm install -g swagger
 npm install -g swagger-tools
 ```
-14) ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
-  1. Open jenkins URL(since it is not setup yet, it should allow anonymous login)
-  2. Go to Manage Jenkins -> Configure Global Security
-  3. There you will need to check Enable Security box and then select LDAP as security Realm
-  4. Once it is done you will need to click on Advanced box under LDAP security realm and configure LDAP with the following values:
-```
-Server: alm.gosource.com.au
-root DN: dc=gosource,dc=com,dc=au
-User search base: ou=Users
-User search filter: uid={0}
-Group search base: ou=Groups,ou=env01,ou=accounts,ou=env,ou=organisations (it depends on the organization name)
-Group search filter:
-Group membership: select Parse user attribute for list of groups from dropdown and put memberOf as Group membership attribute
-Manager DN: this one should be populated with the alm CN created for the organization
-Manager Password: this one should be populated with the alm password
-Display Name LDAP attribute: displayname
-Email Address LDAP attribute: mail
-```
-  5. After LDAP is configured you will need to choose the proper Authorization, it is Project-based Matrix Authorization Strategy, configure local-alm group with the full access and other LDAP groups with the Read Permissions as required
- 
- 
-13) Adding docker images to the private registry
 
-  1. First you need to login to the instance with the running docker daemon(alm fits best for this purpose) and login to the private registry:
+15. ***Set up LDAP jenkins authentication (as alternative to GitHub Authentication)***
+    1. Open jenkins URL(since it is not setup yet, it should allow anonymous login)
+    2. Go to Manage Jenkins -> Configure Global Security
+    3. There you will need to check Enable Security box and then select LDAP as security Realm
+    4. Once it is done you will need to click on Advanced box under LDAP security realm and configure LDAP with the following values:
+    ```
+    Server: alm.gosource.com.au
+    root DN: dc=gosource,dc=com,dc=au
+    User search base: ou=Users
+    User search filter: uid={0}
+    Group search base: ou=Groups,ou=env01,ou=accounts,ou=env,ou=organisations (it depends on the organization name)
+    Group search filter:
+    Group membership: select Parse user attribute for list of groups from dropdown and put memberOf as Group membership attribute
+    Manager DN: this one should be populated with the alm CN created for the organization
+    Manager Password: this one should be populated with the alm password
+    Display Name LDAP attribute: displayname
+    Email Address LDAP attribute: mail
+    ```
+    5. After LDAP is configured you will need to choose the proper Authorization, it is Project-based Matrix Authorization Strategy, configure local-alm group with the full access and other LDAP groups with the Read Permissions as required
 
-`docker login -u USER -p PASS -e USER docker.env01.gosource.com.au:443`
+16. **Adding docker images to the private registry**
 
-  2. Then you need to pull or build the image that needs to be added to the registry, e.g.:
+    1. First you need to login to the instance with the running docker daemon(alm fits best for this purpose) and login to the private registry:
 
-`docker pull logstash`
+    `docker login -u USER -p PASS -e USER docker.env01.gosource.com.au:443`
 
-  3. After the image is built/pulled, it needs to be tagged properly, e.g.:
+    2. Then you need to pull or build the image that needs to be added to the registry, e.g.:
 
-`docker tag logstash docker.env01.gosource.com.au:443/logstash`
+    `docker pull logstash`
 
-  4. And then it could be pushed to the registry:
+    3. After the image is built/pulled, it needs to be tagged properly, e.g.:
 
-`docker push docker.env01.gosource.com.au:443/logstash`
+    `docker tag logstash docker.env01.gosource.com.au:443/logstash`
+
+    4. And then it could be pushed to the registry:
+
+    `docker push docker.env01.gosource.com.au:443/logstash`
 
 
-15) Google email domains and addresses
+17. **Google email domains and addresses**
+
 GoSource uses Google to host the various email domains it uses under gosource.com.au. To set up an email domain:
 
   1. Add the domain in the Google console->Domains. Domains take the form {OrganisationIdentifier}{SequenceNumber = 01, 02...}, e.g. fin01, gs03. NOTE: Make sure "Add another domain" is selected NOT the default "Add a domain alias of gosource.com.au"
@@ -518,7 +597,8 @@ Finally, each domain should have a "root" and "alerts" group. The root group wil
   6. Add the domain default email (if created) to the group via the Google console->Groups->root group->Add.
   7. Repeat the process replacing "root" with "alerts".
 
-15) SSL certificates
+18. **SSL certificates**
+
 GoSource obtains an SSL certificate for any accounts in which an alm is established, and if a project is using the gosource domain, can also obtain a certificate for project environments. We'd expect any production environment would use a project specific SSL certificate.
 
 The following openssl command should be used to generate the domain keypair (crt) and the certificate signing request (csr). Both should be stored in the top level of the account/project credentials S3 bucket.
@@ -562,7 +642,7 @@ Technical Details: <same as admin details>
 
 Ensure the resulting certificate is provided in PEM format, and save it in S3 with the CSR as {domain}-ssl-crt.pem. It may also be necessary to capture issuer intermediary certificates, e.g. rapidssl-ssl-intermediate.pem.
 
-17) Shelf Account Creation
+19. **Shelf Account Creation**
 In order to speed up the process of organisation account creation, we maintain a few GoSource "shelf" accounts - shelf01, shelf02, ..shelfnn. These are basically fully set up AWS accounts. Importantly, they are already linked for consolidated billing and have cross-account access established via the gosource-administration role.
 
 When a customer needs a new account, a shelf account is converted into an organisation account as described below.
@@ -612,7 +692,7 @@ The next step is to create a role in the account that will be used by the GoSour
 
 ***NOTE: the steps above are for manual creation of the the shelf account. The next step will be to change this to use a CloudFormation script for as much of the creation as possible.***
 
-18) Conversion of Shelf Account to Organisation Account
+20. **Conversion of Shelf Account to Organisation Account**
 Most of the work to set up an AWS account is performed as part of creating the shelf account. The following steps are needed:
 
   1. If not already set up, create a new email domain based on the organisation id, e.g. fin01.gosource.com.au.
