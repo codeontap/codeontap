@@ -27,7 +27,6 @@ yum groupinstall "Development Tools"
 
 5. **Configure tomcat7**
 
-
 Install OpenJDK 8
 
 ```
@@ -327,7 +326,6 @@ exit 0
 
 Make it executable:
 
-```bash
 chmod +x /etc/init.d/sentry
 ```
 
@@ -433,6 +431,7 @@ chmod +x certbot-auto
 
 Ignore any errors involving apachectl (config will be invalid until certificate obtained), choose `(3) (Spin up temporary webserver)` as the authentication method required, and `automation.{domain}` as the required domain.
 
+
 Start the httpd server:
 
 ```bash
@@ -447,6 +446,7 @@ Check renewal will work ok - need to reconfigure to allow for running http serve
 ```
 
 > *Important: Configuration must be updated for each name. Make sure to run renew --dry-run.*
+> *Important: If you have problems with certbot-auto, install certbot via `pip install certbot`. Make sure to update the crontab properly in this case.*
 
 If you have installed Sentry, make the same steps for sentry.{domain}.
 
