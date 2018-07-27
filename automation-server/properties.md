@@ -9,7 +9,7 @@ The properties files follow a heirachy structure, with a server level properties
 These are stored in
 
 ```text
-/opt/var/codeontap
+/var/opt/codeontap
 ```
 
 ### site.properties 

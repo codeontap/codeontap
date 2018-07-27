@@ -155,7 +155,6 @@
     }
     ````
 
-
 ### solution.json
 
 * Repository - ProductCMDB
