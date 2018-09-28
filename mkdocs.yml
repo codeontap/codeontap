@@ -4,3 +4,13 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+
+nav: 
+  - 'Introduction': 'README.md'
+  - 'Getting Started' : 
+    - 'Introduction' : 'getting-started/README.md'
+    - 'Local Environment Setup' : 'getting-started/local-env-setup.md'
+    - 'Create CMDB' : 'getting-started/cmdb-setup.md'
+    - 'Deploy Components' : 'getting-started/deploy-components.md'
+  - 'About' :
+    - 'Release Process' : 'about/versioning.md'
