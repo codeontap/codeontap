@@ -1,5 +1,5 @@
 site_name: CodeOnTap Docs
-
+docs_dir: docs
 repo_url: https://github.com/codeontap/codeontap/
 
 theme: readthedocs
@@ -10,9 +10,9 @@ markdown_extensions:
       permalink: true
 
 nav: 
-  - 'Introduction': './README.md'
+  - 'Introduction': './index.md'
   - 'Getting Started' : 
-    - 'Introduction' : './getting-started/README.md'
+    - 'Introduction' : './getting-started/index.md'
     - 'Local Environment Setup' : './getting-started/local-env-setup.md'
     - 'Create CMDB' : './getting-started/cmdb-setup.md'
     - 'Deploy Components' : './getting-started/deploy-components.md'
