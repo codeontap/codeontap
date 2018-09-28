@@ -1,5 +1,9 @@
 site_name: CodeOnTap Docs
+
+repo_url: https://github.com/codeontap/codeontap/
+
 theme: readthedocs
+
 markdown_extensions:
   - admonition
   - toc:
