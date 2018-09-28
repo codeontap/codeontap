@@ -1,0 +1,6 @@
+site_name: CodeOnTap
+theme: readthedocs
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
