@@ -3,7 +3,9 @@ docs_dir: docs
 
 repo_url: https://github.com/codeontap/codeontap/
 
-theme: readthedocs
+theme: 
+  name: readthedocs
+  titles_only: true
 
 markdown_extensions:
   - admonition
@@ -19,3 +21,5 @@ nav:
     - 'Deploy Components' : './getting-started/deploy-components.md'
   - 'About' :
     - 'Release Process' : './about/versioning.md'
+  - 'Reference' : 
+    - 'Components' : './reference/component-reference.md'
