@@ -256,12 +256,12 @@ Upgrade sentry:
 docker-compose exec sentry sentry upgrade
 ```
 
-Install GitHub Auth for all Sentry services:
+Install ktlg version of GitHub Auth with multi-organisation support for all Sentry services:
 
 ```bash
-docker-compose exec sentry bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
-docker-compose exec celerybeat bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
-docker-compose exec celeryworker bash -c "pip install https://github.com/getsentry/sentry-auth-github/archive/master.zip"
+docker-compose exec sentry bash -c "pip install https://github.com/ktlg/sentry-auth-github/archive/v1.0.0.zip"
+docker-compose exec celerybeat bash -c "pip install https://github.com/ktlg/sentry-auth-github/archive/v1.0.0.zip"
+docker-compose exec celeryworker bash -c "pip install https://github.com/ktlg/sentry-auth-github/archive/v1.0.0.zip"
 ```
 
 Restart sentry:
