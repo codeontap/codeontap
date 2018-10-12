@@ -2,18 +2,50 @@
 
 Application level API proxy
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Names" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Links","Type" : "object","Default" : {}},{"Name" : "WAF","Children" : [{"Name" : "IPAddressGroups","Type" : ["array","string"],"Mandatory" : true},{"Name" : "Default","Type" : "string","Values" : ["ALLOW","BLOCK"],"Default" : "BLOCK"},{"Name" : "RuleDefault","Type" : "string","Values" : ["ALLOW","BLOCK"],"Default" : "ALLOW"}]},{"Name" : "EndpointType","Type" : "string","Values" : ["EDGE","REGIONAL"],"Default" : "EDGE"},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []},{"Name" : "Authentication","Type" : "string","Values" : ["IP","SIG4ORIP","SIG4ANDIP"],"Default" : "IP"},{"Name" : "CloudFront","Children" : [{"Name" : "AssumeSNI","Type" : "boolean","Default" : true},{"Name" : "EnableLogging","Type" : "boolean","Default" : true},{"Name" : "CountryGroups","Type" : ["array","string"],"Default" : []},{"Name" : "CustomHeaders","Type" : ["array","any"],"Default" : []},{"Name" : "Mapping","Type" : "boolean","Default" : false},{"Name" : "Compress","Type" : "boolean","Default" : true}]},{"Name" : "Certificate","Children" : [{"Name" : "*"}]},{"Name" : "Publish","Children" : [{"Name" : "DnsNamePrefix","Type" : "string","Default" : "docs"},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []}]},{"Name" : "Mapping","Children" : [{"Name" : "IncludeStage","Type" : "boolean","Default" : true}]},{"Name" : "Profiles","Children" : [{"Name" : "SecurityProfile","Type" : "string","Default" : "default"}]}]
+{
+	"Fragment" : "<string>",
+	"Links" : "<object>",
+	"WAF" : {
+		"IPAddressGroups" : "<array of string>",
+		"Default" : "BLOCK",
+		"RuleDefault" : "ALLOW"
+	},
+	"EndpointType" : "EDGE",
+	"IPAddressGroups" : "<array of string>",
+	"Authentication" : "IP",
+	"CloudFront" : {
+		"AssumeSNI" : true,
+		"EnableLogging" : true,
+		"CountryGroups" : "<array of string>",
+		"CustomHeaders" : "<array of any>",
+		"Mapping" : false,
+		"Compress" : true
+	},
+	"Certificate" : {
+		"*" : "<unknown>"
+	},
+	"Publish" : {
+		"DnsNamePrefix" : "docs",
+		"IPAddressGroups" : "<array of string>"
+	},
+	"Mapping" : {
+		"IncludeStage" : true
+	},
+	"Profiles" : {
+		"SecurityProfile" : "default"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -24,7 +56,7 @@ Application level API proxy
     -   **Default** - {}
 -   **WAF**
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Mandatory** - true
     -   **Default**
         -   **Type** - string
@@ -39,7 +71,7 @@ Application level API proxy
     -   **Values** - EDGE, REGIONAL
     -   **Default** - EDGE
 -   **IPAddressGroups**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Default** - \[]
 -   **Authentication**
     -   **Type** - string
@@ -53,10 +85,10 @@ Application level API proxy
         -   **Type** - boolean
         -   **Default** - true
     -   **CountryGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **CustomHeaders**
-        -   **Type** - array, any
+        -   **Type** - array of any
         -   **Default** - \[]
     -   **Mapping**
         -   **Type** - boolean
@@ -71,7 +103,7 @@ Application level API proxy
         -   **Type** - string
         -   **Default** - docs
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
 -   **Mapping**
     -   **IncludeStage**
@@ -84,22 +116,109 @@ Application level API proxy
 
 * * *
 
+# apiusageplan
+
+provides a metered link between an API gateway and an invoking client
+
+## Deployment Properties
+
+-   **Available Providers** - aws
+-   **Component Level** - application
+
+## Component Format
+
+```json
+{
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	}
+}
+```
+
+## Attribute Reference
+
+-   **Links**
+    -   **Any**
+        -   **Type** - string
+    -   **Tenant**
+        -   **Type** - string
+    -   **Product**
+        -   **Type** - string
+    -   **Environment**
+        -   **Type** - string
+    -   **Segment**
+        -   **Type** - string
+    -   **Tier**
+        -   **Type** - string
+        -   **Mandatory** - true
+    -   **Component**
+        -   **Type** - string
+        -   **Mandatory** - true
+    -   **Function**
+        -   **Type** - string
+    -   **Service**
+        -   **Type** - string
+    -   **Task**
+        -   **Type** - string
+    -   **PortMapping**
+        -   **Alternate Names** - Port
+        -   **Type** - string
+    -   **Mount**
+        -   **Type** - string
+    -   **Platform**
+        -   **Type** - string
+    -   **Instance**
+        -   **Types** - string
+    -   **Version**
+        -   **Type** - string
+    -   **Role**
+        -   **Type** - string
+    -   **Direction**
+        -   **Type** - string
+
+* * *
+
 # cache
 
 Managed in-memory cache services
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Engine","Type" : "string","Mandatory" : true},{"Name" : "EngineVersion","Type" : "string"},{"Name" : "Port","Type" : "string"},{"Name" : "Backup","Children" : [{"Name" : "RetentionPeriod","Type" : "string","Default" : ""}]}]
+{
+	"Engine" : "<string>",
+	"EngineVersion" : "<string>",
+	"Port" : "<string>",
+	"Backup" : {
+		"RetentionPeriod" : "<string>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Engine**
     -   **Type** - string
@@ -119,23 +238,72 @@ Managed in-memory cache services
 
 Managed identity service
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Notes
+## Notes
 
 !!! warning
-	Requires second deployment to complete configuration
+    Requires second deployment to complete configuration
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "MFA","Type" : "boolean","Default" : false},{"Name" : "AdminCreatesUser","Type" : "boolean","Default" : true},{"Name" : "UnusedAccountTimeout","Type" : "number","Default" : 7},{"Name" : "VerifyEmail","Type" : "boolean","Default" : true},{"Name" : "VerifyPhone","Type" : "boolean","Default" : false},{"Name" : "LoginAliases","Type" : ["array","string"],"Default" : ["email"]},{"Name" : "ClientGenerateSecret","Type" : "boolean","Default" : false},{"Name" : "ClientTokenValidity","Type" : "number","Default" : 30},{"Name" : "AllowUnauthenticatedIds","Type" : "boolean","Default" : false},{"Name" : "AuthorizationHeader","Type" : "string","Default" : "Authorization"},{"Name" : "OAuth","Children" : [{"Name" : "Scopes","Type" : ["array","string"],"Default" : ["openid"]},{"Name" : "Flows","Type" : ["array","string"],"Default" : ["code"]}]},{"Name" : "PasswordPolicy","Children" : [{"Name" : "MinimumLength","Type" : "number","Default" : 10},{"Name" : "Lowercase","Type" : "boolean","Default" : true},{"Name" : "Uppercase","Type" : "boolean","Default" : true},{"Name" : "Numbers","Type" : "boolean","Default" : true},{"Name" : "SpecialCharacters","Type" : "boolean","Default" : true}]},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]}]
+{
+	"MFA" : false,
+	"AdminCreatesUser" : true,
+	"UnusedAccountTimeout" : 7,
+	"VerifyEmail" : true,
+	"VerifyPhone" : false,
+	"LoginAliases" : [
+		"email"
+	],
+	"ClientGenerateSecret" : false,
+	"ClientTokenValidity" : 30,
+	"AllowUnauthenticatedIds" : false,
+	"AuthorizationHeader" : "Authorization",
+	"OAuth" : {
+		"Scopes" : [
+			"openid"
+		],
+		"Flows" : [
+			"code"
+		]
+	},
+	"PasswordPolicy" : {
+		"MinimumLength" : 10,
+		"Lowercase" : true,
+		"Uppercase" : true,
+		"Numbers" : true,
+		"SpecialCharacters" : true
+	},
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **MFA**
     -   **Type** - boolean
@@ -153,7 +321,7 @@ Managed identity service
     -   **Type** - boolean
     -   **Default** - false
 -   **LoginAliases**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Default** - email
 -   **ClientGenerateSecret**
     -   **Type** - boolean
@@ -169,10 +337,10 @@ Managed identity service
     -   **Default** - Authorization
 -   **OAuth**
     -   **Scopes**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - openid
     -   **Flows**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - code
 -   **PasswordPolicy**
     -   **MinimumLength**
@@ -221,7 +389,7 @@ Managed identity service
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -235,18 +403,60 @@ Managed identity service
 
 Auto-Scaling IaaS with code deployment
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "UseInitAsService","Type" : "boolean","Default" : false},{"Name" : "MinUpdateInstances","Type" : "number","Default" : 1},{"Name" : "ReplaceOnUpdate","Type" : "boolean","Default" : false},{"Name" : "UpdatePauseTime","Type" : "string","Default" : "5M"},{"Name" : "StartupTimeout","Type" : "string","Default" : "15M"},{"Name" : "DockerHost","Type" : "boolean","Default" : false},{"Name" : "Ports","Subobjects" : true,"Children" : [{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []},{"Name" : "LB","Children" : [{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : "LinkName","Type" : "string","Default" : "lb"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string","Default" : ""}]}]}]
+{
+	"Fragment" : "<string>",
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"UseInitAsService" : false,
+	"MinUpdateInstances" : 1,
+	"ReplaceOnUpdate" : false,
+	"UpdatePauseTime" : "5M",
+	"StartupTimeout" : "15M",
+	"DockerHost" : false,
+	"Ports" : {
+		"example" : {
+			"IPAddressGroups" : "<array of string>",
+			"LB" : {
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"LinkName" : "lb",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"PortMapping" : "<string>"
+			}
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -283,7 +493,7 @@ Auto-Scaling IaaS with code deployment
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -310,7 +520,7 @@ Auto-Scaling IaaS with code deployment
     -   **Default** - false
 -   **Ports**
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **LB**
     -   **Tier**
@@ -336,16 +546,24 @@ Auto-Scaling IaaS with code deployment
 # contenthub
 
 Hub for decentralised content hosting with centralised publishing
-github
-application
 
-### Component Format
+## Deployment Properties
+
+-   **Available Providers** - github
+-   **Component Level** - application
+
+## Component Format
 
 ```json
-[{"Name" : "Prefix","Type" : "string","Mandatory" : true},{"Name" : "Engine","Type" : "string","Default" : "github"},{"Name" : "Branch","Type" : "string","Default" : "master"},{"Name" : "Repository","Type" : "string","Default" : ""}]
+{
+	"Prefix" : "<string>",
+	"Engine" : "github",
+	"Branch" : "master",
+	"Repository" : "<string>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Prefix**
     -   **Type** - string
@@ -366,18 +584,55 @@ application
 
 Node for decentralised content hosting with centralised publishing
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - github
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Path","Children" : [{"Name" : "Host","Type" : "string","Default" : ""},{"Name" : "Style","Type" : "string","Default" : "single"},{"Name" : "IncludeInPath","Children" : [{"Name" : "Product","Type" : "boolean","Default" : true},{"Name" : "Environment","Type" : "boolean","Default" : false},{"Name" : "Solution","Type" : "boolean","Default" : false},{"Name" : "Segment","Type" : "boolean","Default" : true},{"Name" : "Tier","Type" : "boolean","Default" : false},{"Name" : "Component","Type" : "boolean","Default" : false},{"Name" : "Instance","Type" : "boolean","Default" : false},{"Name" : "Version","Type" : "boolean","Default" : false},{"Name" : "Host","Type" : "boolean","Default" : false}]}]},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]}]
+{
+	"Path" : {
+		"Host" : "<string>",
+		"Style" : "single",
+		"IncludeInPath" : {
+			"Product" : true,
+			"Environment" : false,
+			"Solution" : false,
+			"Segment" : true,
+			"Tier" : false,
+			"Component" : false,
+			"Instance" : false,
+			"Version" : false,
+			"Host" : false
+		}
+	},
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Path**
     -   **Host**
@@ -445,7 +700,7 @@ Node for decentralised content hosting with centralised publishing
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -459,18 +714,47 @@ Node for decentralised content hosting with centralised publishing
 
 Managed Data ETL Processing
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Permissions","Children" : [{"Name" : "Decrypt","Type" : "boolean","Default" : true},{"Name" : "AsFile","Type" : "boolean","Default" : true},{"Name" : "AppData","Type" : "boolean","Default" : true},{"Name" : "AppPublic","Type" : "boolean","Default" : true}]},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]}]
+{
+	"Fragment" : "<string>",
+	"Permissions" : {
+		"Decrypt" : true,
+		"AsFile" : true,
+		"AppData" : true,
+		"AppPublic" : true
+	},
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -520,7 +804,7 @@ Managed Data ETL Processing
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -534,18 +818,42 @@ Managed Data ETL Processing
 
 A data aretefact that is managed in a similar way to a code unit
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Engine","Type" : "string","Values" : ["s3","rdsSnapshot"],"Mandatory" : true},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "Prefix","Type" : "string","Default" : ""}]
+{
+	"Engine" : "<string>",
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"Prefix" : "<string>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Engine**
     -   **Type** - string
@@ -582,7 +890,7 @@ A data aretefact that is managed in a similar way to a code unit
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -599,18 +907,56 @@ A data aretefact that is managed in a similar way to a code unit
 
 A single virtual machine with no code deployment 
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "FixedIP","Type" : "boolean","Default" : false},{"Name" : "DockerHost","Type" : "boolean","Default" : false},{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "Ports","Subobjects" : true,"Children" : [{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []},{"Name" : "LB","Children" : [{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : "LinkName","Type" : "string","Default" : "lb"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string","Default" : ""}]}]}]
+{
+	"FixedIP" : false,
+	"DockerHost" : false,
+	"Fragment" : "<string>",
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"Ports" : {
+		"example" : {
+			"IPAddressGroups" : "<array of string>",
+			"LB" : {
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"LinkName" : "lb",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"PortMapping" : "<string>"
+			}
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **FixedIP**
     -   **Type** - boolean
@@ -653,7 +999,7 @@ A single virtual machine with no code deployment
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -662,7 +1008,7 @@ A single virtual machine with no code deployment
         -   **Type** - string
 -   **Ports**
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **LB**
     -   **Tier**
@@ -689,18 +1035,65 @@ A single virtual machine with no code deployment
 
 An autoscaling container host cluster
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Sub Components
+
+-   [service](#service)
+    -   **Component Attribute** - Services
+    -   **Link Attribute** - Service
+-   [task](#task)
+    -   **Component Attribute** - Tasks
+    -   **Link Attribute** - Task
+
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "FixedIP","Type" : "boolean","Default" : false},{"Name" : "LogDriver","Type" : "string","Values" : ["awslogs","json-file","fluentd"],"Default" : "awslogs"},{"Name" : "ClusterLogGroup","Type" : "boolean","Default" : true},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "DockerUsers","Subobjects" : true,"Children" : [{"Name" : "UserName","Type" : "string"},{"Name" : "UID","Type" : "number","Mandatory" : true}]}]
+{
+	"Fragment" : "<string>",
+	"FixedIP" : false,
+	"LogDriver" : "awslogs",
+	"ClusterLogGroup" : true,
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"DockerUsers" : {
+		"example" : {
+			"UserName" : "<string>",
+			"UID" : "<number>"
+		}
+	},
+	"Services" : {
+		"example" : "< instance of service>"
+	},
+	"Tasks" : {
+		"example" : "< instance of task>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -747,7 +1140,7 @@ An autoscaling container host cluster
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -767,18 +1160,80 @@ An autoscaling container host cluster
 
 An orchestrated container with always on scheduling
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Containers","Subobjects" : true,"Children" : [{"Name" : "Cpu","Type" : "number","Default" : ""},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "LocalLogging","Type" : "boolean","Default" : false},{"Name" : "LogDriver","Type" : "string","Values" : ["awslogs","json-file","fluentd"],"Default" : "awslogs"},{"Name" : "ContainerLogGroup","Type" : "boolean","Default" : false},{"Name" : "RunCapabilities","Type" : ["array","string"],"Default" : []},{"Name" : "Privileged","Type" : "boolean","Default" : false},{"Name" : ["MaximumMemory","MemoryMaximum","MaxMemory"],"Types" : "number","Description" : "Set to 0 to not set a maximum"},{"Name" : ["MemoryReservation","Memory","ReservedMemory"],"Type" : "number","Mandatory" : true},{"Name" : "Ports","Subobjects" : true,"Children" : ["Container",{"Name" : "DynamicHostPort","Type" : "boolean","Default" : false},{"Name" : "LB","Children" : [{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : "LinkName","Type" : "string","Default" : "lb"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string","Default" : ""}]},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []}]},{"Name" : "Version","Type" : "string","Default" : ""},{"Name" : "ContainerNetworkLinks","Type" : ["array","string"],"Default" : []}]},{"Name" : "DesiredCount","Type" : "number","Default" : -1},{"Name" : "UseTaskRole","Type" : "boolean","Default" : true},{"Name" : "Permissions","Children" : [{"Name" : "Decrypt","Type" : "boolean","Default" : true},{"Name" : "AsFile","Type" : "boolean","Default" : true},{"Name" : "AppData","Type" : "boolean","Default" : true},{"Name" : "AppPublic","Type" : "boolean","Default" : true}]},{"Name" : "TaskLogGroup","Type" : "boolean","Default" : true},{"Name" : "NetworkMode","Type" : "string","Values" : ["none","bridge","awsvpc","host"],"Default" : ""},{"Name" : "ContainerNetworkLinks","Type" : "boolean","Default" : false}]
+{
+	"Containers" : {
+		"example" : {
+			"Cpu" : "<number>",
+			"Links" : {
+				"example" : {
+					"Any" : "<string>",
+					"Tenant" : "<string>",
+					"Product" : "<string>",
+					"Environment" : "<string>",
+					"Segment" : "<string>",
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"Function" : "<string>",
+					"Service" : "<string>",
+					"Task" : "<string>",
+					"PortMapping" : "<string>",
+					"Mount" : "<string>",
+					"Platform" : "<string>",
+					"Instance" : "<unknown>",
+					"Version" : "<string>",
+					"Role" : "<string>",
+					"Direction" : "<string>"
+				}
+			},
+			"LocalLogging" : false,
+			"LogDriver" : "awslogs",
+			"ContainerLogGroup" : false,
+			"RunCapabilities" : "<array of string>",
+			"Privileged" : false,
+			"MaximumMemory" : "<unknown>",
+			"MemoryReservation" : "<number>",
+			"Ports" : {
+				"example" : {
+					"Container" : "unknown",
+					"DynamicHostPort" : false,
+					"LB" : {
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"LinkName" : "lb",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"PortMapping" : "<string>"
+					},
+					"IPAddressGroups" : "<array of string>"
+				}
+			},
+			"Version" : "<string>",
+			"ContainerNetworkLinks" : "<array of string>"
+		}
+	},
+	"DesiredCount" : -1,
+	"UseTaskRole" : true,
+	"Permissions" : {
+		"Decrypt" : true,
+		"AsFile" : true,
+		"AppData" : true,
+		"AppPublic" : true
+	},
+	"TaskLogGroup" : true,
+	"NetworkMode" : "<string>",
+	"ContainerNetworkLinks" : false
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Containers**
     -   **Cpu**
@@ -815,7 +1270,7 @@ An orchestrated container with always on scheduling
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -833,7 +1288,7 @@ An orchestrated container with always on scheduling
         -   **Type** - boolean
         -   **Default** - false
     -   **RunCapabilities**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **Privileged**
         -   **Type** - boolean
@@ -847,7 +1302,7 @@ An orchestrated container with always on scheduling
         -   **Type** - number
         -   **Mandatory** - true
     -   **Ports**
-    -   **Container**
+        -   **Name** - Container
     -   **DynamicHostPort**
         -   **Type** - boolean
         -   **Default** - false
@@ -870,13 +1325,13 @@ An orchestrated container with always on scheduling
         -   **Type** - string
         -   **Default** - null
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **Version**
         -   **Type** - string
         -   **Default** - null
     -   **ContainerNetworkLinks**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
 -   **DesiredCount**
     -   **Type** - number
@@ -914,18 +1369,78 @@ An orchestrated container with always on scheduling
 
 A container defintion which is invoked on demand
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Containers","Subobjects" : true,"Children" : [{"Name" : "Cpu","Type" : "number","Default" : ""},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "LocalLogging","Type" : "boolean","Default" : false},{"Name" : "LogDriver","Type" : "string","Values" : ["awslogs","json-file","fluentd"],"Default" : "awslogs"},{"Name" : "ContainerLogGroup","Type" : "boolean","Default" : false},{"Name" : "RunCapabilities","Type" : ["array","string"],"Default" : []},{"Name" : "Privileged","Type" : "boolean","Default" : false},{"Name" : ["MaximumMemory","MemoryMaximum","MaxMemory"],"Types" : "number","Description" : "Set to 0 to not set a maximum"},{"Name" : ["MemoryReservation","Memory","ReservedMemory"],"Type" : "number","Mandatory" : true},{"Name" : "Ports","Subobjects" : true,"Children" : ["Container",{"Name" : "DynamicHostPort","Type" : "boolean","Default" : false},{"Name" : "LB","Children" : [{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : "LinkName","Type" : "string","Default" : "lb"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string","Default" : ""}]},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []}]},{"Name" : "Version","Type" : "string","Default" : ""},{"Name" : "ContainerNetworkLinks","Type" : ["array","string"],"Default" : []}]},{"Name" : "UseTaskRole","Type" : "boolean","Default" : true},{"Name" : "Permissions","Children" : [{"Name" : "Decrypt","Type" : "boolean","Default" : true},{"Name" : "AsFile","Type" : "boolean","Default" : true},{"Name" : "AppData","Type" : "boolean","Default" : true},{"Name" : "AppPublic","Type" : "boolean","Default" : true}]},{"Name" : "TaskLogGroup","Type" : "boolean","Default" : true},{"Name" : "FixedName","Type" : "boolean","Default" : false}]
+{
+	"Containers" : {
+		"example" : {
+			"Cpu" : "<number>",
+			"Links" : {
+				"example" : {
+					"Any" : "<string>",
+					"Tenant" : "<string>",
+					"Product" : "<string>",
+					"Environment" : "<string>",
+					"Segment" : "<string>",
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"Function" : "<string>",
+					"Service" : "<string>",
+					"Task" : "<string>",
+					"PortMapping" : "<string>",
+					"Mount" : "<string>",
+					"Platform" : "<string>",
+					"Instance" : "<unknown>",
+					"Version" : "<string>",
+					"Role" : "<string>",
+					"Direction" : "<string>"
+				}
+			},
+			"LocalLogging" : false,
+			"LogDriver" : "awslogs",
+			"ContainerLogGroup" : false,
+			"RunCapabilities" : "<array of string>",
+			"Privileged" : false,
+			"MaximumMemory" : "<unknown>",
+			"MemoryReservation" : "<number>",
+			"Ports" : {
+				"example" : {
+					"Container" : "unknown",
+					"DynamicHostPort" : false,
+					"LB" : {
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"LinkName" : "lb",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"PortMapping" : "<string>"
+					},
+					"IPAddressGroups" : "<array of string>"
+				}
+			},
+			"Version" : "<string>",
+			"ContainerNetworkLinks" : "<array of string>"
+		}
+	},
+	"UseTaskRole" : true,
+	"Permissions" : {
+		"Decrypt" : true,
+		"AsFile" : true,
+		"AppData" : true,
+		"AppPublic" : true
+	},
+	"TaskLogGroup" : true,
+	"FixedName" : false
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Containers**
     -   **Cpu**
@@ -962,7 +1477,7 @@ A container defintion which is invoked on demand
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -980,7 +1495,7 @@ A container defintion which is invoked on demand
         -   **Type** - boolean
         -   **Default** - false
     -   **RunCapabilities**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **Privileged**
         -   **Type** - boolean
@@ -994,7 +1509,7 @@ A container defintion which is invoked on demand
         -   **Type** - number
         -   **Mandatory** - true
     -   **Ports**
-    -   **Container**
+        -   **Name** - Container
     -   **DynamicHostPort**
         -   **Type** - boolean
         -   **Default** - false
@@ -1017,13 +1532,13 @@ A container defintion which is invoked on demand
         -   **Type** - string
         -   **Default** - null
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **Version**
         -   **Type** - string
         -   **Default** - null
     -   **ContainerNetworkLinks**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
 -   **UseTaskRole**
     -   **Type** - boolean
@@ -1054,18 +1569,29 @@ A container defintion which is invoked on demand
 
 A managed network attached file share
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Sub Components
+
+-   [efsMount](#efsMount)
+    -   **Component Attribute** - Mounts
+    -   **Link Attribute** - Mount
+
+## Component Format
 
 ```json
-[{"Name" : "Encrypted","Type" : "boolean","Default" : true}]
+{
+	"Encrypted" : true,
+	"Mounts" : {
+		"example" : "< instance of efsMount>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Encrypted**
     -   **Type** - boolean
@@ -1073,32 +1599,87 @@ A managed network attached file share
 
 * * *
 
-# es
+# efsmount
 
-A managed ElasticSearch instance
+A specific directory on the share for OS mounting
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Authentication","Type" : "string","Values" : ["IP","SIG4ORIP","SIG4ANDIP"],"Default" : "IP"},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Mandatory" : true},{"Name" : "AdvancedOptions","Type" : ["array","string"],"Default" : []},{"Name" : "Version","Type" : "string","Default" : "2.3"},{"Name" : "Encrypted","Type" : "boolean","Default" : false},{"Name" : "Snapshot","Children" : [{"Name" : "Hour","Type" : "string","Default" : ""}]},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]}]
+{
+	"Directory" : "<string>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
+
+-   **Directory**
+    -   **Type** - string
+    -   **Mandatory** - true
+
+* * *
+
+# es
+
+A managed ElasticSearch instance
+
+## Deployment Properties
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+## Component Format
+
+```json
+{
+	"Authentication" : "IP",
+	"IPAddressGroups" : "<array of string>",
+	"AdvancedOptions" : "<array of string>",
+	"Version" : "2.3",
+	"Encrypted" : false,
+	"Snapshot" : {
+		"Hour" : "<string>"
+	},
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	}
+}
+```
+
+## Attribute Reference
 
 -   **Authentication**
     -   **Type** - string
     -   **Values** - IP, SIG4ORIP, SIG4ANDIP
     -   **Default** - IP
 -   **IPAddressGroups**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Mandatory** - true
 -   **AdvancedOptions**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Default** - \[]
 -   **Version**
     -   **Type** - string
@@ -1141,7 +1722,7 @@ A managed ElasticSearch instance
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1155,18 +1736,28 @@ A managed ElasticSearch instance
 
 Container for a Function as a Service deployment
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Sub Components
+
+-   [function](#function)
+    -   **Component Attribute** - Functions
+    -   **Link Attribute** - Function
+
+## Component Format
 
 ```json
-[]
+{
+	"Functions" : {
+		"example" : "< instance of function>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 * * *
 
@@ -1174,18 +1765,119 @@ Container for a Function as a Service deployment
 
 A specific entry point for the lambda deployment
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Handler","Type" : "string","Mandatory" : true},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "LogMetrics","Subobjects" : true,"Children" : [{"Name" : "LogFilter","Type" : "string","Mandatory" : true}]},{"Name" : "LogWatchers","Subobjects" : true,"Children" : [{"Name" : "LogFilter","Type" : "string","Mandatory" : true},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]}]},{"Name" : "Alerts","Subobjects" : true,"Children" : ["Description",{"Name" : "Name","Type" : "string","Mandatory" : true},{"Name" : "Metric","Children" : [{"Name" : "Name","Type" : "string","Mandatory" : true},{"Name" : "Type","Type" : "string","Mandatory" : true}]},{"Name" : "Threshold","Type" : "number","Default" : 1},{"Name" : "Severity","Type" : "string","Default" : "Info"},{"Name" : "Namespace","Type" : "string","Default" : ""},{"Name" : "Comparison","Type" : "string","Default" : "Threshold"},{"Name" : "Operator","Type" : "string","Default" : "GreaterThanOrEqualToThreshold"},{"Name" : "Time","Type" : "number","Default" : 300},{"Name" : "Periods","Type" : "number","Default" : 1},{"Name" : "Statistic","Type" : "string","Default" : "Sum"},{"Name" : "ReportOk","Type" : "boolean","Default" : false},{"Name" : "MissingData","Type" : "string","Default" : "notBreaching"}]},{"Name" : ["Memory","MemorySize"],"Type" : "number","Default" : 0},{"Name" : "RunTime","Type" : "string","Values" : ["nodejs","nodejs4.3","nodejs6.10","nodejs8.10","java8","python2.7","python3.6","dotnetcore1.0","dotnetcore2.0","dotnetcore2.1","nodejs4.3-edge","go1.x"],"Mandatory" : true},{"Name" : "Schedules","Subobjects" : true,"Children" : [{"Name" : "Expression","Type" : "string","Default" : "rate(6 minutes)"},{"Name" : "InputPath","Type" : "string","Default" : "\/healthcheck"},{"Name" : "Input","Type" : "object","Default" : {}}]},{"Name" : "Timeout","Type" : "number","Default" : 0},{"Name" : "VPCAccess","Type" : "boolean","Default" : true},{"Name" : "UseSegmentKey","Type" : "boolean","Default" : false},{"Name" : "Permissions","Children" : [{"Name" : "Decrypt","Type" : "boolean","Default" : true},{"Name" : "AsFile","Type" : "boolean","Default" : true},{"Name" : "AppData","Type" : "boolean","Default" : true},{"Name" : "AppPublic","Type" : "boolean","Default" : true}]},{"Name" : "PredefineLogGroup","Type" : "boolean","Default" : false},{"Name" : "Environment","Children" : [{"Name" : "AsFile","Type" : "boolean","Default" : false},{"Name" : "Json","Children" : [{"Name" : "Escaped","Type" : "boolean","Default" : true},{"Name" : "Prefix","Type" : "string","Values" : ["json",""],"Default" : "json"}]}]}]
+{
+	"Fragment" : "<string>",
+	"Handler" : "<string>",
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"LogMetrics" : {
+		"example" : {
+			"LogFilter" : "<string>"
+		}
+	},
+	"LogWatchers" : {
+		"example" : {
+			"LogFilter" : "<string>",
+			"Links" : {
+				"example" : {
+					"Any" : "<string>",
+					"Tenant" : "<string>",
+					"Product" : "<string>",
+					"Environment" : "<string>",
+					"Segment" : "<string>",
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"Function" : "<string>",
+					"Service" : "<string>",
+					"Task" : "<string>",
+					"PortMapping" : "<string>",
+					"Mount" : "<string>",
+					"Platform" : "<string>",
+					"Instance" : "<unknown>",
+					"Version" : "<string>",
+					"Role" : "<string>",
+					"Direction" : "<string>"
+				}
+			}
+		}
+	},
+	"Alerts" : {
+		"example" : {
+			"Description" : "unknown",
+			"Name" : "<string>",
+			"Metric" : {
+				"Name" : "<string>",
+				"Type" : "<string>"
+			},
+			"Threshold" : 1,
+			"Severity" : "Info",
+			"Namespace" : "<string>",
+			"Comparison" : "Threshold",
+			"Operator" : "GreaterThanOrEqualToThreshold",
+			"Time" : 300,
+			"Periods" : 1,
+			"Statistic" : "Sum",
+			"ReportOk" : false,
+			"MissingData" : "notBreaching"
+		}
+	},
+	"Memory" : 0,
+	"RunTime" : "<string>",
+	"Schedules" : {
+		"example" : {
+			"Expression" : "rate(6 minutes)",
+			"InputPath" : "/healthcheck",
+			"Input" : "<object>"
+		}
+	},
+	"Timeout" : 0,
+	"VPCAccess" : true,
+	"UseSegmentKey" : false,
+	"Permissions" : {
+		"Decrypt" : true,
+		"AsFile" : true,
+		"AppData" : true,
+		"AppPublic" : true
+	},
+	"PredefineLogGroup" : false,
+	"Environment" : {
+		"AsFile" : false,
+		"Json" : {
+			"Escaped" : true,
+			"Prefix" : "json"
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -1225,7 +1917,7 @@ A specific entry point for the lambda deployment
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1271,7 +1963,7 @@ A specific entry point for the lambda deployment
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1279,7 +1971,7 @@ A specific entry point for the lambda deployment
     -   **Direction**
         -   **Type** - string
 -   **Alerts**
-    -   **Description**
+    -   **Name** - Description
     -   **Name**
         -   **Type** - string
         -   **Mandatory** - true
@@ -1382,23 +2074,40 @@ A specific entry point for the lambda deployment
 
 A load balancer for virtual network based components
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Notes
+## Notes
 
 !!! warning
-	Requires second deployment to complete configuration
+    Requires second deployment to complete configuration
 
-### Component Format
+## Sub Components
+
+-   [lbport](#lbport)
+    -   **Component Attribute** - PortMappings
+    -   **Link Attribute** - PortMapping, Port
+
+## Component Format
 
 ```json
-[{"Name" : "Logs","Type" : "boolean","Default" : false},{"Name" : "Engine","Type" : "string","Values" : ["application","network","classic"],"Default" : "application"},{"Name" : "Profiles","Children" : [{"Name" : "SecurityProfile","Type" : "string","Default" : "default"}]},{"Name" : "IdleTimeout","Type" : "number","Default" : 60},{"Name" : "HealthCheckPort","Type" : "string","Default" : ""}]
+{
+	"Logs" : false,
+	"Engine" : "application",
+	"Profiles" : {
+		"SecurityProfile" : "default"
+	},
+	"IdleTimeout" : 60,
+	"HealthCheckPort" : "<string>",
+	"PortMappings" : {
+		"example" : "< instance of lbport>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Logs**
     -   **Type** - boolean
@@ -1424,21 +2133,72 @@ A load balancer for virtual network based components
 
 A specifc listener based on the client side network port
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : []},{"Name" : "Certificate","Type" : "object","Default" : {}},{"Name" : "HostFilter","Type" : "boolean","Default" : false},{"Name" : "Mapping","Type" : "string"},{"Name" : "Path","Type" : "string","Default" : "default"},{"Name" : "Priority","Type" : "number","Default" : 100},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "Authentication","Children" : [{"Name" : "SessionCookieName","Type" : "string","Default" : "AWSELBAuthSessionCookie"},{"Name" : "SessionTimeout","Type" : "number","Default" : 604800}]},{"Name" : "Redirect","Children" : [{"Name" : "Protocol","Type" : "string","Values" : ["HTTPS","#{protocol}"],"Default" : "HTTPS"},{"Name" : "Port","Type" : "string","Default" : "443"},{"Name" : "Host","Type" : "string","Default" : "#{host}"},{"Name" : "Path","Type" : "string","Default" : "\/#{path}"},{"Name" : "Query","Type" : "string","Default" : "#{query}"},{"Name" : "Permanent","Type" : "boolean","Default" : true}]},{"Name" : "Fixed","Children" : [{"Name" : "Message","Type" : "string","Default" : "This application is currently unavailable. Please try again later."},{"Name" : "ContentType","Type" : "string","Default" : "text/plain"},{"Name" : "StatusCode","Type" : "string","Default" : "404"}]},{"Name" : "Forward","Children" : [{"Name" : "TargetType","Type" : "string","Values" : ["instance","ip"],"Default" : "instance"},{"Name" : "SlowStartTime","Type" : "number","Default" : -1},{"Name" : "StickinessTime","Type" : "number","Default" : -1},{"Name" : "DeregistrationTimeout","Type" : "number","Default" : 30}]}]
+{
+	"IPAddressGroups" : "<array of string>",
+	"Certificate" : "<object>",
+	"HostFilter" : false,
+	"Mapping" : "<string>",
+	"Path" : "default",
+	"Priority" : 100,
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"Authentication" : {
+		"SessionCookieName" : "AWSELBAuthSessionCookie",
+		"SessionTimeout" : 604800
+	},
+	"Redirect" : {
+		"Protocol" : "HTTPS",
+		"Port" : "443",
+		"Host" : "#{host}",
+		"Path" : "/#{path}",
+		"Query" : "#{query}",
+		"Permanent" : true
+	},
+	"Fixed" : {
+		"Message" : "This application is currently unavailable. Please try again later.",
+		"ContentType" : "text/plain",
+		"StatusCode" : "404"
+	},
+	"Forward" : {
+		"TargetType" : "instance",
+		"SlowStartTime" : -1,
+		"StickinessTime" : -1,
+		"DeregistrationTimeout" : 30
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **IPAddressGroups**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Default** - \[]
 -   **Certificate**
     -   **Type** - object
@@ -1485,7 +2245,7 @@ A specifc listener based on the client side network port
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1550,18 +2310,53 @@ A specifc listener based on the client side network port
 
 A managed mobile notification proxy
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Sub Components
+
+-   [mobilenotiferplatform](#mobilenotiferplatform)
+    -   **Component Attribute** - Platforms
+    -   **Link Attribute** - Platform
+
+## Component Format
 
 ```json
-[{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "SuccessSampleRate","Type" : "string","Default" : "100"},{"Name" : "Credentials","Children" : [{"Name" : "EncryptionScheme","Type" : "string","Values" : ["base64"],"Default" : "base64"}]}]
+{
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"SuccessSampleRate" : "100",
+	"Credentials" : {
+		"EncryptionScheme" : "base64"
+	},
+	"Platforms" : {
+		"example" : "< instance of mobilenotiferplatform>"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Links**
     -   **Any**
@@ -1594,7 +2389,7 @@ A managed mobile notification proxy
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1616,25 +2411,57 @@ A managed mobile notification proxy
 
 A specific mobile platform notification proxy
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Notes
+## Notes
 
 !!! warning
-	SMS Engine requires account level configuration for AWS provider
+    SMS Engine requires account level configuration for AWS provider
 !!! info
-	Platform specific credentials are required and must be provided as credentials
+    Platform specific credentials are required and must be provided as credentials
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Engine","Type" : "string"},{"Name" : "SuccessSampleRate","Type" : "string"},{"Name" : "Credentials","Children" : [{"Name" : "EncryptionScheme","Type" : "string","Values" : ["base64"]}]},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "LogMetrics","Subobjects" : true,"Children" : [{"Name" : "LogFilter","Type" : "string","Mandatory" : true}]}]
+{
+	"Engine" : "<string>",
+	"SuccessSampleRate" : "<string>",
+	"Credentials" : {
+		"EncryptionScheme" : "<string>"
+	},
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"LogMetrics" : {
+		"example" : {
+			"LogFilter" : "<string>"
+		}
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Engine**
     -   **Type** - string
@@ -1675,7 +2502,7 @@ A specific mobile platform notification proxy
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1693,18 +2520,37 @@ A specific mobile platform notification proxy
 
 A managed SQL database instance
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Engine","Mandatory" : true},{"Name" : "EngineVersion","Type" : "string"},{"Name" : "Port","Type" : "string"},{"Name" : "Encrypted","Type" : "boolean","Default" : false},{"Name" : "GenerateCredentials","Children" : [{"Name" : "Enabled","Type" : "boolean","Default" : false},{"Name" : "MasterUserName","Type" : "string","Default" : "root"},{"Name" : "CharacterLength","Type" : "number","Default" : 20},{"Name" : "EncryptionScheme","Type" : "string","Values" : ["base64"],"Default" : ""}]},{"Name" : "Size","Type" : "number","Default" : 20},{"Name" : "Backup","Children" : [{"Name" : "RetentionPeriod","Type" : "number","Default" : 35},{"Name" : "SnapshotOnDeploy","Type" : "boolean","Default" : true}]},{"Name" : "AutoMinorVersionUpgrade","Type" : "boolean"},{"Name" : "DatabaseName","Type" : "string"},{"Name" : "DBParameters","Type" : "object","Default" : {}}]
+{
+	"Engine" : "<unknown>",
+	"EngineVersion" : "<string>",
+	"Port" : "<string>",
+	"Encrypted" : false,
+	"GenerateCredentials" : {
+		"Enabled" : false,
+		"MasterUserName" : "root",
+		"CharacterLength" : 20,
+		"EncryptionScheme" : "<string>"
+	},
+	"Size" : 20,
+	"Backup" : {
+		"RetentionPeriod" : 35,
+		"SnapshotOnDeploy" : true
+	},
+	"AutoMinorVersionUpgrade" : "<boolean>",
+	"DatabaseName" : "<string>",
+	"DBParameters" : "<object>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Engine**
     -   **Mandatory** - true
@@ -1753,18 +2599,39 @@ A managed SQL database instance
 
 HTTP based object storage service
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "Lifecycle","Children" : [{"Name" : "Expiration","Types" : ["string","number"],"Description" : "Provide either a date or a number of days"},{"Name" : "Offline","Types" : ["string","number"],"Description" : "Provide either a date or a number of days"},{"Name" : "Versioning","Type" : "boolean","Default" : false}]},{"Name" : "Website","Children" : [{"Name" : "Index","Type" : "string","Default" : "index.html"},{"Name" : "Error","Type" : "string","Default" : ""}]},{"Name" : "PublicAccess","Children" : [{"Name" : "Enabled","Type" : "boolean","Default" : false},{"Name" : "Permissions","Type" : "string","Values" : ["ro","wo","rw"],"Default" : "ro"},{"Name" : "IPAddressGroups","Type" : ["array","string"],"Default" : ["_localnet"]},{"Name" : "Prefix","Type" : "string","Default" : ""}]},{"Name" : "Style","Type" : "string","Description" : "TODO(mfl): Think this can be removed"},{"Name" : "Notifications","Type" : "object"},{"Name" : "CORSBehaviours","Type" : ["array","string"],"Default" : []}]
+{
+	"Lifecycle" : {
+		"Expiration" : "<unknown>",
+		"Offline" : "<unknown>",
+		"Versioning" : false
+	},
+	"Website" : {
+		"Index" : "index.html",
+		"Error" : "<string>"
+	},
+	"PublicAccess" : {
+		"Enabled" : false,
+		"Permissions" : "ro",
+		"IPAddressGroups" : [
+			"_localnet"
+		],
+		"Prefix" : "<string>"
+	},
+	"Style" : "<string>",
+	"Notifications" : "<object>",
+	"CORSBehaviours" : "<array of string>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Lifecycle**
     -   **Expiration**
@@ -1792,7 +2659,7 @@ HTTP based object storage service
         -   **Values** - ro, wo, rw
         -   **Default** - ro
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \_localnet
     -   **Prefix**
         -   **Type** - string
@@ -1803,7 +2670,7 @@ HTTP based object storage service
 -   **Notifications**
     -   **Type** - object
 -   **CORSBehaviours**
-    -   **Type** - array, string
+    -   **Type** - array of string
     -   **Default** - \[]
 
 * * *
@@ -1812,18 +2679,46 @@ HTTP based object storage service
 
 Object stored hosted web application with content distribution management
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Links","Type" : "object","Default" : {}},{"Name" : "WAF","Children" : [{"Name" : "IPAddressGroups","Type" : ["array","string"],"Mandatory" : true},{"Name" : "Default","Type" : "string","Values" : ["ALLOW","BLOCK"],"Default" : "BLOCK"},{"Name" : "RuleDefault","Type" : "string","Values" : ["ALLOW","BLOCK"],"Default" : "ALLOW"}]},{"Name" : "CloudFront","Children" : [{"Name" : "AssumeSNI","Type" : "boolean","Default" : true},{"Name" : "EnableLogging","Type" : "boolean","Default" : true},{"Name" : "CountryGroups","Type" : ["array","string"],"Default" : []},{"Name" : "ErrorPage","Type" : "string","Default" : "\/index.html"},{"Name" : "DeniedPage","Type" : "string","Default" : ""},{"Name" : "NotFoundPage","Type" : "string","Default" : ""},{"Name" : "CachingTTL","Children" : [{"Name" : "Default","Type" : "number","Default" : 600},{"Name" : "Maximum","Type" : "number","Default" : 31536000},{"Name" : "Minimum","Type" : "number","Default" : 0}]},{"Name" : "Compress","Type" : "boolean","Default" : true}]},{"Name" : "Certificate","Children" : [{"Name" : "*"}]},{"Name" : "Profiles","Children" : [{"Name" : "SecurityProfile","Type" : "string","Default" : "default"}]}]
+{
+	"Fragment" : "<string>",
+	"Links" : "<object>",
+	"WAF" : {
+		"IPAddressGroups" : "<array of string>",
+		"Default" : "BLOCK",
+		"RuleDefault" : "ALLOW"
+	},
+	"CloudFront" : {
+		"AssumeSNI" : true,
+		"EnableLogging" : true,
+		"CountryGroups" : "<array of string>",
+		"ErrorPage" : "/index.html",
+		"DeniedPage" : "<string>",
+		"NotFoundPage" : "<string>",
+		"CachingTTL" : {
+			"Default" : 600,
+			"Maximum" : 31536000,
+			"Minimum" : 0
+		},
+		"Compress" : true
+	},
+	"Certificate" : {
+		"*" : "<unknown>"
+	},
+	"Profiles" : {
+		"SecurityProfile" : "default"
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -1834,7 +2729,7 @@ Object stored hosted web application with content distribution management
     -   **Default** - {}
 -   **WAF**
     -   **IPAddressGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Mandatory** - true
     -   **Default**
         -   **Type** - string
@@ -1852,7 +2747,7 @@ Object stored hosted web application with content distribution management
         -   **Type** - boolean
         -   **Default** - true
     -   **CountryGroups**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Default** - \[]
     -   **ErrorPage**
         -   **Type** - string
@@ -1889,18 +2784,27 @@ Object stored hosted web application with content distribution management
 
 Managed worker queue engine
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : "DelaySeconds","Type" : "number"},{"Name" : "MaximumMessageSize","Type" : "number"},{"Name" : "MessageRetentionPeriod","Type" : "number"},{"Name" : "ReceiveMessageWaitTimeSeconds","Type" : "number"},{"Name" : "DeadLetterQueue","Children" : [{"Name" : "MaxReceives","Type" : "number","Default" : 0}]},{"Name" : "VisibilityTimeout","Type" : "number"}]
+{
+	"DelaySeconds" : "<number>",
+	"MaximumMessageSize" : "<number>",
+	"MessageRetentionPeriod" : "<number>",
+	"ReceiveMessageWaitTimeSeconds" : "<number>",
+	"DeadLetterQueue" : {
+		"MaxReceives" : 0
+	},
+	"VisibilityTimeout" : "<number>"
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **DelaySeconds**
     -   **Type** - number
@@ -1923,18 +2827,54 @@ Managed worker queue engine
 
 A user with permissions on components deployed in the solution
 
-### Deployment Properties
+## Deployment Properties
 
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-### Component Format
+## Component Format
 
 ```json
-[{"Name" : ["Fragment","Container"],"Type" : "string","Default" : ""},{"Name" : "Links","Subobjects" : true,"Children" : [{"Name" : "Any","Type" : "string"},{"Name" : "Tenant","Type" : "string"},{"Name" : "Product","Type" : "string"},{"Name" : "Environment","Type" : "string"},{"Name" : "Segment","Type" : "string"},{"Name" : "Tier","Type" : "string","Mandatory" : true},{"Name" : "Component","Type" : "string","Mandatory" : true},{"Name" : ["Function"],"Type" : "string"},{"Name" : ["Service"],"Type" : "string"},{"Name" : ["Task"],"Type" : "string"},{"Name" : ["PortMapping","Port"],"Type" : "string"},{"Name" : ["Mount"],"Type" : "string"},{"Name" : ["Platform"],"Type" : "string"},{"Name" : "Instance","Type" : "string"},{"Name" : "Version","Type" : "string"},{"Name" : "Role","Type" : "string"},{"Name" : "Direction","Type" : "string"}]},{"Name" : "GenerateCredentials","Children" : [{"Name" : "Formats","Type" : ["array","string"],"Values" : ["system","console"],"Default" : ["system"]},{"Name" : "EncryptionScheme","Type" : "string","Values" : ["base64"],"Default" : ""},{"Name" : "CharacterLength","Type" : "number","Default" : 20}]},{"Name" : "Permissions","Children" : [{"Name" : "Decrypt","Type" : "boolean","Default" : true},{"Name" : "AsFile","Type" : "boolean","Default" : true},{"Name" : "AppData","Type" : "boolean","Default" : true},{"Name" : "AppPublic","Type" : "boolean","Default" : true}]}]
+{
+	"Fragment" : "<string>",
+	"Links" : {
+		"example" : {
+			"Any" : "<string>",
+			"Tenant" : "<string>",
+			"Product" : "<string>",
+			"Environment" : "<string>",
+			"Segment" : "<string>",
+			"Tier" : "<string>",
+			"Component" : "<string>",
+			"Function" : "<string>",
+			"Service" : "<string>",
+			"Task" : "<string>",
+			"PortMapping" : "<string>",
+			"Mount" : "<string>",
+			"Platform" : "<string>",
+			"Instance" : "<unknown>",
+			"Version" : "<string>",
+			"Role" : "<string>",
+			"Direction" : "<string>"
+		}
+	},
+	"GenerateCredentials" : {
+		"Formats" : [
+			"system"
+		],
+		"EncryptionScheme" : "<string>",
+		"CharacterLength" : 20
+	},
+	"Permissions" : {
+		"Decrypt" : true,
+		"AsFile" : true,
+		"AppData" : true,
+		"AppPublic" : true
+	}
+}
 ```
 
-### Attribute Reference
+## Attribute Reference
 
 -   **Fragment**
     -   **Alternate Names** - Container
@@ -1971,7 +2911,7 @@ A user with permissions on components deployed in the solution
     -   **Platform**
         -   **Type** - string
     -   **Instance**
-        -   **Type** - string
+        -   **Types** - string
     -   **Version**
         -   **Type** - string
     -   **Role**
@@ -1980,7 +2920,7 @@ A user with permissions on components deployed in the solution
         -   **Type** - string
 -   **GenerateCredentials**
     -   **Formats**
-        -   **Type** - array, string
+        -   **Type** - array of string
         -   **Values** - system, console
         -   **Default** - system
     -   **EncryptionScheme**
