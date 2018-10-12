@@ -147,7 +147,8 @@ provides a metered link between an API gateway and an invoking client
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	}
 }
@@ -192,6 +193,8 @@ provides a metered link between an API gateway and an invoking client
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 
 * * *
@@ -297,7 +300,8 @@ Managed identity service
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	}
 }
@@ -396,6 +400,8 @@ Managed identity service
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 
 * * *
 
@@ -431,14 +437,20 @@ Auto-Scaling IaaS with code deployment
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"UseInitAsService" : false,
-	"MinUpdateInstances" : 1,
-	"ReplaceOnUpdate" : false,
-	"UpdatePauseTime" : "5M",
-	"StartupTimeout" : "15M",
+	"AutoScaling" : {
+		"WaitForSignal" : true,
+		"MinUpdateInstances" : 1,
+		"ReplaceCluster" : false,
+		"UpdatePauseTime" : "5M",
+		"StartupTimeout" : "15M",
+		"AlwaysReplaceOnUpdate" : false,
+		"ActivityCooldown" : 30
+	},
 	"DockerHost" : false,
 	"Ports" : {
 		"example" : {
@@ -500,21 +512,39 @@ Auto-Scaling IaaS with code deployment
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 -   **UseInitAsService**
     -   **Type** - boolean
     -   **Default** - false
--   **MinUpdateInstances**
-    -   **Type** - number
-    -   **Default** - 1
--   **ReplaceOnUpdate**
-    -   **Type** - boolean
-    -   **Default** - false
--   **UpdatePauseTime**
-    -   **Type** - string
-    -   **Default** - 5M
--   **StartupTimeout**
-    -   **Type** - string
-    -   **Default** - 15M
+-   **AutoScaling**
+    -   **WaitForSignal**
+        -   **Type** - boolean
+        -   **Default** - true
+        -   **Description** - Wait for a cfn-signal before treating the instances as alive
+    -   **MinUpdateInstances**
+        -   **Type** - number
+        -   **Default** - 1
+        -   **Description** - The minimum number of instances which must be available during an update
+    -   **ReplaceCluster**
+        -   **Type** - boolean
+        -   **Default** - false
+        -   **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced
+    -   **UpdatePauseTime**
+        -   **Type** - string
+        -   **Default** - 5M
+        -   **Description** - How long to pause betweeen updates of instances
+    -   **StartupTimeout**
+        -   **Type** - string
+        -   **Default** - 15M
+        -   **Description** - How long to wait for a cfn-signal to be received from a host
+    -   **AlwaysReplaceOnUpdate**
+        -   **Type** - boolean
+        -   **Default** - false
+        -   **Description** - Replace instances on every update action
+    -   **ActivityCooldown**
+        -   **Type** - number
+        -   **Default** - 30
 -   **DockerHost**
     -   **Type** - boolean
     -   **Default** - false
@@ -626,7 +656,8 @@ Node for decentralised content hosting with centralised publishing
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	}
 }
@@ -707,6 +738,8 @@ Node for decentralised content hosting with centralised publishing
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 
 * * *
 
@@ -748,7 +781,8 @@ Managed Data ETL Processing
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	}
 }
@@ -811,6 +845,8 @@ Managed Data ETL Processing
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 
 * * *
 
@@ -846,7 +882,8 @@ A data aretefact that is managed in a similar way to a code unit
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"Prefix" : "<string>"
@@ -897,6 +934,8 @@ A data aretefact that is managed in a similar way to a code unit
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 -   **Prefix**
     -   **Type** - string
     -   **Default** - null
@@ -937,7 +976,8 @@ A single virtual machine with no code deployment
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"Ports" : {
@@ -1005,6 +1045,8 @@ A single virtual machine with no code deployment
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **Ports**
     -   **IPAddressGroups**
@@ -1075,8 +1117,18 @@ An autoscaling container host cluster
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
+	},
+	"AutoScaling" : {
+		"WaitForSignal" : true,
+		"MinUpdateInstances" : 1,
+		"ReplaceCluster" : false,
+		"UpdatePauseTime" : "5M",
+		"StartupTimeout" : "15M",
+		"AlwaysReplaceOnUpdate" : false,
+		"ActivityCooldown" : 30
 	},
 	"DockerUsers" : {
 		"example" : {
@@ -1147,6 +1199,36 @@ An autoscaling container host cluster
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
+-   **AutoScaling**
+    -   **WaitForSignal**
+        -   **Type** - boolean
+        -   **Default** - true
+        -   **Description** - Wait for a cfn-signal before treating the instances as alive
+    -   **MinUpdateInstances**
+        -   **Type** - number
+        -   **Default** - 1
+        -   **Description** - The minimum number of instances which must be available during an update
+    -   **ReplaceCluster**
+        -   **Type** - boolean
+        -   **Default** - false
+        -   **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced
+    -   **UpdatePauseTime**
+        -   **Type** - string
+        -   **Default** - 5M
+        -   **Description** - How long to pause betweeen updates of instances
+    -   **StartupTimeout**
+        -   **Type** - string
+        -   **Default** - 15M
+        -   **Description** - How long to wait for a cfn-signal to be received from a host
+    -   **AlwaysReplaceOnUpdate**
+        -   **Type** - boolean
+        -   **Default** - false
+        -   **Description** - Replace instances on every update action
+    -   **ActivityCooldown**
+        -   **Type** - number
+        -   **Default** - 30
 -   **DockerUsers**
     -   **UserName**
         -   **Type** - string
@@ -1190,7 +1272,8 @@ An orchestrated container with always on scheduling
 					"Instance" : "<unknown>",
 					"Version" : "<string>",
 					"Role" : "<string>",
-					"Direction" : "<string>"
+					"Direction" : "<string>",
+					"Type" : "<string>"
 				}
 			},
 			"LocalLogging" : false,
@@ -1276,6 +1359,8 @@ An orchestrated container with always on scheduling
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
     -   **LocalLogging**
         -   **Type** - boolean
@@ -1399,7 +1484,8 @@ A container defintion which is invoked on demand
 					"Instance" : "<unknown>",
 					"Version" : "<string>",
 					"Role" : "<string>",
-					"Direction" : "<string>"
+					"Direction" : "<string>",
+					"Type" : "<string>"
 				}
 			},
 			"LocalLogging" : false,
@@ -1483,6 +1569,8 @@ A container defintion which is invoked on demand
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
     -   **LocalLogging**
         -   **Type** - boolean
@@ -1663,7 +1751,8 @@ A managed ElasticSearch instance
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	}
 }
@@ -1728,6 +1817,8 @@ A managed ElasticSearch instance
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 
 * * *
@@ -1794,7 +1885,8 @@ A specific entry point for the lambda deployment
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"LogMetrics" : {
@@ -1823,7 +1915,8 @@ A specific entry point for the lambda deployment
 					"Instance" : "<unknown>",
 					"Version" : "<string>",
 					"Role" : "<string>",
-					"Direction" : "<string>"
+					"Direction" : "<string>",
+					"Type" : "<string>"
 				}
 			}
 		}
@@ -1924,6 +2017,8 @@ A specific entry point for the lambda deployment
         -   **Type** - string
     -   **Direction**
         -   **Type** - string
+    -   **Type**
+        -   **Type** - string
 -   **LogMetrics**
     -   **LogFilter**
         -   **Type** - string
@@ -1969,6 +2064,8 @@ A specific entry point for the lambda deployment
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **Alerts**
     -   **Name** - Description
@@ -2166,7 +2263,8 @@ A specifc listener based on the client side network port
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"Authentication" : {
@@ -2251,6 +2349,8 @@ A specifc listener based on the client side network port
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **Authentication**
     -   **SessionCookieName**
@@ -2343,7 +2443,8 @@ A managed mobile notification proxy
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"SuccessSampleRate" : "100",
@@ -2395,6 +2496,8 @@ A managed mobile notification proxy
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **SuccessSampleRate**
     -   **Type** - string
@@ -2450,7 +2553,8 @@ A specific mobile platform notification proxy
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"LogMetrics" : {
@@ -2508,6 +2612,8 @@ A specific mobile platform notification proxy
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **LogMetrics**
     -   **LogFilter**
@@ -2855,7 +2961,8 @@ A user with permissions on components deployed in the solution
 			"Instance" : "<unknown>",
 			"Version" : "<string>",
 			"Role" : "<string>",
-			"Direction" : "<string>"
+			"Direction" : "<string>",
+			"Type" : "<string>"
 		}
 	},
 	"GenerateCredentials" : {
@@ -2917,6 +3024,8 @@ A user with permissions on components deployed in the solution
     -   **Role**
         -   **Type** - string
     -   **Direction**
+        -   **Type** - string
+    -   **Type**
         -   **Type** - string
 -   **GenerateCredentials**
     -   **Formats**
