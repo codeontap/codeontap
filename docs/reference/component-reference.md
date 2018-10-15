@@ -50,10 +50,8 @@ Application level API proxy
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Links**
     -   **Type** - object
-    -   **Default** - {}
 -   **WAF**
     -   **IPAddressGroups**
         -   **Type** - array of string
@@ -72,7 +70,6 @@ Application level API proxy
     -   **Default** - EDGE
 -   **IPAddressGroups**
     -   **Type** - array of string
-    -   **Default** - \[]
 -   **Authentication**
     -   **Type** - string
     -   **Values** - IP, SIG4ORIP, SIG4ANDIP
@@ -86,10 +83,8 @@ Application level API proxy
         -   **Default** - true
     -   **CountryGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **CustomHeaders**
         -   **Type** - array of any
-        -   **Default** - \[]
     -   **Mapping**
         -   **Type** - boolean
         -   **Default** - false
@@ -104,7 +99,6 @@ Application level API proxy
         -   **Default** - docs
     -   **IPAddressGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
 -   **Mapping**
     -   **IncludeStage**
         -   **Type** - boolean
@@ -233,7 +227,6 @@ Managed in-memory cache services
 -   **Backup**
     -   **RetentionPeriod**
         -   **Type** - string
-        -   **Default** - null
 
 * * *
 
@@ -473,7 +466,6 @@ Auto-Scaling IaaS with code deployment
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Links**
     -   **Any**
         -   **Type** - string
@@ -551,7 +543,6 @@ Auto-Scaling IaaS with code deployment
 -   **Ports**
     -   **IPAddressGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **LB**
     -   **Tier**
         -   **Type** - string
@@ -569,7 +560,6 @@ Auto-Scaling IaaS with code deployment
     -   **PortMapping**
         -   **Alternate Names** - Port
         -   **Type** - string
-        -   **Default** - null
 
 * * *
 
@@ -606,7 +596,6 @@ Hub for decentralised content hosting with centralised publishing
     -   **Default** - master
 -   **Repository**
     -   **Type** - string
-    -   **Default** - null
 
 * * *
 
@@ -668,7 +657,6 @@ Node for decentralised content hosting with centralised publishing
 -   **Path**
     -   **Host**
         -   **Type** - string
-        -   **Default** - null
     -   **Style**
         -   **Type** - string
         -   **Default** - single
@@ -793,7 +781,6 @@ Managed Data ETL Processing
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Permissions**
     -   **Decrypt**
         -   **Type** - boolean
@@ -938,7 +925,6 @@ A data aretefact that is managed in a similar way to a code unit
         -   **Type** - string
 -   **Prefix**
     -   **Type** - string
-    -   **Default** - null
 
 * * *
 
@@ -1007,7 +993,6 @@ A single virtual machine with no code deployment
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Links**
     -   **Any**
         -   **Type** - string
@@ -1051,7 +1036,6 @@ A single virtual machine with no code deployment
 -   **Ports**
     -   **IPAddressGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **LB**
     -   **Tier**
         -   **Type** - string
@@ -1069,7 +1053,6 @@ A single virtual machine with no code deployment
     -   **PortMapping**
         -   **Alternate Names** - Port
         -   **Type** - string
-        -   **Default** - null
 
 * * *
 
@@ -1150,7 +1133,6 @@ An autoscaling container host cluster
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **FixedIP**
     -   **Type** - boolean
     -   **Default** - false
@@ -1321,7 +1303,6 @@ An orchestrated container with always on scheduling
 -   **Containers**
     -   **Cpu**
         -   **Type** - number
-        -   **Default** - null
     -   **Links**
     -   **Any**
         -   **Type** - string
@@ -1374,7 +1355,6 @@ An orchestrated container with always on scheduling
         -   **Default** - false
     -   **RunCapabilities**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **Privileged**
         -   **Type** - boolean
         -   **Default** - false
@@ -1408,16 +1388,12 @@ An orchestrated container with always on scheduling
     -   **PortMapping**
         -   **Alternate Names** - Port
         -   **Type** - string
-        -   **Default** - null
     -   **IPAddressGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **Version**
         -   **Type** - string
-        -   **Default** - null
     -   **ContainerNetworkLinks**
         -   **Type** - array of string
-        -   **Default** - \[]
 -   **DesiredCount**
     -   **Type** - number
     -   **Default** - -1
@@ -1443,7 +1419,6 @@ An orchestrated container with always on scheduling
 -   **NetworkMode**
     -   **Type** - string
     -   **Values** - none, bridge, awsvpc, host
-    -   **Default** - null
 -   **ContainerNetworkLinks**
     -   **Type** - boolean
     -   **Default** - false
@@ -1531,7 +1506,6 @@ A container defintion which is invoked on demand
 -   **Containers**
     -   **Cpu**
         -   **Type** - number
-        -   **Default** - null
     -   **Links**
     -   **Any**
         -   **Type** - string
@@ -1584,7 +1558,6 @@ A container defintion which is invoked on demand
         -   **Default** - false
     -   **RunCapabilities**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **Privileged**
         -   **Type** - boolean
         -   **Default** - false
@@ -1618,16 +1591,12 @@ A container defintion which is invoked on demand
     -   **PortMapping**
         -   **Alternate Names** - Port
         -   **Type** - string
-        -   **Default** - null
     -   **IPAddressGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **Version**
         -   **Type** - string
-        -   **Default** - null
     -   **ContainerNetworkLinks**
         -   **Type** - array of string
-        -   **Default** - \[]
 -   **UseTaskRole**
     -   **Type** - boolean
     -   **Default** - true
@@ -1769,7 +1738,6 @@ A managed ElasticSearch instance
     -   **Mandatory** - true
 -   **AdvancedOptions**
     -   **Type** - array of string
-    -   **Default** - \[]
 -   **Version**
     -   **Type** - string
     -   **Default** - 2.3
@@ -1779,7 +1747,6 @@ A managed ElasticSearch instance
 -   **Snapshot**
     -   **Hour**
         -   **Type** - string
-        -   **Default** - null
 -   **Links**
     -   **Any**
         -   **Type** - string
@@ -1975,7 +1942,6 @@ A specific entry point for the lambda deployment
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Handler**
     -   **Type** - string
     -   **Mandatory** - true
@@ -2087,7 +2053,6 @@ A specific entry point for the lambda deployment
         -   **Default** - Info
     -   **Namespace**
         -   **Type** - string
-        -   **Default** - null
     -   **Comparison**
         -   **Type** - string
         -   **Default** - Threshold
@@ -2126,7 +2091,6 @@ A specific entry point for the lambda deployment
         -   **Default** - /healthcheck
     -   **Input**
         -   **Type** - object
-        -   **Default** - {}
 -   **Timeout**
     -   **Type** - number
     -   **Default** - 0
@@ -2222,7 +2186,6 @@ A load balancer for virtual network based components
     -   **Default** - 60
 -   **HealthCheckPort**
     -   **Type** - string
-    -   **Default** - null
 
 * * *
 
@@ -2297,10 +2260,8 @@ A specifc listener based on the client side network port
 
 -   **IPAddressGroups**
     -   **Type** - array of string
-    -   **Default** - \[]
 -   **Certificate**
     -   **Type** - object
-    -   **Default** - {}
 -   **HostFilter**
     -   **Type** - boolean
     -   **Default** - false
@@ -2680,7 +2641,6 @@ A managed SQL database instance
     -   **EncryptionScheme**
         -   **Type** - string
         -   **Values** - base64
-        -   **Default** - null
 -   **Size**
     -   **Type** - number
     -   **Default** - 20
@@ -2697,7 +2657,6 @@ A managed SQL database instance
     -   **Type** - string
 -   **DBParameters**
     -   **Type** - object
-    -   **Default** - {}
 
 * * *
 
@@ -2755,7 +2714,6 @@ HTTP based object storage service
         -   **Default** - index.html
     -   **Error**
         -   **Type** - string
-        -   **Default** - null
 -   **PublicAccess**
     -   **Enabled**
         -   **Type** - boolean
@@ -2769,7 +2727,6 @@ HTTP based object storage service
         -   **Default** - \_localnet
     -   **Prefix**
         -   **Type** - string
-        -   **Default** - null
 -   **Style**
     -   **Type** - string
     -   **Description** - TODO(mfl): Think this can be removed
@@ -2777,7 +2734,6 @@ HTTP based object storage service
     -   **Type** - object
 -   **CORSBehaviours**
     -   **Type** - array of string
-    -   **Default** - \[]
 
 * * *
 
@@ -2829,10 +2785,8 @@ Object stored hosted web application with content distribution management
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Links**
     -   **Type** - object
-    -   **Default** - {}
 -   **WAF**
     -   **IPAddressGroups**
         -   **Type** - array of string
@@ -2854,16 +2808,13 @@ Object stored hosted web application with content distribution management
         -   **Default** - true
     -   **CountryGroups**
         -   **Type** - array of string
-        -   **Default** - \[]
     -   **ErrorPage**
         -   **Type** - string
         -   **Default** - /index.html
     -   **DeniedPage**
         -   **Type** - string
-        -   **Default** - null
     -   **NotFoundPage**
         -   **Type** - string
-        -   **Default** - null
     -   **CachingTTL**
     -   **Default**
         -   **Type** - number
@@ -2986,7 +2937,6 @@ A user with permissions on components deployed in the solution
 -   **Fragment**
     -   **Alternate Names** - Container
     -   **Type** - string
-    -   **Default** - null
 -   **Links**
     -   **Any**
         -   **Type** - string
@@ -3035,7 +2985,6 @@ A user with permissions on components deployed in the solution
     -   **EncryptionScheme**
         -   **Type** - string
         -   **Values** - base64
-        -   **Default** - null
     -   **CharacterLength**
         -   **Type** - number
         -   **Default** - 20
