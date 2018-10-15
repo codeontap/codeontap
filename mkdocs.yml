@@ -18,7 +18,10 @@ nav:
     - 'Introduction' : './getting-started/index.md'
     - 'Local Environment Setup' : './getting-started/local-env-setup.md'
     - 'Create CMDB' : './getting-started/cmdb-setup.md'
-    - 'Deploy Components' : './getting-started/deploy-components.md'
+    - 'Deploy Basic Components' : './getting-started/deploy-basic-components.md'
+    - 'Encrypt Secrets' : './getting-started/encrypt-secrets.md'
+    - 'Deploy Product Components' : './getting-started/deploy-product-components.md'
+    - 'Accessing Jenkins' : './getting-started/accessing-jenkins.md'
   - 'About' :
     - 'Release Process' : './about/versioning.md'
   - 'Reference' : 
