@@ -116,4 +116,4 @@ Edit the domains.json file `/var/opt/codeontap/accounts/<tenantname>/domains.jso
 }
 ```
 
-## Next Step: [Deploy Components](./deploy-components.md)
+## Next Step: [Deploy Basic Components](./deploy-basic-components.md)

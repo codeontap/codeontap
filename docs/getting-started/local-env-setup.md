@@ -20,8 +20,11 @@ Run the codeontap container as an interactive session. This will provide you wit
 !!! info
   Your AWS profile might be in a different location
 
+!!! info
+  You will need to run docker commands within this container during the setup process. To do this you will need access to your local machines docker socket.
+
 ```bash
-  docker run -it --rm --volume $(pwd):/var/opt/codeontap --volume ~/.aws:/root/.aws codeontap/gen3
+  docker run -it --rm --volume $(pwd):/var/opt/codeontap --volume ~/.aws:/root/.aws --volume /var/run/docker.sock:/var/run/docker.sock codeontap/gen3
 ```
 
 Change into the CMDB directory and create the root marker file ( this file is used to define where the CMDB starts)
