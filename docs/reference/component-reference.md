@@ -11,107 +11,109 @@ Application level API proxy
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Links" : "<object>",
-	"WAF" : {
+	"apigateway" : {
+		"Fragment" : "<string>",
+		"Links" : "<object>",
+		"WAF" : {
+			"IPAddressGroups" : "<array of string>",
+			"Default" : "BLOCK",
+			"RuleDefault" : "ALLOW"
+		},
+		"EndpointType" : "EDGE",
 		"IPAddressGroups" : "<array of string>",
-		"Default" : "BLOCK",
-		"RuleDefault" : "ALLOW"
-	},
-	"EndpointType" : "EDGE",
-	"IPAddressGroups" : "<array of string>",
-	"Authentication" : "IP",
-	"CloudFront" : {
-		"AssumeSNI" : true,
-		"EnableLogging" : true,
-		"CountryGroups" : "<array of string>",
-		"CustomHeaders" : "<array of any>",
-		"Mapping" : false,
-		"Compress" : true
-	},
-	"Certificate" : {
-		"*" : "<unknown>"
-	},
-	"Publish" : {
-		"DnsNamePrefix" : "docs",
-		"IPAddressGroups" : "<array of string>"
-	},
-	"Mapping" : {
-		"IncludeStage" : true
-	},
-	"Profiles" : {
-		"SecurityProfile" : "default"
+		"Authentication" : "IP",
+		"CloudFront" : {
+			"AssumeSNI" : true,
+			"EnableLogging" : true,
+			"CountryGroups" : "<array of string>",
+			"CustomHeaders" : "<array of any>",
+			"Mapping" : false,
+			"Compress" : true
+		},
+		"Certificate" : {
+			"*" : "<unknown>"
+		},
+		"Publish" : {
+			"DnsNamePrefix" : "docs",
+			"IPAddressGroups" : "<array of string>"
+		},
+		"Mapping" : {
+			"IncludeStage" : true
+		},
+		"Profiles" : {
+			"SecurityProfile" : "default"
+		}
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Links**
+-   ### Links
     **Type** - object  
     **Mandatory** - false  
--   ### **WAF**
-    -   ### **IPAddressGroups**
+-   ### WAF
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Mandatory** - true  
-    -   ### **Default**
+    -   ### Default
         **Type** - string  
         **Values** - ALLOW, BLOCK  
         **Default** - BLOCK  
-    -   ### **RuleDefault**
+    -   ### RuleDefault
         **Type** - string  
         **Values** - ALLOW, BLOCK  
         **Default** - ALLOW  
--   ### **EndpointType**
+-   ### EndpointType
     **Type** - string  
     **Values** - EDGE, REGIONAL  
     **Default** - EDGE  
--   ### **IPAddressGroups**
+-   ### IPAddressGroups
     **Type** - array of string  
     **Mandatory** - false  
--   ### **Authentication**
+-   ### Authentication
     **Type** - string  
     **Values** - IP, SIG4ORIP, SIG4ANDIP  
     **Default** - IP  
--   ### **CloudFront**
-    -   ### **AssumeSNI**
+-   ### CloudFront
+    -   ### AssumeSNI
         **Type** - boolean  
         **Default** - true  
-    -   ### **EnableLogging**
+    -   ### EnableLogging
         **Type** - boolean  
         **Default** - true  
-    -   ### **CountryGroups**
+    -   ### CountryGroups
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **CustomHeaders**
+    -   ### CustomHeaders
         **Type** - array of any  
         **Mandatory** - false  
-    -   ### **Mapping**
+    -   ### Mapping
         **Type** - boolean  
         **Default** - false  
-    -   ### **Compress**
+    -   ### Compress
         **Type** - boolean  
         **Default** - true  
--   ### **Certificate**
-    -   ### **\***
+-   ### Certificate
+    -   ### \*
         **Mandatory** - false  
--   ### **Publish**
-    -   ### **DnsNamePrefix**
+-   ### Publish
+    -   ### DnsNamePrefix
         **Type** - string  
         **Default** - docs  
-    -   ### **IPAddressGroups**
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Mandatory** - false  
--   ### **Mapping**
-    -   ### **IncludeStage**
+-   ### Mapping
+    -   ### IncludeStage
         **Type** - boolean  
         **Default** - true  
--   ### **Profiles**
-    -   ### **SecurityProfile**
+-   ### Profiles
+    -   ### SecurityProfile
         **Type** - string  
         **Default** - default  
 
@@ -130,26 +132,28 @@ provides a metered link between an API gateway and an invoking client
 
 ```json
 {
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"apiusageplan" : {
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
 		}
 	}
 }
@@ -157,60 +161,60 @@ provides a metered link between an API gateway and an invoking client
 
 ## Attribute Reference
 
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
 
@@ -229,28 +233,30 @@ Managed in-memory cache services
 
 ```json
 {
-	"Engine" : "<string>",
-	"EngineVersion" : "<string>",
-	"Port" : "<string>",
-	"Backup" : {
-		"RetentionPeriod" : "<string>"
+	"cache" : {
+		"Engine" : "<string>",
+		"EngineVersion" : "<string>",
+		"Port" : "<string>",
+		"Backup" : {
+			"RetentionPeriod" : "<string>"
+		}
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Engine**
+-   ### Engine
     **Type** - string  
     **Mandatory** - true  
--   ### **EngineVersion**
+-   ### EngineVersion
     **Type** - string  
     **Mandatory** - false  
--   ### **Port**
+-   ### Port
     **Type** - string  
     **Mandatory** - false  
--   ### **Backup**
-    -   ### **RetentionPeriod**
+-   ### Backup
+    -   ### RetentionPeriod
         **Type** - string  
         **Mandatory** - false  
 
@@ -274,53 +280,55 @@ Managed identity service
 
 ```json
 {
-	"MFA" : false,
-	"AdminCreatesUser" : true,
-	"UnusedAccountTimeout" : 7,
-	"VerifyEmail" : true,
-	"VerifyPhone" : false,
-	"LoginAliases" : [
-		"email"
-	],
-	"ClientGenerateSecret" : false,
-	"ClientTokenValidity" : 30,
-	"AllowUnauthenticatedIds" : false,
-	"AuthorizationHeader" : "Authorization",
-	"OAuth" : {
-		"Scopes" : [
-			"openid"
+	"userpool" : {
+		"MFA" : false,
+		"AdminCreatesUser" : true,
+		"UnusedAccountTimeout" : 7,
+		"VerifyEmail" : true,
+		"VerifyPhone" : false,
+		"LoginAliases" : [
+			"email"
 		],
-		"Flows" : [
-			"code"
-		]
-	},
-	"PasswordPolicy" : {
-		"MinimumLength" : 10,
-		"Lowercase" : true,
-		"Uppercase" : true,
-		"Numbers" : true,
-		"SpecialCharacters" : true
-	},
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+		"ClientGenerateSecret" : false,
+		"ClientTokenValidity" : 30,
+		"AllowUnauthenticatedIds" : false,
+		"AuthorizationHeader" : "Authorization",
+		"OAuth" : {
+			"Scopes" : [
+				"openid"
+			],
+			"Flows" : [
+				"code"
+			]
+		},
+		"PasswordPolicy" : {
+			"MinimumLength" : 10,
+			"Lowercase" : true,
+			"Uppercase" : true,
+			"Numbers" : true,
+			"SpecialCharacters" : true
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
 		}
 	}
 }
@@ -328,113 +336,113 @@ Managed identity service
 
 ## Attribute Reference
 
--   ### **MFA**
+-   ### MFA
     **Type** - boolean  
     **Default** - false  
--   ### **AdminCreatesUser**
+-   ### AdminCreatesUser
     **Type** - boolean  
     **Default** - true  
--   ### **UnusedAccountTimeout**
+-   ### UnusedAccountTimeout
     **Type** - number  
     **Default** - 7  
--   ### **VerifyEmail**
+-   ### VerifyEmail
     **Type** - boolean  
     **Default** - true  
--   ### **VerifyPhone**
+-   ### VerifyPhone
     **Type** - boolean  
     **Default** - false  
--   ### **LoginAliases**
+-   ### LoginAliases
     **Type** - array of string  
     **Default** - email  
--   ### **ClientGenerateSecret**
+-   ### ClientGenerateSecret
     **Type** - boolean  
     **Default** - false  
--   ### **ClientTokenValidity**
+-   ### ClientTokenValidity
     **Type** - number  
     **Default** - 30  
--   ### **AllowUnauthenticatedIds**
+-   ### AllowUnauthenticatedIds
     **Type** - boolean  
     **Default** - false  
--   ### **AuthorizationHeader**
+-   ### AuthorizationHeader
     **Type** - string  
     **Default** - Authorization  
--   ### **OAuth**
-    -   ### **Scopes**
+-   ### OAuth
+    -   ### Scopes
         **Type** - array of string  
         **Default** - openid  
-    -   ### **Flows**
+    -   ### Flows
         **Type** - array of string  
         **Default** - code  
--   ### **PasswordPolicy**
-    -   ### **MinimumLength**
+-   ### PasswordPolicy
+    -   ### MinimumLength
         **Type** - number  
         **Default** - 10  
-    -   ### **Lowercase**
+    -   ### Lowercase
         **Type** - boolean  
         **Default** - true  
-    -   ### **Uppercase**
+    -   ### Uppercase
         **Type** - boolean  
         **Default** - true  
-    -   ### **Numbers**
+    -   ### Numbers
         **Type** - boolean  
         **Default** - true  
-    -   ### **SpecialCharacters**
+    -   ### SpecialCharacters
         **Type** - boolean  
         **Default** - true  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
 
@@ -453,50 +461,52 @@ Auto-Scaling IaaS with code deployment
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
-		}
-	},
-	"UseInitAsService" : false,
-	"AutoScaling" : {
-		"WaitForSignal" : true,
-		"MinUpdateInstances" : 1,
-		"ReplaceCluster" : false,
-		"UpdatePauseTime" : "5M",
-		"StartupTimeout" : "15M",
-		"AlwaysReplaceOnUpdate" : false,
-		"ActivityCooldown" : 30
-	},
-	"DockerHost" : false,
-	"Ports" : {
-		"example" : {
-			"IPAddressGroups" : "<array of string>",
-			"LB" : {
+	"computecluster" : {
+		"Fragment" : "<string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
 				"Tier" : "<string>",
 				"Component" : "<string>",
-				"LinkName" : "lb",
-				"Instance" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
 				"Version" : "<string>",
-				"PortMapping" : "<string>"
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"UseInitAsService" : false,
+		"AutoScaling" : {
+			"WaitForSignal" : true,
+			"MinUpdateInstances" : 1,
+			"ReplaceCluster" : false,
+			"UpdatePauseTime" : "5M",
+			"StartupTimeout" : "15M",
+			"AlwaysReplaceOnUpdate" : false,
+			"ActivityCooldown" : 30
+		},
+		"DockerHost" : false,
+		"Ports" : {
+			"example" : {
+				"IPAddressGroups" : "<array of string>",
+				"LB" : {
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"LinkName" : "lb",
+					"Instance" : "<string>",
+					"Version" : "<string>",
+					"PortMapping" : "<string>"
+				}
 			}
 		}
 	}
@@ -505,127 +515,127 @@ Auto-Scaling IaaS with code deployment
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **UseInitAsService**
+-   ### UseInitAsService
     **Type** - boolean  
     **Default** - false  
--   ### **AutoScaling**
-    -   ### **WaitForSignal**
+-   ### AutoScaling
+    -   ### WaitForSignal
         **Type** - boolean  
         **Default** - true  
         **Description** - Wait for a cfn-signal before treating the instances as alive  
         **Mandatory** - false  
-    -   ### **MinUpdateInstances**
+    -   ### MinUpdateInstances
         **Type** - number  
         **Default** - 1  
         **Description** - The minimum number of instances which must be available during an update  
         **Mandatory** - false  
-    -   ### **ReplaceCluster**
+    -   ### ReplaceCluster
         **Type** - boolean  
         **Default** - false  
         **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
         **Mandatory** - false  
-    -   ### **UpdatePauseTime**
+    -   ### UpdatePauseTime
         **Type** - string  
         **Default** - 5M  
         **Description** - How long to pause betweeen updates of instances  
         **Mandatory** - false  
-    -   ### **StartupTimeout**
+    -   ### StartupTimeout
         **Type** - string  
         **Default** - 15M  
         **Description** - How long to wait for a cfn-signal to be received from a host  
         **Mandatory** - false  
-    -   ### **AlwaysReplaceOnUpdate**
+    -   ### AlwaysReplaceOnUpdate
         **Type** - boolean  
         **Default** - false  
         **Description** - Replace instances on every update action  
         **Mandatory** - false  
-    -   ### **ActivityCooldown**
+    -   ### ActivityCooldown
         **Type** - number  
         **Default** - 30  
--   ### **DockerHost**
+-   ### DockerHost
     **Type** - boolean  
     **Default** - false  
--   ### **Ports**
-    -   ### **IPAddressGroups**
+-   ### Ports
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **LB**
-    -   ### **Tier**
+    -   ### LB
+    -   ### Tier
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
           **Type** - string  
           **Mandatory** - true  
-    -   ### **LinkName**
+    -   ### LinkName
           **Type** - string  
           **Default** - lb  
-    -   ### **Instance**
+    -   ### Instance
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - string  
           **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
           **Alternate Names** - Port  
           **Type** - string  
           **Mandatory** - false  
@@ -645,25 +655,27 @@ Hub for decentralised content hosting with centralised publishing
 
 ```json
 {
-	"Prefix" : "<string>",
-	"Engine" : "github",
-	"Branch" : "master",
-	"Repository" : "<string>"
+	"contenthub" : {
+		"Prefix" : "<string>",
+		"Engine" : "github",
+		"Branch" : "master",
+		"Repository" : "<string>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Prefix**
+-   ### Prefix
     **Type** - string  
     **Mandatory** - true  
--   ### **Engine**
+-   ### Engine
     **Type** - string  
     **Default** - github  
--   ### **Branch**
+-   ### Branch
     **Type** - string  
     **Default** - master  
--   ### **Repository**
+-   ### Repository
     **Type** - string  
     **Mandatory** - false  
 
@@ -682,41 +694,43 @@ Node for decentralised content hosting with centralised publishing
 
 ```json
 {
-	"Path" : {
-		"Host" : "<string>",
-		"Style" : "single",
-		"IncludeInPath" : {
-			"Product" : true,
-			"Environment" : false,
-			"Solution" : false,
-			"Segment" : true,
-			"Tier" : false,
-			"Component" : false,
-			"Instance" : false,
-			"Version" : false,
-			"Host" : false
-		}
-	},
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"contentnode" : {
+		"Path" : {
+			"Host" : "<string>",
+			"Style" : "single",
+			"IncludeInPath" : {
+				"Product" : true,
+				"Environment" : false,
+				"Solution" : false,
+				"Segment" : true,
+				"Tier" : false,
+				"Component" : false,
+				"Instance" : false,
+				"Version" : false,
+				"Host" : false
+			}
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
 		}
 	}
 }
@@ -724,95 +738,95 @@ Node for decentralised content hosting with centralised publishing
 
 ## Attribute Reference
 
--   ### **Path**
-    -   ### **Host**
+-   ### Path
+    -   ### Host
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Style**
+    -   ### Style
         **Type** - string  
         **Default** - single  
-    -   ### **IncludeInPath**
-    -   ### **Product**
+    -   ### IncludeInPath
+    -   ### Product
           **Type** - boolean  
           **Default** - true  
-    -   ### **Environment**
+    -   ### Environment
           **Type** - boolean  
           **Default** - false  
-    -   ### **Solution**
+    -   ### Solution
           **Type** - boolean  
           **Default** - false  
-    -   ### **Segment**
+    -   ### Segment
           **Type** - boolean  
           **Default** - true  
-    -   ### **Tier**
+    -   ### Tier
           **Type** - boolean  
           **Default** - false  
-    -   ### **Component**
+    -   ### Component
           **Type** - boolean  
           **Default** - false  
-    -   ### **Instance**
+    -   ### Instance
           **Type** - boolean  
           **Default** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - boolean  
           **Default** - false  
-    -   ### **Host**
+    -   ### Host
           **Type** - boolean  
           **Default** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
 
@@ -831,33 +845,35 @@ Managed Data ETL Processing
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Permissions" : {
-		"Decrypt" : true,
-		"AsFile" : true,
-		"AppData" : true,
-		"AppPublic" : true
-	},
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"datapipeline" : {
+		"Fragment" : "<string>",
+		"Permissions" : {
+			"Decrypt" : true,
+			"AsFile" : true,
+			"AppData" : true,
+			"AppPublic" : true
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
 		}
 	}
 }
@@ -865,77 +881,77 @@ Managed Data ETL Processing
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Permissions**
-    -   ### **Decrypt**
+-   ### Permissions
+    -   ### Decrypt
         **Type** - boolean  
         **Default** - true  
-    -   ### **AsFile**
+    -   ### AsFile
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppData**
+    -   ### AppData
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppPublic**
+    -   ### AppPublic
         **Type** - boolean  
         **Default** - true  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
 
@@ -954,96 +970,98 @@ A data aretefact that is managed in a similar way to a code unit
 
 ```json
 {
-	"Engine" : "<string>",
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
-		}
-	},
-	"Prefix" : "<string>"
+	"dataset" : {
+		"Engine" : "<string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Prefix" : "<string>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Engine**
+-   ### Engine
     **Type** - string  
     **Values** - s3, rdsSnapshot  
     **Mandatory** - true  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **Prefix**
+-   ### Prefix
     **Type** - string  
     **Mandatory** - false  
 
@@ -1062,41 +1080,43 @@ A single virtual machine with no code deployment
 
 ```json
 {
-	"FixedIP" : false,
-	"DockerHost" : false,
-	"Fragment" : "<string>",
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
-		}
-	},
-	"Ports" : {
-		"example" : {
-			"IPAddressGroups" : "<array of string>",
-			"LB" : {
+	"ec2" : {
+		"FixedIP" : false,
+		"DockerHost" : false,
+		"Fragment" : "<string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
 				"Tier" : "<string>",
 				"Component" : "<string>",
-				"LinkName" : "lb",
-				"Instance" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
 				"Version" : "<string>",
-				"PortMapping" : "<string>"
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Ports" : {
+			"example" : {
+				"IPAddressGroups" : "<array of string>",
+				"LB" : {
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"LinkName" : "lb",
+					"Instance" : "<string>",
+					"Version" : "<string>",
+					"PortMapping" : "<string>"
+				}
 			}
 		}
 	}
@@ -1105,93 +1125,93 @@ A single virtual machine with no code deployment
 
 ## Attribute Reference
 
--   ### **FixedIP**
+-   ### FixedIP
     **Type** - boolean  
     **Default** - false  
--   ### **DockerHost**
+-   ### DockerHost
     **Type** - boolean  
     **Default** - false  
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **Ports**
-    -   ### **IPAddressGroups**
+-   ### Ports
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **LB**
-    -   ### **Tier**
+    -   ### LB
+    -   ### Tier
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
           **Type** - string  
           **Mandatory** - true  
-    -   ### **LinkName**
+    -   ### LinkName
           **Type** - string  
           **Default** - lb  
-    -   ### **Instance**
+    -   ### Instance
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - string  
           **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
           **Alternate Names** - Port  
           **Type** - string  
           **Mandatory** - false  
@@ -1220,167 +1240,169 @@ An autoscaling container host cluster
 
 ```json
 {
-	"Fragment" : "<string>",
-	"FixedIP" : false,
-	"LogDriver" : "awslogs",
-	"ClusterLogGroup" : true,
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"ecs" : {
+		"Fragment" : "<string>",
+		"FixedIP" : false,
+		"LogDriver" : "awslogs",
+		"ClusterLogGroup" : true,
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"AutoScaling" : {
+			"WaitForSignal" : true,
+			"MinUpdateInstances" : 1,
+			"ReplaceCluster" : false,
+			"UpdatePauseTime" : "5M",
+			"StartupTimeout" : "15M",
+			"AlwaysReplaceOnUpdate" : false,
+			"ActivityCooldown" : 30
+		},
+		"DockerUsers" : {
+			"example" : {
+				"UserName" : "<string>",
+				"UID" : "<number>"
+			}
+		},
+		"Services" : {
+			"example" : "< instance of service>"
+		},
+		"Tasks" : {
+			"example" : "< instance of task>"
 		}
-	},
-	"AutoScaling" : {
-		"WaitForSignal" : true,
-		"MinUpdateInstances" : 1,
-		"ReplaceCluster" : false,
-		"UpdatePauseTime" : "5M",
-		"StartupTimeout" : "15M",
-		"AlwaysReplaceOnUpdate" : false,
-		"ActivityCooldown" : 30
-	},
-	"DockerUsers" : {
-		"example" : {
-			"UserName" : "<string>",
-			"UID" : "<number>"
-		}
-	},
-	"Services" : {
-		"example" : "< instance of service>"
-	},
-	"Tasks" : {
-		"example" : "< instance of task>"
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **FixedIP**
+-   ### FixedIP
     **Type** - boolean  
     **Default** - false  
--   ### **LogDriver**
+-   ### LogDriver
     **Type** - string  
     **Values** - awslogs, json-file, fluentd  
     **Default** - awslogs  
--   ### **ClusterLogGroup**
+-   ### ClusterLogGroup
     **Type** - boolean  
     **Default** - true  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **AutoScaling**
-    -   ### **WaitForSignal**
+-   ### AutoScaling
+    -   ### WaitForSignal
         **Type** - boolean  
         **Default** - true  
         **Description** - Wait for a cfn-signal before treating the instances as alive  
         **Mandatory** - false  
-    -   ### **MinUpdateInstances**
+    -   ### MinUpdateInstances
         **Type** - number  
         **Default** - 1  
         **Description** - The minimum number of instances which must be available during an update  
         **Mandatory** - false  
-    -   ### **ReplaceCluster**
+    -   ### ReplaceCluster
         **Type** - boolean  
         **Default** - false  
         **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
         **Mandatory** - false  
-    -   ### **UpdatePauseTime**
+    -   ### UpdatePauseTime
         **Type** - string  
         **Default** - 5M  
         **Description** - How long to pause betweeen updates of instances  
         **Mandatory** - false  
-    -   ### **StartupTimeout**
+    -   ### StartupTimeout
         **Type** - string  
         **Default** - 15M  
         **Description** - How long to wait for a cfn-signal to be received from a host  
         **Mandatory** - false  
-    -   ### **AlwaysReplaceOnUpdate**
+    -   ### AlwaysReplaceOnUpdate
         **Type** - boolean  
         **Default** - false  
         **Description** - Replace instances on every update action  
         **Mandatory** - false  
-    -   ### **ActivityCooldown**
+    -   ### ActivityCooldown
         **Type** - number  
         **Default** - 30  
--   ### **DockerUsers**
-    -   ### **UserName**
+-   ### DockerUsers
+    -   ### UserName
         **Type** - string  
         **Mandatory** - false  
-    -   ### **UID**
+    -   ### UID
         **Type** - number  
         **Mandatory** - true  
 
@@ -1399,220 +1421,222 @@ An orchestrated container with always on scheduling
 
 ```json
 {
-	"Containers" : {
-		"example" : {
-			"Cpu" : "<number>",
-			"Links" : {
-				"example" : {
-					"Any" : "<string>",
-					"Tenant" : "<string>",
-					"Product" : "<string>",
-					"Environment" : "<string>",
-					"Segment" : "<string>",
-					"Tier" : "<string>",
-					"Component" : "<string>",
-					"Function" : "<string>",
-					"Service" : "<string>",
-					"Task" : "<string>",
-					"PortMapping" : "<string>",
-					"Mount" : "<string>",
-					"Platform" : "<string>",
-					"Instance" : "<unknown>",
-					"Version" : "<string>",
-					"Role" : "<string>",
-					"Direction" : "<string>",
-					"Type" : "<string>"
-				}
-			},
-			"LocalLogging" : false,
-			"LogDriver" : "awslogs",
-			"ContainerLogGroup" : false,
-			"RunCapabilities" : "<array of string>",
-			"Privileged" : false,
-			"MaximumMemory" : "<unknown>",
-			"MemoryReservation" : "<number>",
-			"Ports" : {
-				"example" : {
-					"Container" : "unknown",
-					"DynamicHostPort" : false,
-					"LB" : {
+	"service" : {
+		"Containers" : {
+			"example" : {
+				"Cpu" : "<number>",
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
 						"Tier" : "<string>",
 						"Component" : "<string>",
-						"LinkName" : "lb",
-						"Instance" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"Instance" : "<unknown>",
 						"Version" : "<string>",
-						"PortMapping" : "<string>"
-					},
-					"IPAddressGroups" : "<array of string>"
-				}
-			},
-			"Version" : "<string>",
-			"ContainerNetworkLinks" : "<array of string>"
-		}
-	},
-	"DesiredCount" : -1,
-	"UseTaskRole" : true,
-	"Permissions" : {
-		"Decrypt" : true,
-		"AsFile" : true,
-		"AppData" : true,
-		"AppPublic" : true
-	},
-	"TaskLogGroup" : true,
-	"NetworkMode" : "<string>",
-	"ContainerNetworkLinks" : false
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				},
+				"LocalLogging" : false,
+				"LogDriver" : "awslogs",
+				"ContainerLogGroup" : false,
+				"RunCapabilities" : "<array of string>",
+				"Privileged" : false,
+				"MaximumMemory" : "<unknown>",
+				"MemoryReservation" : "<number>",
+				"Ports" : {
+					"example" : {
+						"Container" : "unknown",
+						"DynamicHostPort" : false,
+						"LB" : {
+							"Tier" : "<string>",
+							"Component" : "<string>",
+							"LinkName" : "lb",
+							"Instance" : "<string>",
+							"Version" : "<string>",
+							"PortMapping" : "<string>"
+						},
+						"IPAddressGroups" : "<array of string>"
+					}
+				},
+				"Version" : "<string>",
+				"ContainerNetworkLinks" : "<array of string>"
+			}
+		},
+		"DesiredCount" : -1,
+		"UseTaskRole" : true,
+		"Permissions" : {
+			"Decrypt" : true,
+			"AsFile" : true,
+			"AppData" : true,
+			"AppPublic" : true
+		},
+		"TaskLogGroup" : true,
+		"NetworkMode" : "<string>",
+		"ContainerNetworkLinks" : false
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Containers**
-    -   ### **Cpu**
+-   ### Containers
+    -   ### Cpu
         **Type** - number  
         **Mandatory** - false  
-    -   ### **Links**
-    -   ### **Any**
+    -   ### Links
+    -   ### Any
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
           **Type** - string  
           **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
           **Alternate Names** - Port  
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
           **Types** - string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
           **Type** - string  
           **Mandatory** - false  
-    -   ### **LocalLogging**
+    -   ### LocalLogging
         **Type** - boolean  
         **Default** - false  
-    -   ### **LogDriver**
+    -   ### LogDriver
         **Type** - string  
         **Values** - awslogs, json-file, fluentd  
         **Default** - awslogs  
-    -   ### **ContainerLogGroup**
+    -   ### ContainerLogGroup
         **Type** - boolean  
         **Default** - false  
-    -   ### **RunCapabilities**
+    -   ### RunCapabilities
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **Privileged**
+    -   ### Privileged
         **Type** - boolean  
         **Default** - false  
-    -   ### **MaximumMemory**
+    -   ### MaximumMemory
         **Alternate Names** - MemoryMaximum, MaxMemory  
         **Types** - number  
         **Description** - Set to 0 to not set a maximum  
         **Mandatory** - false  
-    -   ### **MemoryReservation**
+    -   ### MemoryReservation
         **Alternate Names** - Memory, ReservedMemory  
         **Type** - number  
         **Mandatory** - true  
-    -   ### **Ports**
+    -   ### Ports
            **Name** - Container  
            **Mandatory** - false  
-    -   ### **DynamicHostPort**
+    -   ### DynamicHostPort
           **Type** - boolean  
           **Default** - false  
-    -   ### **LB**
-    -   ### **Tier**
+    -   ### LB
+    -   ### Tier
              **Type** - string  
              **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
              **Type** - string  
              **Mandatory** - true  
-    -   ### **LinkName**
+    -   ### LinkName
              **Type** - string  
              **Default** - lb  
-    -   ### **Instance**
+    -   ### Instance
              **Type** - string  
              **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
              **Type** - string  
              **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
              **Alternate Names** - Port  
              **Type** - string  
              **Mandatory** - false  
-    -   ### **IPAddressGroups**
+    -   ### IPAddressGroups
           **Type** - array of string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **ContainerNetworkLinks**
+    -   ### ContainerNetworkLinks
         **Type** - array of string  
         **Mandatory** - false  
--   ### **DesiredCount**
+-   ### DesiredCount
     **Type** - number  
     **Default** - -1  
--   ### **UseTaskRole**
+-   ### UseTaskRole
     **Type** - boolean  
     **Default** - true  
--   ### **Permissions**
-    -   ### **Decrypt**
+-   ### Permissions
+    -   ### Decrypt
         **Type** - boolean  
         **Default** - true  
-    -   ### **AsFile**
+    -   ### AsFile
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppData**
+    -   ### AppData
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppPublic**
+    -   ### AppPublic
         **Type** - boolean  
         **Default** - true  
--   ### **TaskLogGroup**
+-   ### TaskLogGroup
     **Type** - boolean  
     **Default** - true  
--   ### **NetworkMode**
+-   ### NetworkMode
     **Type** - string  
     **Values** - none, bridge, awsvpc, host  
     **Mandatory** - false  
--   ### **ContainerNetworkLinks**
+-   ### ContainerNetworkLinks
     **Type** - boolean  
     **Default** - false  
 
@@ -1631,211 +1655,213 @@ A container defintion which is invoked on demand
 
 ```json
 {
-	"Containers" : {
-		"example" : {
-			"Cpu" : "<number>",
-			"Links" : {
-				"example" : {
-					"Any" : "<string>",
-					"Tenant" : "<string>",
-					"Product" : "<string>",
-					"Environment" : "<string>",
-					"Segment" : "<string>",
-					"Tier" : "<string>",
-					"Component" : "<string>",
-					"Function" : "<string>",
-					"Service" : "<string>",
-					"Task" : "<string>",
-					"PortMapping" : "<string>",
-					"Mount" : "<string>",
-					"Platform" : "<string>",
-					"Instance" : "<unknown>",
-					"Version" : "<string>",
-					"Role" : "<string>",
-					"Direction" : "<string>",
-					"Type" : "<string>"
-				}
-			},
-			"LocalLogging" : false,
-			"LogDriver" : "awslogs",
-			"ContainerLogGroup" : false,
-			"RunCapabilities" : "<array of string>",
-			"Privileged" : false,
-			"MaximumMemory" : "<unknown>",
-			"MemoryReservation" : "<number>",
-			"Ports" : {
-				"example" : {
-					"Container" : "unknown",
-					"DynamicHostPort" : false,
-					"LB" : {
+	"task" : {
+		"Containers" : {
+			"example" : {
+				"Cpu" : "<number>",
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
 						"Tier" : "<string>",
 						"Component" : "<string>",
-						"LinkName" : "lb",
-						"Instance" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"Instance" : "<unknown>",
 						"Version" : "<string>",
-						"PortMapping" : "<string>"
-					},
-					"IPAddressGroups" : "<array of string>"
-				}
-			},
-			"Version" : "<string>",
-			"ContainerNetworkLinks" : "<array of string>"
-		}
-	},
-	"UseTaskRole" : true,
-	"Permissions" : {
-		"Decrypt" : true,
-		"AsFile" : true,
-		"AppData" : true,
-		"AppPublic" : true
-	},
-	"TaskLogGroup" : true,
-	"FixedName" : false
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				},
+				"LocalLogging" : false,
+				"LogDriver" : "awslogs",
+				"ContainerLogGroup" : false,
+				"RunCapabilities" : "<array of string>",
+				"Privileged" : false,
+				"MaximumMemory" : "<unknown>",
+				"MemoryReservation" : "<number>",
+				"Ports" : {
+					"example" : {
+						"Container" : "unknown",
+						"DynamicHostPort" : false,
+						"LB" : {
+							"Tier" : "<string>",
+							"Component" : "<string>",
+							"LinkName" : "lb",
+							"Instance" : "<string>",
+							"Version" : "<string>",
+							"PortMapping" : "<string>"
+						},
+						"IPAddressGroups" : "<array of string>"
+					}
+				},
+				"Version" : "<string>",
+				"ContainerNetworkLinks" : "<array of string>"
+			}
+		},
+		"UseTaskRole" : true,
+		"Permissions" : {
+			"Decrypt" : true,
+			"AsFile" : true,
+			"AppData" : true,
+			"AppPublic" : true
+		},
+		"TaskLogGroup" : true,
+		"FixedName" : false
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Containers**
-    -   ### **Cpu**
+-   ### Containers
+    -   ### Cpu
         **Type** - number  
         **Mandatory** - false  
-    -   ### **Links**
-    -   ### **Any**
+    -   ### Links
+    -   ### Any
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
           **Type** - string  
           **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
           **Alternate Names** - Port  
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
           **Types** - string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
           **Type** - string  
           **Mandatory** - false  
-    -   ### **LocalLogging**
+    -   ### LocalLogging
         **Type** - boolean  
         **Default** - false  
-    -   ### **LogDriver**
+    -   ### LogDriver
         **Type** - string  
         **Values** - awslogs, json-file, fluentd  
         **Default** - awslogs  
-    -   ### **ContainerLogGroup**
+    -   ### ContainerLogGroup
         **Type** - boolean  
         **Default** - false  
-    -   ### **RunCapabilities**
+    -   ### RunCapabilities
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **Privileged**
+    -   ### Privileged
         **Type** - boolean  
         **Default** - false  
-    -   ### **MaximumMemory**
+    -   ### MaximumMemory
         **Alternate Names** - MemoryMaximum, MaxMemory  
         **Types** - number  
         **Description** - Set to 0 to not set a maximum  
         **Mandatory** - false  
-    -   ### **MemoryReservation**
+    -   ### MemoryReservation
         **Alternate Names** - Memory, ReservedMemory  
         **Type** - number  
         **Mandatory** - true  
-    -   ### **Ports**
+    -   ### Ports
            **Name** - Container  
            **Mandatory** - false  
-    -   ### **DynamicHostPort**
+    -   ### DynamicHostPort
           **Type** - boolean  
           **Default** - false  
-    -   ### **LB**
-    -   ### **Tier**
+    -   ### LB
+    -   ### Tier
              **Type** - string  
              **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
              **Type** - string  
              **Mandatory** - true  
-    -   ### **LinkName**
+    -   ### LinkName
              **Type** - string  
              **Default** - lb  
-    -   ### **Instance**
+    -   ### Instance
              **Type** - string  
              **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
              **Type** - string  
              **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
              **Alternate Names** - Port  
              **Type** - string  
              **Mandatory** - false  
-    -   ### **IPAddressGroups**
+    -   ### IPAddressGroups
           **Type** - array of string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **ContainerNetworkLinks**
+    -   ### ContainerNetworkLinks
         **Type** - array of string  
         **Mandatory** - false  
--   ### **UseTaskRole**
+-   ### UseTaskRole
     **Type** - boolean  
     **Default** - true  
--   ### **Permissions**
-    -   ### **Decrypt**
+-   ### Permissions
+    -   ### Decrypt
         **Type** - boolean  
         **Default** - true  
-    -   ### **AsFile**
+    -   ### AsFile
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppData**
+    -   ### AppData
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppPublic**
+    -   ### AppPublic
         **Type** - boolean  
         **Default** - true  
--   ### **TaskLogGroup**
+-   ### TaskLogGroup
     **Type** - boolean  
     **Default** - true  
--   ### **FixedName**
+-   ### FixedName
     **Type** - boolean  
     **Default** - false  
 
@@ -1860,16 +1886,18 @@ A managed network attached file share
 
 ```json
 {
-	"Encrypted" : true,
-	"Mounts" : {
-		"example" : "< instance of efsMount>"
+	"efs" : {
+		"Encrypted" : true,
+		"Mounts" : {
+			"example" : "< instance of efsMount>"
+		}
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Encrypted**
+-   ### Encrypted
     **Type** - boolean  
     **Default** - true  
 
@@ -1888,13 +1916,15 @@ A specific directory on the share for OS mounting
 
 ```json
 {
-	"Directory" : "<string>"
+	"efsMount" : {
+		"Directory" : "<string>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Directory**
+-   ### Directory
     **Type** - string  
     **Mandatory** - true  
 
@@ -1913,34 +1943,36 @@ A managed ElasticSearch instance
 
 ```json
 {
-	"Authentication" : "IP",
-	"IPAddressGroups" : "<array of string>",
-	"AdvancedOptions" : "<array of string>",
-	"Version" : "2.3",
-	"Encrypted" : false,
-	"Snapshot" : {
-		"Hour" : "<string>"
-	},
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"es" : {
+		"Authentication" : "IP",
+		"IPAddressGroups" : "<array of string>",
+		"AdvancedOptions" : "<array of string>",
+		"Version" : "2.3",
+		"Encrypted" : false,
+		"Snapshot" : {
+			"Hour" : "<string>"
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
 		}
 	}
 }
@@ -1948,80 +1980,80 @@ A managed ElasticSearch instance
 
 ## Attribute Reference
 
--   ### **Authentication**
+-   ### Authentication
     **Type** - string  
     **Values** - IP, SIG4ORIP, SIG4ANDIP  
     **Default** - IP  
--   ### **IPAddressGroups**
+-   ### IPAddressGroups
     **Type** - array of string  
     **Mandatory** - true  
--   ### **AdvancedOptions**
+-   ### AdvancedOptions
     **Type** - array of string  
     **Mandatory** - false  
--   ### **Version**
+-   ### Version
     **Type** - string  
     **Default** - 2.3  
--   ### **Encrypted**
+-   ### Encrypted
     **Type** - boolean  
     **Default** - false  
--   ### **Snapshot**
-    -   ### **Hour**
+-   ### Snapshot
+    -   ### Hour
         **Type** - string  
         **Mandatory** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
 
@@ -2046,8 +2078,10 @@ Container for a Function as a Service deployment
 
 ```json
 {
-	"Functions" : {
-		"example" : "< instance of function>"
+	"lambda" : {
+		"Functions" : {
+			"example" : "< instance of function>"
+		}
 	}
 }
 ```
@@ -2069,106 +2103,108 @@ A specific entry point for the lambda deployment
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Handler" : "<string>",
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
-		}
-	},
-	"LogMetrics" : {
-		"example" : {
-			"LogFilter" : "<string>"
-		}
-	},
-	"LogWatchers" : {
-		"example" : {
-			"LogFilter" : "<string>",
-			"Links" : {
-				"example" : {
-					"Any" : "<string>",
-					"Tenant" : "<string>",
-					"Product" : "<string>",
-					"Environment" : "<string>",
-					"Segment" : "<string>",
-					"Tier" : "<string>",
-					"Component" : "<string>",
-					"Function" : "<string>",
-					"Service" : "<string>",
-					"Task" : "<string>",
-					"PortMapping" : "<string>",
-					"Mount" : "<string>",
-					"Platform" : "<string>",
-					"Instance" : "<unknown>",
-					"Version" : "<string>",
-					"Role" : "<string>",
-					"Direction" : "<string>",
-					"Type" : "<string>"
+	"function" : {
+		"Fragment" : "<string>",
+		"Handler" : "<string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
+		},
+		"LogWatchers" : {
+			"example" : {
+				"LogFilter" : "<string>",
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"Instance" : "<unknown>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
 				}
 			}
-		}
-	},
-	"Alerts" : {
-		"example" : {
-			"Description" : "unknown",
-			"Name" : "<string>",
-			"Metric" : {
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
 				"Name" : "<string>",
-				"Type" : "<string>"
-			},
-			"Threshold" : 1,
-			"Severity" : "Info",
-			"Namespace" : "<string>",
-			"Comparison" : "Threshold",
-			"Operator" : "GreaterThanOrEqualToThreshold",
-			"Time" : 300,
-			"Periods" : 1,
-			"Statistic" : "Sum",
-			"ReportOk" : false,
-			"MissingData" : "notBreaching"
-		}
-	},
-	"Memory" : 0,
-	"RunTime" : "<string>",
-	"Schedules" : {
-		"example" : {
-			"Expression" : "rate(6 minutes)",
-			"InputPath" : "/healthcheck",
-			"Input" : "<object>"
-		}
-	},
-	"Timeout" : 0,
-	"VPCAccess" : true,
-	"UseSegmentKey" : false,
-	"Permissions" : {
-		"Decrypt" : true,
-		"AsFile" : true,
-		"AppData" : true,
-		"AppPublic" : true
-	},
-	"PredefineLogGroup" : false,
-	"Environment" : {
-		"AsFile" : false,
-		"Json" : {
-			"Escaped" : true,
-			"Prefix" : "json"
+				"Metric" : {
+					"Name" : "<string>",
+					"Type" : "<string>"
+				},
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
+		"Memory" : 0,
+		"RunTime" : "<string>",
+		"Schedules" : {
+			"example" : {
+				"Expression" : "rate(6 minutes)",
+				"InputPath" : "/healthcheck",
+				"Input" : "<object>"
+			}
+		},
+		"Timeout" : 0,
+		"VPCAccess" : true,
+		"UseSegmentKey" : false,
+		"Permissions" : {
+			"Decrypt" : true,
+			"AsFile" : true,
+			"AppData" : true,
+			"AppPublic" : true
+		},
+		"PredefineLogGroup" : false,
+		"Environment" : {
+			"AsFile" : false,
+			"Json" : {
+				"Escaped" : true,
+				"Prefix" : "json"
+			}
 		}
 	}
 }
@@ -2176,228 +2212,228 @@ A specific entry point for the lambda deployment
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Handler**
+-   ### Handler
     **Type** - string  
     **Mandatory** - true  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **LogMetrics**
-    -   ### **LogFilter**
+-   ### LogMetrics
+    -   ### LogFilter
         **Type** - string  
         **Mandatory** - true  
--   ### **LogWatchers**
-    -   ### **LogFilter**
+-   ### LogWatchers
+    -   ### LogFilter
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Links**
-    -   ### **Any**
+    -   ### Links
+    -   ### Any
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
           **Type** - string  
           **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
           **Alternate Names** - Port  
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
           **Types** - string  
           **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
           **Type** - string  
           **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
           **Type** - string  
           **Mandatory** - false  
--   ### **Alerts**
+-   ### Alerts
       **Name** - Description  
       **Mandatory** - false  
-    -   ### **Name**
+    -   ### Name
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Metric**
-    -   ### **Name**
+    -   ### Metric
+    -   ### Name
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Type**
+    -   ### Type
           **Type** - string  
           **Mandatory** - true  
-    -   ### **Threshold**
+    -   ### Threshold
         **Type** - number  
         **Default** - 1  
-    -   ### **Severity**
+    -   ### Severity
         **Type** - string  
         **Default** - Info  
-    -   ### **Namespace**
+    -   ### Namespace
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Comparison**
+    -   ### Comparison
         **Type** - string  
         **Default** - Threshold  
-    -   ### **Operator**
+    -   ### Operator
         **Type** - string  
         **Default** - GreaterThanOrEqualToThreshold  
-    -   ### **Time**
+    -   ### Time
         **Type** - number  
         **Default** - 300  
-    -   ### **Periods**
+    -   ### Periods
         **Type** - number  
         **Default** - 1  
-    -   ### **Statistic**
+    -   ### Statistic
         **Type** - string  
         **Default** - Sum  
-    -   ### **ReportOk**
+    -   ### ReportOk
         **Type** - boolean  
         **Default** - false  
-    -   ### **MissingData**
+    -   ### MissingData
         **Type** - string  
         **Default** - notBreaching  
--   ### **Memory**
+-   ### Memory
     **Alternate Names** - MemorySize  
     **Type** - number  
     **Default** - 0  
--   ### **RunTime**
+-   ### RunTime
     **Type** - string  
     **Values** - nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x  
     **Mandatory** - true  
--   ### **Schedules**
-    -   ### **Expression**
+-   ### Schedules
+    -   ### Expression
         **Type** - string  
         **Default** - rate(6 minutes)  
-    -   ### **InputPath**
+    -   ### InputPath
         **Type** - string  
         **Default** - /healthcheck  
-    -   ### **Input**
+    -   ### Input
         **Type** - object  
         **Mandatory** - false  
--   ### **Timeout**
+-   ### Timeout
     **Type** - number  
     **Default** - 0  
--   ### **VPCAccess**
+-   ### VPCAccess
     **Type** - boolean  
     **Default** - true  
--   ### **UseSegmentKey**
+-   ### UseSegmentKey
     **Type** - boolean  
     **Default** - false  
--   ### **Permissions**
-    -   ### **Decrypt**
+-   ### Permissions
+    -   ### Decrypt
         **Type** - boolean  
         **Default** - true  
-    -   ### **AsFile**
+    -   ### AsFile
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppData**
+    -   ### AppData
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppPublic**
+    -   ### AppPublic
         **Type** - boolean  
         **Default** - true  
--   ### **PredefineLogGroup**
+-   ### PredefineLogGroup
     **Type** - boolean  
     **Default** - false  
--   ### **Environment**
-    -   ### **AsFile**
+-   ### Environment
+    -   ### AsFile
         **Type** - boolean  
         **Default** - false  
-    -   ### **Json**
-    -   ### **Escaped**
+    -   ### Json
+    -   ### Escaped
           **Type** - boolean  
           **Default** - true  
-    -   ### **Prefix**
+    -   ### Prefix
           **Type** - string  
           **Values** - json,  
           **Default** - json  
@@ -2428,36 +2464,38 @@ A load balancer for virtual network based components
 
 ```json
 {
-	"Logs" : false,
-	"Engine" : "application",
-	"Profiles" : {
-		"SecurityProfile" : "default"
-	},
-	"IdleTimeout" : 60,
-	"HealthCheckPort" : "<string>",
-	"PortMappings" : {
-		"example" : "< instance of lbport>"
+	"lb" : {
+		"Logs" : false,
+		"Engine" : "application",
+		"Profiles" : {
+			"SecurityProfile" : "default"
+		},
+		"IdleTimeout" : 60,
+		"HealthCheckPort" : "<string>",
+		"PortMappings" : {
+			"example" : "< instance of lbport>"
+		}
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Logs**
+-   ### Logs
     **Type** - boolean  
     **Default** - false  
--   ### **Engine**
+-   ### Engine
     **Type** - string  
     **Values** - application, network, classic  
     **Default** - application  
--   ### **Profiles**
-    -   ### **SecurityProfile**
+-   ### Profiles
+    -   ### SecurityProfile
         **Type** - string  
         **Default** - default  
--   ### **IdleTimeout**
+-   ### IdleTimeout
     **Type** - number  
     **Default** - 60  
--   ### **HealthCheckPort**
+-   ### HealthCheckPort
     **Type** - string  
     **Mandatory** - false  
 
@@ -2476,185 +2514,187 @@ A specifc listener based on the client side network port
 
 ```json
 {
-	"IPAddressGroups" : "<array of string>",
-	"Certificate" : "<object>",
-	"HostFilter" : false,
-	"Mapping" : "<string>",
-	"Path" : "default",
-	"Priority" : 100,
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"lbport" : {
+		"IPAddressGroups" : "<array of string>",
+		"Certificate" : "<object>",
+		"HostFilter" : false,
+		"Mapping" : "<string>",
+		"Path" : "default",
+		"Priority" : 100,
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Authentication" : {
+			"SessionCookieName" : "AWSELBAuthSessionCookie",
+			"SessionTimeout" : 604800
+		},
+		"Redirect" : {
+			"Protocol" : "HTTPS",
+			"Port" : "443",
+			"Host" : "#{host}",
+			"Path" : "/#{path}",
+			"Query" : "#{query}",
+			"Permanent" : true
+		},
+		"Fixed" : {
+			"Message" : "This application is currently unavailable. Please try again later.",
+			"ContentType" : "text/plain",
+			"StatusCode" : "404"
+		},
+		"Forward" : {
+			"TargetType" : "instance",
+			"SlowStartTime" : -1,
+			"StickinessTime" : -1,
+			"DeregistrationTimeout" : 30
 		}
-	},
-	"Authentication" : {
-		"SessionCookieName" : "AWSELBAuthSessionCookie",
-		"SessionTimeout" : 604800
-	},
-	"Redirect" : {
-		"Protocol" : "HTTPS",
-		"Port" : "443",
-		"Host" : "#{host}",
-		"Path" : "/#{path}",
-		"Query" : "#{query}",
-		"Permanent" : true
-	},
-	"Fixed" : {
-		"Message" : "This application is currently unavailable. Please try again later.",
-		"ContentType" : "text/plain",
-		"StatusCode" : "404"
-	},
-	"Forward" : {
-		"TargetType" : "instance",
-		"SlowStartTime" : -1,
-		"StickinessTime" : -1,
-		"DeregistrationTimeout" : 30
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **IPAddressGroups**
+-   ### IPAddressGroups
     **Type** - array of string  
     **Mandatory** - false  
--   ### **Certificate**
+-   ### Certificate
     **Type** - object  
     **Mandatory** - false  
--   ### **HostFilter**
+-   ### HostFilter
     **Type** - boolean  
     **Default** - false  
--   ### **Mapping**
+-   ### Mapping
     **Type** - string  
     **Mandatory** - false  
--   ### **Path**
+-   ### Path
     **Type** - string  
     **Default** - default  
--   ### **Priority**
+-   ### Priority
     **Type** - number  
     **Default** - 100  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **Authentication**
-    -   ### **SessionCookieName**
+-   ### Authentication
+    -   ### SessionCookieName
         **Type** - string  
         **Default** - AWSELBAuthSessionCookie  
-    -   ### **SessionTimeout**
+    -   ### SessionTimeout
         **Type** - number  
         **Default** - 604800  
--   ### **Redirect**
-    -   ### **Protocol**
+-   ### Redirect
+    -   ### Protocol
         **Type** - string  
         **Values** - HTTPS, #{protocol}  
         **Default** - HTTPS  
-    -   ### **Port**
+    -   ### Port
         **Type** - string  
         **Default** - 443  
-    -   ### **Host**
+    -   ### Host
         **Type** - string  
         **Default** - #{host}  
-    -   ### **Path**
+    -   ### Path
         **Type** - string  
         **Default** - /#{path}  
-    -   ### **Query**
+    -   ### Query
         **Type** - string  
         **Default** - #{query}  
-    -   ### **Permanent**
+    -   ### Permanent
         **Type** - boolean  
         **Default** - true  
--   ### **Fixed**
-    -   ### **Message**
+-   ### Fixed
+    -   ### Message
         **Type** - string  
         **Default** - This application is currently unavailable. Please try again later.  
-    -   ### **ContentType**
+    -   ### ContentType
         **Type** - string  
         **Default** - text/plain  
-    -   ### **StatusCode**
+    -   ### StatusCode
         **Type** - string  
         **Default** - 404  
--   ### **Forward**
-    -   ### **TargetType**
+-   ### Forward
+    -   ### TargetType
         **Type** - string  
         **Values** - instance, ip  
         **Default** - instance  
-    -   ### **SlowStartTime**
+    -   ### SlowStartTime
         **Type** - number  
         **Default** - -1  
-    -   ### **StickinessTime**
+    -   ### StickinessTime
         **Type** - number  
         **Default** - -1  
-    -   ### **DeregistrationTimeout**
+    -   ### DeregistrationTimeout
         **Type** - number  
         **Default** - 30  
 
@@ -2679,101 +2719,103 @@ A managed mobile notification proxy
 
 ```json
 {
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"mobilenotifier" : {
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"SuccessSampleRate" : "100",
+		"Credentials" : {
+			"EncryptionScheme" : "base64"
+		},
+		"Platforms" : {
+			"example" : "< instance of mobilenotiferplatform>"
 		}
-	},
-	"SuccessSampleRate" : "100",
-	"Credentials" : {
-		"EncryptionScheme" : "base64"
-	},
-	"Platforms" : {
-		"example" : "< instance of mobilenotiferplatform>"
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **SuccessSampleRate**
+-   ### SuccessSampleRate
     **Type** - string  
     **Default** - 100  
--   ### **Credentials**
-    -   ### **EncryptionScheme**
+-   ### Credentials
+    -   ### EncryptionScheme
         **Type** - string  
         **Values** - base64  
         **Default** - base64  
@@ -2800,36 +2842,38 @@ A specific mobile platform notification proxy
 
 ```json
 {
-	"Engine" : "<string>",
-	"SuccessSampleRate" : "<string>",
-	"Credentials" : {
-		"EncryptionScheme" : "<string>"
-	},
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
-		}
-	},
-	"LogMetrics" : {
-		"example" : {
-			"LogFilter" : "<string>"
+	"mobilenotiferplatform" : {
+		"Engine" : "<string>",
+		"SuccessSampleRate" : "<string>",
+		"Credentials" : {
+			"EncryptionScheme" : "<string>"
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
 		}
 	}
 }
@@ -2837,75 +2881,75 @@ A specific mobile platform notification proxy
 
 ## Attribute Reference
 
--   ### **Engine**
+-   ### Engine
     **Type** - string  
     **Mandatory** - false  
--   ### **SuccessSampleRate**
+-   ### SuccessSampleRate
     **Type** - string  
     **Mandatory** - false  
--   ### **Credentials**
-    -   ### **EncryptionScheme**
+-   ### Credentials
+    -   ### EncryptionScheme
         **Type** - string  
         **Values** - base64  
         **Mandatory** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **LogMetrics**
-    -   ### **LogFilter**
+-   ### LogMetrics
+    -   ### LogFilter
         **Type** - string  
         **Mandatory** - true  
 
@@ -2924,71 +2968,73 @@ A managed SQL database instance
 
 ```json
 {
-	"Engine" : "<unknown>",
-	"EngineVersion" : "<string>",
-	"Port" : "<string>",
-	"Encrypted" : false,
-	"GenerateCredentials" : {
-		"Enabled" : false,
-		"MasterUserName" : "root",
-		"CharacterLength" : 20,
-		"EncryptionScheme" : "<string>"
-	},
-	"Size" : 20,
-	"Backup" : {
-		"RetentionPeriod" : 35,
-		"SnapshotOnDeploy" : true
-	},
-	"AutoMinorVersionUpgrade" : "<boolean>",
-	"DatabaseName" : "<string>",
-	"DBParameters" : "<object>"
+	"rds" : {
+		"Engine" : "<unknown>",
+		"EngineVersion" : "<string>",
+		"Port" : "<string>",
+		"Encrypted" : false,
+		"GenerateCredentials" : {
+			"Enabled" : false,
+			"MasterUserName" : "root",
+			"CharacterLength" : 20,
+			"EncryptionScheme" : "<string>"
+		},
+		"Size" : 20,
+		"Backup" : {
+			"RetentionPeriod" : 35,
+			"SnapshotOnDeploy" : true
+		},
+		"AutoMinorVersionUpgrade" : "<boolean>",
+		"DatabaseName" : "<string>",
+		"DBParameters" : "<object>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Engine**
+-   ### Engine
     **Mandatory** - true  
--   ### **EngineVersion**
+-   ### EngineVersion
     **Type** - string  
     **Mandatory** - false  
--   ### **Port**
+-   ### Port
     **Type** - string  
     **Mandatory** - false  
--   ### **Encrypted**
+-   ### Encrypted
     **Type** - boolean  
     **Default** - false  
--   ### **GenerateCredentials**
-    -   ### **Enabled**
+-   ### GenerateCredentials
+    -   ### Enabled
         **Type** - boolean  
         **Default** - false  
-    -   ### **MasterUserName**
+    -   ### MasterUserName
         **Type** - string  
         **Default** - root  
-    -   ### **CharacterLength**
+    -   ### CharacterLength
         **Type** - number  
         **Default** - 20  
-    -   ### **EncryptionScheme**
+    -   ### EncryptionScheme
         **Type** - string  
         **Values** - base64  
         **Mandatory** - false  
--   ### **Size**
+-   ### Size
     **Type** - number  
     **Default** - 20  
--   ### **Backup**
-    -   ### **RetentionPeriod**
+-   ### Backup
+    -   ### RetentionPeriod
         **Type** - number  
         **Default** - 35  
-    -   ### **SnapshotOnDeploy**
+    -   ### SnapshotOnDeploy
         **Type** - boolean  
         **Default** - true  
--   ### **AutoMinorVersionUpgrade**
+-   ### AutoMinorVersionUpgrade
     **Type** - boolean  
     **Mandatory** - false  
--   ### **DatabaseName**
+-   ### DatabaseName
     **Type** - string  
     **Mandatory** - false  
--   ### **DBParameters**
+-   ### DBParameters
     **Type** - object  
     **Mandatory** - false  
 
@@ -3007,72 +3053,74 @@ HTTP based object storage service
 
 ```json
 {
-	"Lifecycle" : {
-		"Expiration" : "<unknown>",
-		"Offline" : "<unknown>",
-		"Versioning" : false
-	},
-	"Website" : {
-		"Index" : "index.html",
-		"Error" : "<string>"
-	},
-	"PublicAccess" : {
-		"Enabled" : false,
-		"Permissions" : "ro",
-		"IPAddressGroups" : [
-			"_localnet"
-		],
-		"Prefix" : "<string>"
-	},
-	"Style" : "<string>",
-	"Notifications" : "<object>",
-	"CORSBehaviours" : "<array of string>"
+	"s3" : {
+		"Lifecycle" : {
+			"Expiration" : "<unknown>",
+			"Offline" : "<unknown>",
+			"Versioning" : false
+		},
+		"Website" : {
+			"Index" : "index.html",
+			"Error" : "<string>"
+		},
+		"PublicAccess" : {
+			"Enabled" : false,
+			"Permissions" : "ro",
+			"IPAddressGroups" : [
+				"_localnet"
+			],
+			"Prefix" : "<string>"
+		},
+		"Style" : "<string>",
+		"Notifications" : "<object>",
+		"CORSBehaviours" : "<array of string>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Lifecycle**
-    -   ### **Expiration**
+-   ### Lifecycle
+    -   ### Expiration
         **Types** - string, number  
         **Description** - Provide either a date or a number of days  
         **Mandatory** - false  
-    -   ### **Offline**
+    -   ### Offline
         **Types** - string, number  
         **Description** - Provide either a date or a number of days  
         **Mandatory** - false  
-    -   ### **Versioning**
+    -   ### Versioning
         **Type** - boolean  
         **Default** - false  
--   ### **Website**
-    -   ### **Index**
+-   ### Website
+    -   ### Index
         **Type** - string  
         **Default** - index.html  
-    -   ### **Error**
+    -   ### Error
         **Type** - string  
         **Mandatory** - false  
--   ### **PublicAccess**
-    -   ### **Enabled**
+-   ### PublicAccess
+    -   ### Enabled
         **Type** - boolean  
         **Default** - false  
-    -   ### **Permissions**
+    -   ### Permissions
         **Type** - string  
         **Values** - ro, wo, rw  
         **Default** - ro  
-    -   ### **IPAddressGroups**
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Default** - \_localnet  
-    -   ### **Prefix**
+    -   ### Prefix
         **Type** - string  
         **Mandatory** - false  
--   ### **Style**
+-   ### Style
     **Type** - string  
     **Description** - TODO(mfl): Think this can be removed  
     **Mandatory** - false  
--   ### **Notifications**
+-   ### Notifications
     **Type** - object  
     **Mandatory** - false  
--   ### **CORSBehaviours**
+-   ### CORSBehaviours
     **Type** - array of string  
     **Mandatory** - false  
 
@@ -3091,94 +3139,96 @@ Object stored hosted web application with content distribution management
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Links" : "<object>",
-	"WAF" : {
-		"IPAddressGroups" : "<array of string>",
-		"Default" : "BLOCK",
-		"RuleDefault" : "ALLOW"
-	},
-	"CloudFront" : {
-		"AssumeSNI" : true,
-		"EnableLogging" : true,
-		"CountryGroups" : "<array of string>",
-		"ErrorPage" : "/index.html",
-		"DeniedPage" : "<string>",
-		"NotFoundPage" : "<string>",
-		"CachingTTL" : {
-			"Default" : 600,
-			"Maximum" : 31536000,
-			"Minimum" : 0
+	"spa" : {
+		"Fragment" : "<string>",
+		"Links" : "<object>",
+		"WAF" : {
+			"IPAddressGroups" : "<array of string>",
+			"Default" : "BLOCK",
+			"RuleDefault" : "ALLOW"
 		},
-		"Compress" : true
-	},
-	"Certificate" : {
-		"*" : "<unknown>"
-	},
-	"Profiles" : {
-		"SecurityProfile" : "default"
+		"CloudFront" : {
+			"AssumeSNI" : true,
+			"EnableLogging" : true,
+			"CountryGroups" : "<array of string>",
+			"ErrorPage" : "/index.html",
+			"DeniedPage" : "<string>",
+			"NotFoundPage" : "<string>",
+			"CachingTTL" : {
+				"Default" : 600,
+				"Maximum" : 31536000,
+				"Minimum" : 0
+			},
+			"Compress" : true
+		},
+		"Certificate" : {
+			"*" : "<unknown>"
+		},
+		"Profiles" : {
+			"SecurityProfile" : "default"
+		}
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Links**
+-   ### Links
     **Type** - object  
     **Mandatory** - false  
--   ### **WAF**
-    -   ### **IPAddressGroups**
+-   ### WAF
+    -   ### IPAddressGroups
         **Type** - array of string  
         **Mandatory** - true  
-    -   ### **Default**
+    -   ### Default
         **Type** - string  
         **Values** - ALLOW, BLOCK  
         **Default** - BLOCK  
-    -   ### **RuleDefault**
+    -   ### RuleDefault
         **Type** - string  
         **Values** - ALLOW, BLOCK  
         **Default** - ALLOW  
--   ### **CloudFront**
-    -   ### **AssumeSNI**
+-   ### CloudFront
+    -   ### AssumeSNI
         **Type** - boolean  
         **Default** - true  
-    -   ### **EnableLogging**
+    -   ### EnableLogging
         **Type** - boolean  
         **Default** - true  
-    -   ### **CountryGroups**
+    -   ### CountryGroups
         **Type** - array of string  
         **Mandatory** - false  
-    -   ### **ErrorPage**
+    -   ### ErrorPage
         **Type** - string  
         **Default** - /index.html  
-    -   ### **DeniedPage**
+    -   ### DeniedPage
         **Type** - string  
         **Mandatory** - false  
-    -   ### **NotFoundPage**
+    -   ### NotFoundPage
         **Type** - string  
         **Mandatory** - false  
-    -   ### **CachingTTL**
-    -   ### **Default**
+    -   ### CachingTTL
+    -   ### Default
           **Type** - number  
           **Default** - 600  
-    -   ### **Maximum**
+    -   ### Maximum
           **Type** - number  
           **Default** - 31536000  
-    -   ### **Minimum**
+    -   ### Minimum
           **Type** - number  
           **Default** - 0  
-    -   ### **Compress**
+    -   ### Compress
         **Type** - boolean  
         **Default** - true  
--   ### **Certificate**
-    -   ### **\***
+-   ### Certificate
+    -   ### \*
         **Mandatory** - false  
--   ### **Profiles**
-    -   ### **SecurityProfile**
+-   ### Profiles
+    -   ### SecurityProfile
         **Type** - string  
         **Default** - default  
 
@@ -3197,36 +3247,38 @@ Managed worker queue engine
 
 ```json
 {
-	"DelaySeconds" : "<number>",
-	"MaximumMessageSize" : "<number>",
-	"MessageRetentionPeriod" : "<number>",
-	"ReceiveMessageWaitTimeSeconds" : "<number>",
-	"DeadLetterQueue" : {
-		"MaxReceives" : 0
-	},
-	"VisibilityTimeout" : "<number>"
+	"sqs" : {
+		"DelaySeconds" : "<number>",
+		"MaximumMessageSize" : "<number>",
+		"MessageRetentionPeriod" : "<number>",
+		"ReceiveMessageWaitTimeSeconds" : "<number>",
+		"DeadLetterQueue" : {
+			"MaxReceives" : 0
+		},
+		"VisibilityTimeout" : "<number>"
+	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **DelaySeconds**
+-   ### DelaySeconds
     **Type** - number  
     **Mandatory** - false  
--   ### **MaximumMessageSize**
+-   ### MaximumMessageSize
     **Type** - number  
     **Mandatory** - false  
--   ### **MessageRetentionPeriod**
+-   ### MessageRetentionPeriod
     **Type** - number  
     **Mandatory** - false  
--   ### **ReceiveMessageWaitTimeSeconds**
+-   ### ReceiveMessageWaitTimeSeconds
     **Type** - number  
     **Mandatory** - false  
--   ### **DeadLetterQueue**
-    -   ### **MaxReceives**
+-   ### DeadLetterQueue
+    -   ### MaxReceives
         **Type** - number  
         **Default** - 0  
--   ### **VisibilityTimeout**
+-   ### VisibilityTimeout
     **Type** - number  
     **Mandatory** - false  
 
@@ -3245,130 +3297,132 @@ A user with permissions on components deployed in the solution
 
 ```json
 {
-	"Fragment" : "<string>",
-	"Links" : {
-		"example" : {
-			"Any" : "<string>",
-			"Tenant" : "<string>",
-			"Product" : "<string>",
-			"Environment" : "<string>",
-			"Segment" : "<string>",
-			"Tier" : "<string>",
-			"Component" : "<string>",
-			"Function" : "<string>",
-			"Service" : "<string>",
-			"Task" : "<string>",
-			"PortMapping" : "<string>",
-			"Mount" : "<string>",
-			"Platform" : "<string>",
-			"Instance" : "<unknown>",
-			"Version" : "<string>",
-			"Role" : "<string>",
-			"Direction" : "<string>",
-			"Type" : "<string>"
+	"user" : {
+		"Fragment" : "<string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<unknown>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"GenerateCredentials" : {
+			"Formats" : [
+				"system"
+			],
+			"EncryptionScheme" : "<string>",
+			"CharacterLength" : 20
+		},
+		"Permissions" : {
+			"Decrypt" : true,
+			"AsFile" : true,
+			"AppData" : true,
+			"AppPublic" : true
 		}
-	},
-	"GenerateCredentials" : {
-		"Formats" : [
-			"system"
-		],
-		"EncryptionScheme" : "<string>",
-		"CharacterLength" : 20
-	},
-	"Permissions" : {
-		"Decrypt" : true,
-		"AsFile" : true,
-		"AppData" : true,
-		"AppPublic" : true
 	}
 }
 ```
 
 ## Attribute Reference
 
--   ### **Fragment**
+-   ### Fragment
     **Alternate Names** - Container  
     **Type** - string  
     **Mandatory** - false  
--   ### **Links**
-    -   ### **Any**
+-   ### Links
+    -   ### Any
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tenant**
+    -   ### Tenant
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Product**
+    -   ### Product
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Environment**
+    -   ### Environment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Segment**
+    -   ### Segment
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Tier**
+    -   ### Tier
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Component**
+    -   ### Component
         **Type** - string  
         **Mandatory** - true  
-    -   ### **Function**
+    -   ### Function
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Service**
+    -   ### Service
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Task**
+    -   ### Task
         **Type** - string  
         **Mandatory** - false  
-    -   ### **PortMapping**
+    -   ### PortMapping
         **Alternate Names** - Port  
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Mount**
+    -   ### Mount
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Platform**
+    -   ### Platform
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Instance**
+    -   ### Instance
         **Types** - string  
         **Mandatory** - false  
-    -   ### **Version**
+    -   ### Version
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Role**
+    -   ### Role
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Direction**
+    -   ### Direction
         **Type** - string  
         **Mandatory** - false  
-    -   ### **Type**
+    -   ### Type
         **Type** - string  
         **Mandatory** - false  
--   ### **GenerateCredentials**
-    -   ### **Formats**
+-   ### GenerateCredentials
+    -   ### Formats
         **Type** - array of string  
         **Values** - system, console  
         **Default** - system  
-    -   ### **EncryptionScheme**
+    -   ### EncryptionScheme
         **Type** - string  
         **Values** - base64  
         **Mandatory** - false  
-    -   ### **CharacterLength**
+    -   ### CharacterLength
         **Type** - number  
         **Default** - 20  
--   ### **Permissions**
-    -   ### **Decrypt**
+-   ### Permissions
+    -   ### Decrypt
         **Type** - boolean  
         **Default** - true  
-    -   ### **AsFile**
+    -   ### AsFile
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppData**
+    -   ### AppData
         **Type** - boolean  
         **Default** - true  
-    -   ### **AppPublic**
+    -   ### AppPublic
         **Type** - boolean  
         **Default** - true  
 
