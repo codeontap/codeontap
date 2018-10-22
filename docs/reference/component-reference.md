@@ -49,73 +49,35 @@ Application level API proxy
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Links
-    **Type** - object  
-    **Mandatory** - false  
--   ### WAF
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Mandatory** - true  
-    -   ### Default
-        **Type** - string  
-        **Values** - ALLOW, BLOCK  
-        **Default** - BLOCK  
-    -   ### RuleDefault
-        **Type** - string  
-        **Values** - ALLOW, BLOCK  
-        **Default** - ALLOW  
--   ### EndpointType
-    **Type** - string  
-    **Values** - EDGE, REGIONAL  
-    **Default** - EDGE  
--   ### IPAddressGroups
-    **Type** - array of string  
-    **Mandatory** - false  
--   ### Authentication
-    **Type** - string  
-    **Values** - IP, SIG4ORIP, SIG4ANDIP  
-    **Default** - IP  
--   ### CloudFront
-    -   ### AssumeSNI
-        **Type** - boolean  
-        **Default** - true  
-    -   ### EnableLogging
-        **Type** - boolean  
-        **Default** - true  
-    -   ### CountryGroups
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### CustomHeaders
-        **Type** - array of any  
-        **Mandatory** - false  
-    -   ### Mapping
-        **Type** - boolean  
-        **Default** - false  
-    -   ### Compress
-        **Type** - boolean  
-        **Default** - true  
--   ### Certificate
-    -   ### \*
-        **Mandatory** - false  
--   ### Publish
-    -   ### DnsNamePrefix
-        **Type** - string  
-        **Default** - docs  
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Mandatory** - false  
--   ### Mapping
-    -   ### IncludeStage
-        **Type** - boolean  
-        **Default** - true  
--   ### Profiles
-    -   ### SecurityProfile
-        **Type** - string  
-        **Default** - default  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Links](#Links) - **Optional** - **Type:** object  
+-   [WAF](#WAF)
+    -   [IPAddressGroups](#IPAddressGroups) - **Required** - **Type:** array of string  
+    -   [Default](#Default) - **Optional** - **Type:** string - Default: `BLOCK`  
+        **Values:** ALLOW, BLOCK  
+    -   [RuleDefault](#RuleDefault) - **Optional** - **Type:** string - Default: `ALLOW`  
+        **Values:** ALLOW, BLOCK  
+-   [EndpointType](#EndpointType) - **Optional** - **Type:** string - Default: `EDGE`  
+    **Values:** EDGE, REGIONAL  
+-   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+-   [Authentication](#Authentication) - **Optional** - **Type:** string - Default: `IP`  
+    **Values:** IP, SIG4ORIP, SIG4ANDIP  
+-   [CloudFront](#CloudFront)
+    -   [AssumeSNI](#AssumeSNI) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [EnableLogging](#EnableLogging) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [CountryGroups](#CountryGroups) - **Optional** - **Type:** array of string  
+    -   [CustomHeaders](#CustomHeaders) - **Optional** - **Type:** array of any  
+    -   [Mapping](#Mapping) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Compress](#Compress) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Certificate](#Certificate)
+    -   [\*](#*) - **Optional**  
+-   [Publish](#Publish)
+    -   [DnsNamePrefix](#DnsNamePrefix) - **Optional** - **Type:** string - Default: `docs`  
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+-   [Mapping](#Mapping)
+    -   [IncludeStage](#IncludeStage) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Profiles](#Profiles)
+    -   [SecurityProfile](#SecurityProfile) - **Optional** - **Type:** string - Default: `default`  
 
 * * *
 
@@ -161,62 +123,26 @@ provides a metered link between an API gateway and an invoking client
 
 ## Attribute Reference
 
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
 
 * * *
 
@@ -246,19 +172,11 @@ Managed in-memory cache services
 
 ## Attribute Reference
 
--   ### Engine
-    **Type** - string  
-    **Mandatory** - true  
--   ### EngineVersion
-    **Type** - string  
-    **Mandatory** - false  
--   ### Port
-    **Type** - string  
-    **Mandatory** - false  
--   ### Backup
-    -   ### RetentionPeriod
-        **Type** - string  
-        **Mandatory** - false  
+-   [Engine](#Engine) - **Required** - **Type:** string  
+-   [EngineVersion](#EngineVersion) - **Optional** - **Type:** string  
+-   [Port](#Port) - **Optional** - **Type:** string  
+-   [Backup](#Backup)
+    -   [RetentionPeriod](#RetentionPeriod) - **Optional** - **Type:** string  
 
 * * *
 
@@ -336,115 +254,45 @@ Managed identity service
 
 ## Attribute Reference
 
--   ### MFA
-    **Type** - boolean  
-    **Default** - false  
--   ### AdminCreatesUser
-    **Type** - boolean  
-    **Default** - true  
--   ### UnusedAccountTimeout
-    **Type** - number  
-    **Default** - 7  
--   ### VerifyEmail
-    **Type** - boolean  
-    **Default** - true  
--   ### VerifyPhone
-    **Type** - boolean  
-    **Default** - false  
--   ### LoginAliases
-    **Type** - array of string  
-    **Default** - email  
--   ### ClientGenerateSecret
-    **Type** - boolean  
-    **Default** - false  
--   ### ClientTokenValidity
-    **Type** - number  
-    **Default** - 30  
--   ### AllowUnauthenticatedIds
-    **Type** - boolean  
-    **Default** - false  
--   ### AuthorizationHeader
-    **Type** - string  
-    **Default** - Authorization  
--   ### OAuth
-    -   ### Scopes
-        **Type** - array of string  
-        **Default** - openid  
-    -   ### Flows
-        **Type** - array of string  
-        **Default** - code  
--   ### PasswordPolicy
-    -   ### MinimumLength
-        **Type** - number  
-        **Default** - 10  
-    -   ### Lowercase
-        **Type** - boolean  
-        **Default** - true  
-    -   ### Uppercase
-        **Type** - boolean  
-        **Default** - true  
-    -   ### Numbers
-        **Type** - boolean  
-        **Default** - true  
-    -   ### SpecialCharacters
-        **Type** - boolean  
-        **Default** - true  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
+-   [MFA](#MFA) - **Optional** - **Type:** boolean - Default: `false`  
+-   [AdminCreatesUser](#AdminCreatesUser) - **Optional** - **Type:** boolean - Default: `true`  
+-   [UnusedAccountTimeout](#UnusedAccountTimeout) - **Optional** - **Type:** number - Default: `7`  
+-   [VerifyEmail](#VerifyEmail) - **Optional** - **Type:** boolean - Default: `true`  
+-   [VerifyPhone](#VerifyPhone) - **Optional** - **Type:** boolean - Default: `false`  
+-   [LoginAliases](#LoginAliases) - **Optional** - **Type:** array of string - Default: `email`  
+-   [ClientGenerateSecret](#ClientGenerateSecret) - **Optional** - **Type:** boolean - Default: `false`  
+-   [ClientTokenValidity](#ClientTokenValidity) - **Optional** - **Type:** number - Default: `30`  
+-   [AllowUnauthenticatedIds](#AllowUnauthenticatedIds) - **Optional** - **Type:** boolean - Default: `false`  
+-   [AuthorizationHeader](#AuthorizationHeader) - **Optional** - **Type:** string - Default: `Authorization`  
+-   [OAuth](#OAuth)
+    -   [Scopes](#Scopes) - **Optional** - **Type:** array of string - Default: `openid`  
+    -   [Flows](#Flows) - **Optional** - **Type:** array of string - Default: `code`  
+-   [PasswordPolicy](#PasswordPolicy)
+    -   [MinimumLength](#MinimumLength) - **Optional** - **Type:** number - Default: `10`  
+    -   [Lowercase](#Lowercase) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [Uppercase](#Uppercase) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [Numbers](#Numbers) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [SpecialCharacters](#SpecialCharacters) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
 
 * * *
 
@@ -515,130 +363,52 @@ Auto-Scaling IaaS with code deployment
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### UseInitAsService
-    **Type** - boolean  
-    **Default** - false  
--   ### AutoScaling
-    -   ### WaitForSignal
-        **Type** - boolean  
-        **Default** - true  
-        **Description** - Wait for a cfn-signal before treating the instances as alive  
-        **Mandatory** - false  
-    -   ### MinUpdateInstances
-        **Type** - number  
-        **Default** - 1  
-        **Description** - The minimum number of instances which must be available during an update  
-        **Mandatory** - false  
-    -   ### ReplaceCluster
-        **Type** - boolean  
-        **Default** - false  
-        **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
-        **Mandatory** - false  
-    -   ### UpdatePauseTime
-        **Type** - string  
-        **Default** - 5M  
-        **Description** - How long to pause betweeen updates of instances  
-        **Mandatory** - false  
-    -   ### StartupTimeout
-        **Type** - string  
-        **Default** - 15M  
-        **Description** - How long to wait for a cfn-signal to be received from a host  
-        **Mandatory** - false  
-    -   ### AlwaysReplaceOnUpdate
-        **Type** - boolean  
-        **Default** - false  
-        **Description** - Replace instances on every update action  
-        **Mandatory** - false  
-    -   ### ActivityCooldown
-        **Type** - number  
-        **Default** - 30  
--   ### DockerHost
-    **Type** - boolean  
-    **Default** - false  
--   ### Ports
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### LB
-    -   ### Tier
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Component
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### LinkName
-          **Type** - string  
-          **Default** - lb  
-    -   ### Instance
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Version
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### PortMapping
-          **Alternate Names** - Port  
-          **Type** - string  
-          **Mandatory** - false  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [UseInitAsService](#UseInitAsService) - **Optional** - **Type:** boolean - Default: `false`  
+-   [AutoScaling](#AutoScaling)
+    -   [WaitForSignal](#WaitForSignal) - **Optional** - **Type:** boolean - Default: `true`  
+        **Description:** Wait for a cfn-signal before treating the instances as alive  
+    -   [MinUpdateInstances](#MinUpdateInstances) - **Optional** - **Type:** number - Default: `1`  
+        **Description:** The minimum number of instances which must be available during an update  
+    -   [ReplaceCluster](#ReplaceCluster) - **Optional** - **Type:** boolean - Default: `false`  
+        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
+    -   [UpdatePauseTime](#UpdatePauseTime) - **Optional** - **Type:** string - Default: `5M`  
+        **Description:** How long to pause betweeen updates of instances  
+    -   [StartupTimeout](#StartupTimeout) - **Optional** - **Type:** string - Default: `15M`  
+        **Description:** How long to wait for a cfn-signal to be received from a host  
+    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - **Optional** - **Type:** boolean - Default: `false`  
+        **Description:** Replace instances on every update action  
+    -   [ActivityCooldown](#ActivityCooldown) - **Optional** - **Type:** number - Default: `30`  
+-   [DockerHost](#DockerHost) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Ports](#Ports)
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+    -   [LB](#LB)
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [LinkName](#LinkName) - **Optional** - **Type:** string - Default: `lb`  
+    -   [Instance](#Instance) - **Optional** - **Type:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
 
 * * *
 
@@ -666,18 +436,10 @@ Hub for decentralised content hosting with centralised publishing
 
 ## Attribute Reference
 
--   ### Prefix
-    **Type** - string  
-    **Mandatory** - true  
--   ### Engine
-    **Type** - string  
-    **Default** - github  
--   ### Branch
-    **Type** - string  
-    **Default** - master  
--   ### Repository
-    **Type** - string  
-    **Mandatory** - false  
+-   [Prefix](#Prefix) - **Required** - **Type:** string  
+-   [Engine](#Engine) - **Optional** - **Type:** string - Default: `github`  
+-   [Branch](#Branch) - **Optional** - **Type:** string - Default: `master`  
+-   [Repository](#Repository) - **Optional** - **Type:** string  
 
 * * *
 
@@ -738,97 +500,39 @@ Node for decentralised content hosting with centralised publishing
 
 ## Attribute Reference
 
--   ### Path
-    -   ### Host
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Style
-        **Type** - string  
-        **Default** - single  
-    -   ### IncludeInPath
-    -   ### Product
-          **Type** - boolean  
-          **Default** - true  
-    -   ### Environment
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Solution
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Segment
-          **Type** - boolean  
-          **Default** - true  
-    -   ### Tier
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Component
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Instance
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Version
-          **Type** - boolean  
-          **Default** - false  
-    -   ### Host
-          **Type** - boolean  
-          **Default** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
+-   [Path](#Path)
+    -   [Host](#Host) - **Optional** - **Type:** string  
+    -   [Style](#Style) - **Optional** - **Type:** string - Default: `single`  
+    -   [IncludeInPath](#IncludeInPath)
+    -   [Product](#Product) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [Environment](#Environment) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Solution](#Solution) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Segment](#Segment) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [Tier](#Tier) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Component](#Component) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Instance](#Instance) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Version](#Version) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Host](#Host) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
 
 * * *
 
@@ -881,79 +585,32 @@ Managed Data ETL Processing
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Permissions
-    -   ### Decrypt
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppData
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppPublic
-        **Type** - boolean  
-        **Default** - true  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Permissions](#Permissions)
+    -   [Decrypt](#Decrypt) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppData](#AppData) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppPublic](#AppPublic) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
 
 * * *
 
@@ -1001,69 +658,29 @@ A data aretefact that is managed in a similar way to a code unit
 
 ## Attribute Reference
 
--   ### Engine
-    **Type** - string  
-    **Values** - s3, rdsSnapshot  
-    **Mandatory** - true  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### Prefix
-    **Type** - string  
-    **Mandatory** - false  
+-   [Engine](#Engine) - **Required** - **Type:** string  
+    **Values:** s3, rdsSnapshot  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [Prefix](#Prefix) - **Optional** - **Type:** string  
 
 * * *
 
@@ -1125,96 +742,38 @@ A single virtual machine with no code deployment
 
 ## Attribute Reference
 
--   ### FixedIP
-    **Type** - boolean  
-    **Default** - false  
--   ### DockerHost
-    **Type** - boolean  
-    **Default** - false  
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### Ports
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### LB
-    -   ### Tier
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Component
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### LinkName
-          **Type** - string  
-          **Default** - lb  
-    -   ### Instance
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Version
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### PortMapping
-          **Alternate Names** - Port  
-          **Type** - string  
-          **Mandatory** - false  
+-   [FixedIP](#FixedIP) - **Optional** - **Type:** boolean - Default: `false`  
+-   [DockerHost](#DockerHost) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [Ports](#Ports)
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+    -   [LB](#LB)
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [LinkName](#LinkName) - **Optional** - **Type:** string - Default: `lb`  
+    -   [Instance](#Instance) - **Optional** - **Type:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
 
 * * *
 
@@ -1294,117 +853,48 @@ An autoscaling container host cluster
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### FixedIP
-    **Type** - boolean  
-    **Default** - false  
--   ### LogDriver
-    **Type** - string  
-    **Values** - awslogs, json-file, fluentd  
-    **Default** - awslogs  
--   ### ClusterLogGroup
-    **Type** - boolean  
-    **Default** - true  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### AutoScaling
-    -   ### WaitForSignal
-        **Type** - boolean  
-        **Default** - true  
-        **Description** - Wait for a cfn-signal before treating the instances as alive  
-        **Mandatory** - false  
-    -   ### MinUpdateInstances
-        **Type** - number  
-        **Default** - 1  
-        **Description** - The minimum number of instances which must be available during an update  
-        **Mandatory** - false  
-    -   ### ReplaceCluster
-        **Type** - boolean  
-        **Default** - false  
-        **Description** - When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
-        **Mandatory** - false  
-    -   ### UpdatePauseTime
-        **Type** - string  
-        **Default** - 5M  
-        **Description** - How long to pause betweeen updates of instances  
-        **Mandatory** - false  
-    -   ### StartupTimeout
-        **Type** - string  
-        **Default** - 15M  
-        **Description** - How long to wait for a cfn-signal to be received from a host  
-        **Mandatory** - false  
-    -   ### AlwaysReplaceOnUpdate
-        **Type** - boolean  
-        **Default** - false  
-        **Description** - Replace instances on every update action  
-        **Mandatory** - false  
-    -   ### ActivityCooldown
-        **Type** - number  
-        **Default** - 30  
--   ### DockerUsers
-    -   ### UserName
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### UID
-        **Type** - number  
-        **Mandatory** - true  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [FixedIP](#FixedIP) - **Optional** - **Type:** boolean - Default: `false`  
+-   [LogDriver](#LogDriver) - **Optional** - **Type:** string - Default: `awslogs`  
+    **Values:** awslogs, json-file, fluentd  
+-   [ClusterLogGroup](#ClusterLogGroup) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [AutoScaling](#AutoScaling)
+    -   [WaitForSignal](#WaitForSignal) - **Optional** - **Type:** boolean - Default: `true`  
+        **Description:** Wait for a cfn-signal before treating the instances as alive  
+    -   [MinUpdateInstances](#MinUpdateInstances) - **Optional** - **Type:** number - Default: `1`  
+        **Description:** The minimum number of instances which must be available during an update  
+    -   [ReplaceCluster](#ReplaceCluster) - **Optional** - **Type:** boolean - Default: `false`  
+        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
+    -   [UpdatePauseTime](#UpdatePauseTime) - **Optional** - **Type:** string - Default: `5M`  
+        **Description:** How long to pause betweeen updates of instances  
+    -   [StartupTimeout](#StartupTimeout) - **Optional** - **Type:** string - Default: `15M`  
+        **Description:** How long to wait for a cfn-signal to be received from a host  
+    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - **Optional** - **Type:** boolean - Default: `false`  
+        **Description:** Replace instances on every update action  
+    -   [ActivityCooldown](#ActivityCooldown) - **Optional** - **Type:** number - Default: `30`  
+-   [DockerUsers](#DockerUsers)
+    -   [UserName](#UserName) - **Optional** - **Type:** string  
+    -   [UID](#UID) - **Required** - **Type:** number  
 
 * * *
 
@@ -1490,155 +980,61 @@ An orchestrated container with always on scheduling
 
 ## Attribute Reference
 
--   ### Containers
-    -   ### Cpu
-        **Type** - number  
-        **Mandatory** - false  
-    -   ### Links
-    -   ### Any
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tenant
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Product
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Environment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Segment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tier
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Component
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Function
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Service
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Task
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### PortMapping
-          **Alternate Names** - Port  
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Mount
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Platform
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Instance
-          **Types** - string  
-          **Mandatory** - false  
-    -   ### Version
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Role
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Direction
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Type
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### LocalLogging
-        **Type** - boolean  
-        **Default** - false  
-    -   ### LogDriver
-        **Type** - string  
-        **Values** - awslogs, json-file, fluentd  
-        **Default** - awslogs  
-    -   ### ContainerLogGroup
-        **Type** - boolean  
-        **Default** - false  
-    -   ### RunCapabilities
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### Privileged
-        **Type** - boolean  
-        **Default** - false  
-    -   ### MaximumMemory
-        **Alternate Names** - MemoryMaximum, MaxMemory  
-        **Types** - number  
-        **Description** - Set to 0 to not set a maximum  
-        **Mandatory** - false  
-    -   ### MemoryReservation
-        **Alternate Names** - Memory, ReservedMemory  
-        **Type** - number  
-        **Mandatory** - true  
-    -   ### Ports
-           **Name** - Container  
-           **Mandatory** - false  
-    -   ### DynamicHostPort
-          **Type** - boolean  
-          **Default** - false  
-    -   ### LB
-    -   ### Tier
-             **Type** - string  
-             **Mandatory** - true  
-    -   ### Component
-             **Type** - string  
-             **Mandatory** - true  
-    -   ### LinkName
-             **Type** - string  
-             **Default** - lb  
-    -   ### Instance
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### Version
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### PortMapping
-             **Alternate Names** - Port  
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### IPAddressGroups
-          **Type** - array of string  
-          **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### ContainerNetworkLinks
-        **Type** - array of string  
-        **Mandatory** - false  
--   ### DesiredCount
-    **Type** - number  
-    **Default** - -1  
--   ### UseTaskRole
-    **Type** - boolean  
-    **Default** - true  
--   ### Permissions
-    -   ### Decrypt
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppData
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppPublic
-        **Type** - boolean  
-        **Default** - true  
--   ### TaskLogGroup
-    **Type** - boolean  
-    **Default** - true  
--   ### NetworkMode
-    **Type** - string  
-    **Values** - none, bridge, awsvpc, host  
-    **Mandatory** - false  
--   ### ContainerNetworkLinks
-    **Type** - boolean  
-    **Default** - false  
+-   [Containers](#Containers)
+    -   [Cpu](#Cpu) - **Optional** - **Type:** number  
+    -   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+          **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+    -   [LocalLogging](#LocalLogging) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [LogDriver](#LogDriver) - **Optional** - **Type:** string - Default: `awslogs`  
+        **Values:** awslogs, json-file, fluentd  
+    -   [ContainerLogGroup](#ContainerLogGroup) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [RunCapabilities](#RunCapabilities) - **Optional** - **Type:** array of string  
+    -   [Privileged](#Privileged) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [MaximumMemory](#MaximumMemory) (_MemoryMaximum, MaxMemory_) - **Optional**  
+        **Types:** number **Description:** Set to 0 to not set a maximum  
+    -   [MemoryReservation](#MemoryReservation) (_Memory, ReservedMemory_) - **Required** - **Type:** number  
+    -   [Ports](#Ports)
+    -   [Container](#Container) - **Optional**  
+    -   [DynamicHostPort](#DynamicHostPort) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [LB](#LB)
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [LinkName](#LinkName) - **Optional** - **Type:** string - Default: `lb`  
+    -   [Instance](#Instance) - **Optional** - **Type:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [ContainerNetworkLinks](#ContainerNetworkLinks) - **Optional** - **Type:** array of string  
+-   [DesiredCount](#DesiredCount) - **Optional** - **Type:** number - Default: `-1`  
+-   [UseTaskRole](#UseTaskRole) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Permissions](#Permissions)
+    -   [Decrypt](#Decrypt) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppData](#AppData) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppPublic](#AppPublic) - **Optional** - **Type:** boolean - Default: `true`  
+-   [TaskLogGroup](#TaskLogGroup) - **Optional** - **Type:** boolean - Default: `true`  
+-   [NetworkMode](#NetworkMode) - **Optional** - **Type:** string  
+    **Values:** none, bridge, awsvpc, host  
+-   [ContainerNetworkLinks](#ContainerNetworkLinks) - **Optional** - **Type:** boolean - Default: `false`  
 
 * * *
 
@@ -1722,148 +1118,58 @@ A container defintion which is invoked on demand
 
 ## Attribute Reference
 
--   ### Containers
-    -   ### Cpu
-        **Type** - number  
-        **Mandatory** - false  
-    -   ### Links
-    -   ### Any
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tenant
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Product
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Environment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Segment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tier
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Component
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Function
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Service
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Task
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### PortMapping
-          **Alternate Names** - Port  
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Mount
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Platform
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Instance
-          **Types** - string  
-          **Mandatory** - false  
-    -   ### Version
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Role
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Direction
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Type
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### LocalLogging
-        **Type** - boolean  
-        **Default** - false  
-    -   ### LogDriver
-        **Type** - string  
-        **Values** - awslogs, json-file, fluentd  
-        **Default** - awslogs  
-    -   ### ContainerLogGroup
-        **Type** - boolean  
-        **Default** - false  
-    -   ### RunCapabilities
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### Privileged
-        **Type** - boolean  
-        **Default** - false  
-    -   ### MaximumMemory
-        **Alternate Names** - MemoryMaximum, MaxMemory  
-        **Types** - number  
-        **Description** - Set to 0 to not set a maximum  
-        **Mandatory** - false  
-    -   ### MemoryReservation
-        **Alternate Names** - Memory, ReservedMemory  
-        **Type** - number  
-        **Mandatory** - true  
-    -   ### Ports
-           **Name** - Container  
-           **Mandatory** - false  
-    -   ### DynamicHostPort
-          **Type** - boolean  
-          **Default** - false  
-    -   ### LB
-    -   ### Tier
-             **Type** - string  
-             **Mandatory** - true  
-    -   ### Component
-             **Type** - string  
-             **Mandatory** - true  
-    -   ### LinkName
-             **Type** - string  
-             **Default** - lb  
-    -   ### Instance
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### Version
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### PortMapping
-             **Alternate Names** - Port  
-             **Type** - string  
-             **Mandatory** - false  
-    -   ### IPAddressGroups
-          **Type** - array of string  
-          **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### ContainerNetworkLinks
-        **Type** - array of string  
-        **Mandatory** - false  
--   ### UseTaskRole
-    **Type** - boolean  
-    **Default** - true  
--   ### Permissions
-    -   ### Decrypt
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppData
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppPublic
-        **Type** - boolean  
-        **Default** - true  
--   ### TaskLogGroup
-    **Type** - boolean  
-    **Default** - true  
--   ### FixedName
-    **Type** - boolean  
-    **Default** - false  
+-   [Containers](#Containers)
+    -   [Cpu](#Cpu) - **Optional** - **Type:** number  
+    -   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+          **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+    -   [LocalLogging](#LocalLogging) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [LogDriver](#LogDriver) - **Optional** - **Type:** string - Default: `awslogs`  
+        **Values:** awslogs, json-file, fluentd  
+    -   [ContainerLogGroup](#ContainerLogGroup) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [RunCapabilities](#RunCapabilities) - **Optional** - **Type:** array of string  
+    -   [Privileged](#Privileged) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [MaximumMemory](#MaximumMemory) (_MemoryMaximum, MaxMemory_) - **Optional**  
+        **Types:** number **Description:** Set to 0 to not set a maximum  
+    -   [MemoryReservation](#MemoryReservation) (_Memory, ReservedMemory_) - **Required** - **Type:** number  
+    -   [Ports](#Ports)
+    -   [Container](#Container) - **Optional**  
+    -   [DynamicHostPort](#DynamicHostPort) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [LB](#LB)
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [LinkName](#LinkName) - **Optional** - **Type:** string - Default: `lb`  
+    -   [Instance](#Instance) - **Optional** - **Type:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [ContainerNetworkLinks](#ContainerNetworkLinks) - **Optional** - **Type:** array of string  
+-   [UseTaskRole](#UseTaskRole) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Permissions](#Permissions)
+    -   [Decrypt](#Decrypt) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppData](#AppData) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppPublic](#AppPublic) - **Optional** - **Type:** boolean - Default: `true`  
+-   [TaskLogGroup](#TaskLogGroup) - **Optional** - **Type:** boolean - Default: `true`  
+-   [FixedName](#FixedName) - **Optional** - **Type:** boolean - Default: `false`  
 
 * * *
 
@@ -1897,9 +1203,7 @@ A managed network attached file share
 
 ## Attribute Reference
 
--   ### Encrypted
-    **Type** - boolean  
-    **Default** - true  
+-   [Encrypted](#Encrypted) - **Optional** - **Type:** boolean - Default: `true`  
 
 * * *
 
@@ -1924,9 +1228,7 @@ A specific directory on the share for OS mounting
 
 ## Attribute Reference
 
--   ### Directory
-    **Type** - string  
-    **Mandatory** - true  
+-   [Directory](#Directory) - **Required** - **Type:** string  
 
 * * *
 
@@ -1980,82 +1282,34 @@ A managed ElasticSearch instance
 
 ## Attribute Reference
 
--   ### Authentication
-    **Type** - string  
-    **Values** - IP, SIG4ORIP, SIG4ANDIP  
-    **Default** - IP  
--   ### IPAddressGroups
-    **Type** - array of string  
-    **Mandatory** - true  
--   ### AdvancedOptions
-    **Type** - array of string  
-    **Mandatory** - false  
--   ### Version
-    **Type** - string  
-    **Default** - 2.3  
--   ### Encrypted
-    **Type** - boolean  
-    **Default** - false  
--   ### Snapshot
-    -   ### Hour
-        **Type** - string  
-        **Mandatory** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
+-   [Authentication](#Authentication) - **Optional** - **Type:** string - Default: `IP`  
+    **Values:** IP, SIG4ORIP, SIG4ANDIP  
+-   [IPAddressGroups](#IPAddressGroups) - **Required** - **Type:** array of string  
+-   [AdvancedOptions](#AdvancedOptions) - **Optional** - **Type:** array of string  
+-   [Version](#Version) - **Optional** - **Type:** string - Default: `2.3`  
+-   [Encrypted](#Encrypted) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Snapshot](#Snapshot)
+    -   [Hour](#Hour) - **Optional** - **Type:** string  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
 
 * * *
 
@@ -2212,231 +1466,90 @@ A specific entry point for the lambda deployment
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Handler
-    **Type** - string  
-    **Mandatory** - true  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### LogMetrics
-    -   ### LogFilter
-        **Type** - string  
-        **Mandatory** - true  
--   ### LogWatchers
-    -   ### LogFilter
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Links
-    -   ### Any
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tenant
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Product
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Environment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Segment
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Tier
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Component
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Function
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Service
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Task
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### PortMapping
-          **Alternate Names** - Port  
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Mount
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Platform
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Instance
-          **Types** - string  
-          **Mandatory** - false  
-    -   ### Version
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Role
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Direction
-          **Type** - string  
-          **Mandatory** - false  
-    -   ### Type
-          **Type** - string  
-          **Mandatory** - false  
--   ### Alerts
-      **Name** - Description  
-      **Mandatory** - false  
-    -   ### Name
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Metric
-    -   ### Name
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Type
-          **Type** - string  
-          **Mandatory** - true  
-    -   ### Threshold
-        **Type** - number  
-        **Default** - 1  
-    -   ### Severity
-        **Type** - string  
-        **Default** - Info  
-    -   ### Namespace
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Comparison
-        **Type** - string  
-        **Default** - Threshold  
-    -   ### Operator
-        **Type** - string  
-        **Default** - GreaterThanOrEqualToThreshold  
-    -   ### Time
-        **Type** - number  
-        **Default** - 300  
-    -   ### Periods
-        **Type** - number  
-        **Default** - 1  
-    -   ### Statistic
-        **Type** - string  
-        **Default** - Sum  
-    -   ### ReportOk
-        **Type** - boolean  
-        **Default** - false  
-    -   ### MissingData
-        **Type** - string  
-        **Default** - notBreaching  
--   ### Memory
-    **Alternate Names** - MemorySize  
-    **Type** - number  
-    **Default** - 0  
--   ### RunTime
-    **Type** - string  
-    **Values** - nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x  
-    **Mandatory** - true  
--   ### Schedules
-    -   ### Expression
-        **Type** - string  
-        **Default** - rate(6 minutes)  
-    -   ### InputPath
-        **Type** - string  
-        **Default** - /healthcheck  
-    -   ### Input
-        **Type** - object  
-        **Mandatory** - false  
--   ### Timeout
-    **Type** - number  
-    **Default** - 0  
--   ### VPCAccess
-    **Type** - boolean  
-    **Default** - true  
--   ### UseSegmentKey
-    **Type** - boolean  
-    **Default** - false  
--   ### Permissions
-    -   ### Decrypt
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppData
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppPublic
-        **Type** - boolean  
-        **Default** - true  
--   ### PredefineLogGroup
-    **Type** - boolean  
-    **Default** - false  
--   ### Environment
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - false  
-    -   ### Json
-    -   ### Escaped
-          **Type** - boolean  
-          **Default** - true  
-    -   ### Prefix
-          **Type** - string  
-          **Values** - json,  
-          **Default** - json  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Handler](#Handler) - **Required** - **Type:** string  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - **Required** - **Type:** string  
+-   [LogWatchers](#LogWatchers)
+    -   [LogFilter](#LogFilter) - **Required** - **Type:** string  
+    -   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+          **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - **Optional**  
+    -   [Name](#Name) - **Required** - **Type:** string  
+    -   [Metric](#Metric)
+    -   [Name](#Name) - **Required** - **Type:** string  
+    -   [Type](#Type) - **Required** - **Type:** string  
+    -   [Threshold](#Threshold) - **Optional** - **Type:** number - Default: `1`  
+    -   [Severity](#Severity) - **Optional** - **Type:** string - Default: `Info`  
+    -   [Namespace](#Namespace) - **Optional** - **Type:** string  
+    -   [Comparison](#Comparison) - **Optional** - **Type:** string - Default: `Threshold`  
+    -   [Operator](#Operator) - **Optional** - **Type:** string - Default: `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - **Optional** - **Type:** number - Default: `300`  
+    -   [Periods](#Periods) - **Optional** - **Type:** number - Default: `1`  
+    -   [Statistic](#Statistic) - **Optional** - **Type:** string - Default: `Sum`  
+    -   [ReportOk](#ReportOk) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [MissingData](#MissingData) - **Optional** - **Type:** string - Default: `notBreaching`  
+-   [Memory](#Memory) (_MemorySize_) - **Optional** - **Type:** number - Default: `0`  
+-   [RunTime](#RunTime) - **Required** - **Type:** string  
+    **Values:** nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x  
+-   [Schedules](#Schedules)
+    -   [Expression](#Expression) - **Optional** - **Type:** string - Default: `rate(6 minutes)`  
+    -   [InputPath](#InputPath) - **Optional** - **Type:** string - Default: `/healthcheck`  
+    -   [Input](#Input) - **Optional** - **Type:** object  
+-   [Timeout](#Timeout) - **Optional** - **Type:** number - Default: `0`  
+-   [VPCAccess](#VPCAccess) - **Optional** - **Type:** boolean - Default: `true`  
+-   [UseSegmentKey](#UseSegmentKey) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Permissions](#Permissions)
+    -   [Decrypt](#Decrypt) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppData](#AppData) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppPublic](#AppPublic) - **Optional** - **Type:** boolean - Default: `true`  
+-   [PredefineLogGroup](#PredefineLogGroup) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Environment](#Environment)
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Json](#Json)
+    -   [Escaped](#Escaped) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [Prefix](#Prefix) - **Optional** - **Type:** string - Default: `json`  
+          **Values:** json,   
 
 * * *
 
@@ -2481,23 +1594,13 @@ A load balancer for virtual network based components
 
 ## Attribute Reference
 
--   ### Logs
-    **Type** - boolean  
-    **Default** - false  
--   ### Engine
-    **Type** - string  
-    **Values** - application, network, classic  
-    **Default** - application  
--   ### Profiles
-    -   ### SecurityProfile
-        **Type** - string  
-        **Default** - default  
--   ### IdleTimeout
-    **Type** - number  
-    **Default** - 60  
--   ### HealthCheckPort
-    **Type** - string  
-    **Mandatory** - false  
+-   [Logs](#Logs) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Engine](#Engine) - **Optional** - **Type:** string - Default: `application`  
+    **Values:** application, network, classic  
+-   [Profiles](#Profiles)
+    -   [SecurityProfile](#SecurityProfile) - **Optional** - **Type:** string - Default: `default`  
+-   [IdleTimeout](#IdleTimeout) - **Optional** - **Type:** number - Default: `60`  
+-   [HealthCheckPort](#HealthCheckPort) - **Optional** - **Type:** string  
 
 * * *
 
@@ -2572,131 +1675,53 @@ A specifc listener based on the client side network port
 
 ## Attribute Reference
 
--   ### IPAddressGroups
-    **Type** - array of string  
-    **Mandatory** - false  
--   ### Certificate
-    **Type** - object  
-    **Mandatory** - false  
--   ### HostFilter
-    **Type** - boolean  
-    **Default** - false  
--   ### Mapping
-    **Type** - string  
-    **Mandatory** - false  
--   ### Path
-    **Type** - string  
-    **Default** - default  
--   ### Priority
-    **Type** - number  
-    **Default** - 100  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### Authentication
-    -   ### SessionCookieName
-        **Type** - string  
-        **Default** - AWSELBAuthSessionCookie  
-    -   ### SessionTimeout
-        **Type** - number  
-        **Default** - 604800  
--   ### Redirect
-    -   ### Protocol
-        **Type** - string  
-        **Values** - HTTPS, #{protocol}  
-        **Default** - HTTPS  
-    -   ### Port
-        **Type** - string  
-        **Default** - 443  
-    -   ### Host
-        **Type** - string  
-        **Default** - #{host}  
-    -   ### Path
-        **Type** - string  
-        **Default** - /#{path}  
-    -   ### Query
-        **Type** - string  
-        **Default** - #{query}  
-    -   ### Permanent
-        **Type** - boolean  
-        **Default** - true  
--   ### Fixed
-    -   ### Message
-        **Type** - string  
-        **Default** - This application is currently unavailable. Please try again later.  
-    -   ### ContentType
-        **Type** - string  
-        **Default** - text/plain  
-    -   ### StatusCode
-        **Type** - string  
-        **Default** - 404  
--   ### Forward
-    -   ### TargetType
-        **Type** - string  
-        **Values** - instance, ip  
-        **Default** - instance  
-    -   ### SlowStartTime
-        **Type** - number  
-        **Default** - -1  
-    -   ### StickinessTime
-        **Type** - number  
-        **Default** - -1  
-    -   ### DeregistrationTimeout
-        **Type** - number  
-        **Default** - 30  
+-   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string  
+-   [Certificate](#Certificate) - **Optional** - **Type:** object  
+-   [HostFilter](#HostFilter) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Mapping](#Mapping) - **Optional** - **Type:** string  
+-   [Path](#Path) - **Optional** - **Type:** string - Default: `default`  
+-   [Priority](#Priority) - **Optional** - **Type:** number - Default: `100`  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [Authentication](#Authentication)
+    -   [SessionCookieName](#SessionCookieName) - **Optional** - **Type:** string - Default: `AWSELBAuthSessionCookie`  
+    -   [SessionTimeout](#SessionTimeout) - **Optional** - **Type:** number - Default: `604800`  
+-   [Redirect](#Redirect)
+    -   [Protocol](#Protocol) - **Optional** - **Type:** string - Default: `HTTPS`  
+        **Values:** HTTPS, #{protocol}  
+    -   [Port](#Port) - **Optional** - **Type:** string - Default: `443`  
+    -   [Host](#Host) - **Optional** - **Type:** string - Default: `#{host}`  
+    -   [Path](#Path) - **Optional** - **Type:** string - Default: `/#{path}`  
+    -   [Query](#Query) - **Optional** - **Type:** string - Default: `#{query}`  
+    -   [Permanent](#Permanent) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Fixed](#Fixed)
+    -   [Message](#Message) - **Optional** - **Type:** string - Default: `This application is currently unavailable. Please try again later.`  
+    -   [ContentType](#ContentType) - **Optional** - **Type:** string - Default: `text/plain`  
+    -   [StatusCode](#StatusCode) - **Optional** - **Type:** string - Default: `404`  
+-   [Forward](#Forward)
+    -   [TargetType](#TargetType) - **Optional** - **Type:** string - Default: `instance`  
+        **Values:** instance, ip  
+    -   [SlowStartTime](#SlowStartTime) - **Optional** - **Type:** number - Default: `-1`  
+    -   [StickinessTime](#StickinessTime) - **Optional** - **Type:** number - Default: `-1`  
+    -   [DeregistrationTimeout](#DeregistrationTimeout) - **Optional** - **Type:** number - Default: `30`  
 
 * * *
 
@@ -2755,70 +1780,30 @@ A managed mobile notification proxy
 
 ## Attribute Reference
 
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### SuccessSampleRate
-    **Type** - string  
-    **Default** - 100  
--   ### Credentials
-    -   ### EncryptionScheme
-        **Type** - string  
-        **Values** - base64  
-        **Default** - base64  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [SuccessSampleRate](#SuccessSampleRate) - **Optional** - **Type:** string - Default: `100`  
+-   [Credentials](#Credentials)
+    -   [EncryptionScheme](#EncryptionScheme) - **Optional** - **Type:** string - Default: `base64`  
+        **Values:** base64  
 
 * * *
 
@@ -2881,77 +1866,33 @@ A specific mobile platform notification proxy
 
 ## Attribute Reference
 
--   ### Engine
-    **Type** - string  
-    **Mandatory** - false  
--   ### SuccessSampleRate
-    **Type** - string  
-    **Mandatory** - false  
--   ### Credentials
-    -   ### EncryptionScheme
-        **Type** - string  
-        **Values** - base64  
-        **Mandatory** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### LogMetrics
-    -   ### LogFilter
-        **Type** - string  
-        **Mandatory** - true  
+-   [Engine](#Engine) - **Optional** - **Type:** string  
+-   [SuccessSampleRate](#SuccessSampleRate) - **Optional** - **Type:** string  
+-   [Credentials](#Credentials)
+    -   [EncryptionScheme](#EncryptionScheme) - **Optional** - **Type:** string  
+        **Values:** base64  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - **Required** - **Type:** string  
 
 * * *
 
@@ -2993,50 +1934,23 @@ A managed SQL database instance
 
 ## Attribute Reference
 
--   ### Engine
-    **Mandatory** - true  
--   ### EngineVersion
-    **Type** - string  
-    **Mandatory** - false  
--   ### Port
-    **Type** - string  
-    **Mandatory** - false  
--   ### Encrypted
-    **Type** - boolean  
-    **Default** - false  
--   ### GenerateCredentials
-    -   ### Enabled
-        **Type** - boolean  
-        **Default** - false  
-    -   ### MasterUserName
-        **Type** - string  
-        **Default** - root  
-    -   ### CharacterLength
-        **Type** - number  
-        **Default** - 20  
-    -   ### EncryptionScheme
-        **Type** - string  
-        **Values** - base64  
-        **Mandatory** - false  
--   ### Size
-    **Type** - number  
-    **Default** - 20  
--   ### Backup
-    -   ### RetentionPeriod
-        **Type** - number  
-        **Default** - 35  
-    -   ### SnapshotOnDeploy
-        **Type** - boolean  
-        **Default** - true  
--   ### AutoMinorVersionUpgrade
-    **Type** - boolean  
-    **Mandatory** - false  
--   ### DatabaseName
-    **Type** - string  
-    **Mandatory** - false  
--   ### DBParameters
-    **Type** - object  
-    **Mandatory** - false  
+-   [Engine](#Engine) - **Required**  
+-   [EngineVersion](#EngineVersion) - **Optional** - **Type:** string  
+-   [Port](#Port) - **Optional** - **Type:** string  
+-   [Encrypted](#Encrypted) - **Optional** - **Type:** boolean - Default: `false`  
+-   [GenerateCredentials](#GenerateCredentials)
+    -   [Enabled](#Enabled) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [MasterUserName](#MasterUserName) - **Optional** - **Type:** string - Default: `root`  
+    -   [CharacterLength](#CharacterLength) - **Optional** - **Type:** number - Default: `20`  
+    -   [EncryptionScheme](#EncryptionScheme) - **Optional** - **Type:** string  
+        **Values:** base64  
+-   [Size](#Size) - **Optional** - **Type:** number - Default: `20`  
+-   [Backup](#Backup)
+    -   [RetentionPeriod](#RetentionPeriod) - **Optional** - **Type:** number - Default: `35`  
+    -   [SnapshotOnDeploy](#SnapshotOnDeploy) - **Optional** - **Type:** boolean - Default: `true`  
+-   [AutoMinorVersionUpgrade](#AutoMinorVersionUpgrade) - **Optional** - **Type:** boolean  
+-   [DatabaseName](#DatabaseName) - **Optional** - **Type:** string  
+-   [DBParameters](#DBParameters) - **Optional** - **Type:** object  
 
 * * *
 
@@ -3080,49 +1994,25 @@ HTTP based object storage service
 
 ## Attribute Reference
 
--   ### Lifecycle
-    -   ### Expiration
-        **Types** - string, number  
-        **Description** - Provide either a date or a number of days  
-        **Mandatory** - false  
-    -   ### Offline
-        **Types** - string, number  
-        **Description** - Provide either a date or a number of days  
-        **Mandatory** - false  
-    -   ### Versioning
-        **Type** - boolean  
-        **Default** - false  
--   ### Website
-    -   ### Index
-        **Type** - string  
-        **Default** - index.html  
-    -   ### Error
-        **Type** - string  
-        **Mandatory** - false  
--   ### PublicAccess
-    -   ### Enabled
-        **Type** - boolean  
-        **Default** - false  
-    -   ### Permissions
-        **Type** - string  
-        **Values** - ro, wo, rw  
-        **Default** - ro  
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Default** - \_localnet  
-    -   ### Prefix
-        **Type** - string  
-        **Mandatory** - false  
--   ### Style
-    **Type** - string  
-    **Description** - TODO(mfl): Think this can be removed  
-    **Mandatory** - false  
--   ### Notifications
-    **Type** - object  
-    **Mandatory** - false  
--   ### CORSBehaviours
-    **Type** - array of string  
-    **Mandatory** - false  
+-   [Lifecycle](#Lifecycle)
+    -   [Expiration](#Expiration) - **Optional**  
+        **Types:** string, number **Description:** Provide either a date or a number of days  
+    -   [Offline](#Offline) - **Optional**  
+        **Types:** string, number **Description:** Provide either a date or a number of days  
+    -   [Versioning](#Versioning) - **Optional** - **Type:** boolean - Default: `false`  
+-   [Website](#Website)
+    -   [Index](#Index) - **Optional** - **Type:** string - Default: `index.html`  
+    -   [Error](#Error) - **Optional** - **Type:** string  
+-   [PublicAccess](#PublicAccess)
+    -   [Enabled](#Enabled) - **Optional** - **Type:** boolean - Default: `false`  
+    -   [Permissions](#Permissions) - **Optional** - **Type:** string - Default: `ro`  
+        **Values:** ro, wo, rw  
+    -   [IPAddressGroups](#IPAddressGroups) - **Optional** - **Type:** array of string - Default: `_localnet`  
+    -   [Prefix](#Prefix) - **Optional** - **Type:** string  
+-   [Style](#Style) - **Optional** - **Type:** string  
+    **Description:** TODO(mfl): Think this can be removed  
+-   [Notifications](#Notifications) - **Optional** - **Type:** object  
+-   [CORSBehaviours](#CORSBehaviours) - **Optional** - **Type:** array of string  
 
 * * *
 
@@ -3173,64 +2063,30 @@ Object stored hosted web application with content distribution management
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Links
-    **Type** - object  
-    **Mandatory** - false  
--   ### WAF
-    -   ### IPAddressGroups
-        **Type** - array of string  
-        **Mandatory** - true  
-    -   ### Default
-        **Type** - string  
-        **Values** - ALLOW, BLOCK  
-        **Default** - BLOCK  
-    -   ### RuleDefault
-        **Type** - string  
-        **Values** - ALLOW, BLOCK  
-        **Default** - ALLOW  
--   ### CloudFront
-    -   ### AssumeSNI
-        **Type** - boolean  
-        **Default** - true  
-    -   ### EnableLogging
-        **Type** - boolean  
-        **Default** - true  
-    -   ### CountryGroups
-        **Type** - array of string  
-        **Mandatory** - false  
-    -   ### ErrorPage
-        **Type** - string  
-        **Default** - /index.html  
-    -   ### DeniedPage
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### NotFoundPage
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### CachingTTL
-    -   ### Default
-          **Type** - number  
-          **Default** - 600  
-    -   ### Maximum
-          **Type** - number  
-          **Default** - 31536000  
-    -   ### Minimum
-          **Type** - number  
-          **Default** - 0  
-    -   ### Compress
-        **Type** - boolean  
-        **Default** - true  
--   ### Certificate
-    -   ### \*
-        **Mandatory** - false  
--   ### Profiles
-    -   ### SecurityProfile
-        **Type** - string  
-        **Default** - default  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Links](#Links) - **Optional** - **Type:** object  
+-   [WAF](#WAF)
+    -   [IPAddressGroups](#IPAddressGroups) - **Required** - **Type:** array of string  
+    -   [Default](#Default) - **Optional** - **Type:** string - Default: `BLOCK`  
+        **Values:** ALLOW, BLOCK  
+    -   [RuleDefault](#RuleDefault) - **Optional** - **Type:** string - Default: `ALLOW`  
+        **Values:** ALLOW, BLOCK  
+-   [CloudFront](#CloudFront)
+    -   [AssumeSNI](#AssumeSNI) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [EnableLogging](#EnableLogging) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [CountryGroups](#CountryGroups) - **Optional** - **Type:** array of string  
+    -   [ErrorPage](#ErrorPage) - **Optional** - **Type:** string - Default: `/index.html`  
+    -   [DeniedPage](#DeniedPage) - **Optional** - **Type:** string  
+    -   [NotFoundPage](#NotFoundPage) - **Optional** - **Type:** string  
+    -   [CachingTTL](#CachingTTL)
+    -   [Default](#Default) - **Optional** - **Type:** number - Default: `600`  
+    -   [Maximum](#Maximum) - **Optional** - **Type:** number - Default: `31536000`  
+    -   [Minimum](#Minimum) - **Optional** - **Type:** number - Default: `0`  
+    -   [Compress](#Compress) - **Optional** - **Type:** boolean - Default: `true`  
+-   [Certificate](#Certificate)
+    -   [\*](#*) - **Optional**  
+-   [Profiles](#Profiles)
+    -   [SecurityProfile](#SecurityProfile) - **Optional** - **Type:** string - Default: `default`  
 
 * * *
 
@@ -3262,25 +2118,13 @@ Managed worker queue engine
 
 ## Attribute Reference
 
--   ### DelaySeconds
-    **Type** - number  
-    **Mandatory** - false  
--   ### MaximumMessageSize
-    **Type** - number  
-    **Mandatory** - false  
--   ### MessageRetentionPeriod
-    **Type** - number  
-    **Mandatory** - false  
--   ### ReceiveMessageWaitTimeSeconds
-    **Type** - number  
-    **Mandatory** - false  
--   ### DeadLetterQueue
-    -   ### MaxReceives
-        **Type** - number  
-        **Default** - 0  
--   ### VisibilityTimeout
-    **Type** - number  
-    **Mandatory** - false  
+-   [DelaySeconds](#DelaySeconds) - **Optional** - **Type:** number  
+-   [MaximumMessageSize](#MaximumMessageSize) - **Optional** - **Type:** number  
+-   [MessageRetentionPeriod](#MessageRetentionPeriod) - **Optional** - **Type:** number  
+-   [ReceiveMessageWaitTimeSeconds](#ReceiveMessageWaitTimeSeconds) - **Optional** - **Type:** number  
+-   [DeadLetterQueue](#DeadLetterQueue)
+    -   [MaxReceives](#MaxReceives) - **Optional** - **Type:** number - Default: `0`  
+-   [VisibilityTimeout](#VisibilityTimeout) - **Optional** - **Type:** number  
 
 * * *
 
@@ -3340,90 +2184,37 @@ A user with permissions on components deployed in the solution
 
 ## Attribute Reference
 
--   ### Fragment
-    **Alternate Names** - Container  
-    **Type** - string  
-    **Mandatory** - false  
--   ### Links
-    -   ### Any
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tenant
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Product
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Environment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Segment
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Tier
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Component
-        **Type** - string  
-        **Mandatory** - true  
-    -   ### Function
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Service
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Task
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### PortMapping
-        **Alternate Names** - Port  
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Mount
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Platform
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Instance
-        **Types** - string  
-        **Mandatory** - false  
-    -   ### Version
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Role
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Direction
-        **Type** - string  
-        **Mandatory** - false  
-    -   ### Type
-        **Type** - string  
-        **Mandatory** - false  
--   ### GenerateCredentials
-    -   ### Formats
-        **Type** - array of string  
-        **Values** - system, console  
-        **Default** - system  
-    -   ### EncryptionScheme
-        **Type** - string  
-        **Values** - base64  
-        **Mandatory** - false  
-    -   ### CharacterLength
-        **Type** - number  
-        **Default** - 20  
--   ### Permissions
-    -   ### Decrypt
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AsFile
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppData
-        **Type** - boolean  
-        **Default** - true  
-    -   ### AppPublic
-        **Type** - boolean  
-        **Default** - true  
+-   [Fragment](#Fragment) (_Container_) - **Optional** - **Type:** string  
+-   [Links](#Links)
+    -   [Any](#Any) - **Optional** - **Type:** string  
+    -   [Tenant](#Tenant) - **Optional** - **Type:** string  
+    -   [Product](#Product) - **Optional** - **Type:** string  
+    -   [Environment](#Environment) - **Optional** - **Type:** string  
+    -   [Segment](#Segment) - **Optional** - **Type:** string  
+    -   [Tier](#Tier) - **Required** - **Type:** string  
+    -   [Component](#Component) - **Required** - **Type:** string  
+    -   [Function](#Function) - **Optional** - **Type:** string  
+    -   [Service](#Service) - **Optional** - **Type:** string  
+    -   [Task](#Task) - **Optional** - **Type:** string  
+    -   [PortMapping](#PortMapping) (_Port_) - **Optional** - **Type:** string  
+    -   [Mount](#Mount) - **Optional** - **Type:** string  
+    -   [Platform](#Platform) - **Optional** - **Type:** string  
+    -   [Instance](#Instance) - **Optional**  
+        **Types:** string  
+    -   [Version](#Version) - **Optional** - **Type:** string  
+    -   [Role](#Role) - **Optional** - **Type:** string  
+    -   [Direction](#Direction) - **Optional** - **Type:** string  
+    -   [Type](#Type) - **Optional** - **Type:** string  
+-   [GenerateCredentials](#GenerateCredentials)
+    -   [Formats](#Formats) - **Optional** - **Type:** array of string - Default: `system`  
+        **Values:** system, console  
+    -   [EncryptionScheme](#EncryptionScheme) - **Optional** - **Type:** string  
+        **Values:** base64  
+    -   [CharacterLength](#CharacterLength) - **Optional** - **Type:** number - Default: `20`  
+-   [Permissions](#Permissions)
+    -   [Decrypt](#Decrypt) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AsFile](#AsFile) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppData](#AppData) - **Optional** - **Type:** boolean - Default: `true`  
+    -   [AppPublic](#AppPublic) - **Optional** - **Type:** boolean - Default: `true`  
 
 * * *
