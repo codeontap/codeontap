@@ -53,31 +53,42 @@ Application level API proxy
 -   [Links](#Links) - Optional - **Type:** object  
 -   [WAF](#WAF)
     -   [IPAddressGroups](#IPAddressGroups) - Required - **Type:** array of string  
-    -   [Default](#Default) - Optional - **Type:** string - **Default:** `BLOCK`  
-        **Possible Values:** `[ALLOW, BLOCK]`
-    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string - **Default:** `ALLOW`  
-        **Possible Values:** `[ALLOW, BLOCK]`
--   [EndpointType](#EndpointType) - Optional - **Type:** string - **Default:** `EDGE`  
-    **Possible Values:** `[EDGE, REGIONAL]`
+    -   [Default](#Default) - Optional - **Type:** string  
+        **Possible Values:** `[ALLOW, BLOCK]`  
+        **Default:** `BLOCK`  
+    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string  
+        **Possible Values:** `[ALLOW, BLOCK]`  
+        **Default:** `ALLOW`  
+-   [EndpointType](#EndpointType) - Optional - **Type:** string  
+    **Possible Values:** `[EDGE, REGIONAL]`  
+    **Default:** `EDGE`  
 -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
--   [Authentication](#Authentication) - Optional - **Type:** string - **Default:** `IP`  
-    **Possible Values:** `[IP, SIG4ORIP, SIG4ANDIP]`
+-   [Authentication](#Authentication) - Optional - **Type:** string  
+    **Possible Values:** `[IP, SIG4ORIP, SIG4ANDIP]`  
+    **Default:** `IP`  
 -   [CloudFront](#CloudFront)
-    -   [AssumeSNI](#AssumeSNI) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [EnableLogging](#EnableLogging) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [AssumeSNI](#AssumeSNI) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [EnableLogging](#EnableLogging) - Optional - **Type:** boolean  
+        **Default:** `true`  
     -   [CountryGroups](#CountryGroups) - Optional - **Type:** array of string  
     -   [CustomHeaders](#CustomHeaders) - Optional - **Type:** array of any  
-    -   [Mapping](#Mapping) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Compress](#Compress) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Mapping](#Mapping) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [Compress](#Compress) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Certificate](#Certificate)
     -   [\*](#*) - Optional  
 -   [Publish](#Publish)
-    -   [DnsNamePrefix](#DnsNamePrefix) - Optional - **Type:** string - **Default:** `docs`  
+    -   [DnsNamePrefix](#DnsNamePrefix) - Optional - **Type:** string  
+        **Default:** `docs`  
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
 -   [Mapping](#Mapping)
-    -   [IncludeStage](#IncludeStage) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [IncludeStage](#IncludeStage) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Profiles](#Profiles)
-    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string - **Default:** `default`  
+    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string  
+        **Default:** `default`  
 
 * * *
 
@@ -253,25 +264,42 @@ Managed identity service
 
 ## Attribute Reference
 
--   [MFA](#MFA) - Optional - **Type:** boolean - **Default:** `false`  
--   [AdminCreatesUser](#AdminCreatesUser) - Optional - **Type:** boolean - **Default:** `true`  
--   [UnusedAccountTimeout](#UnusedAccountTimeout) - Optional - **Type:** number - **Default:** `7`  
--   [VerifyEmail](#VerifyEmail) - Optional - **Type:** boolean - **Default:** `true`  
--   [VerifyPhone](#VerifyPhone) - Optional - **Type:** boolean - **Default:** `false`  
--   [LoginAliases](#LoginAliases) - Optional - **Type:** array of string - **Default:** `email`  
--   [ClientGenerateSecret](#ClientGenerateSecret) - Optional - **Type:** boolean - **Default:** `false`  
--   [ClientTokenValidity](#ClientTokenValidity) - Optional - **Type:** number - **Default:** `30`  
--   [AllowUnauthenticatedIds](#AllowUnauthenticatedIds) - Optional - **Type:** boolean - **Default:** `false`  
--   [AuthorizationHeader](#AuthorizationHeader) - Optional - **Type:** string - **Default:** `Authorization`  
+-   [MFA](#MFA) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [AdminCreatesUser](#AdminCreatesUser) - Optional - **Type:** boolean  
+    **Default:** `true`  
+-   [UnusedAccountTimeout](#UnusedAccountTimeout) - Optional - **Type:** number  
+    **Default:** `7`  
+-   [VerifyEmail](#VerifyEmail) - Optional - **Type:** boolean  
+    **Default:** `true`  
+-   [VerifyPhone](#VerifyPhone) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [LoginAliases](#LoginAliases) - Optional - **Type:** array of string  
+    **Default:** `email`  
+-   [ClientGenerateSecret](#ClientGenerateSecret) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [ClientTokenValidity](#ClientTokenValidity) - Optional - **Type:** number  
+    **Default:** `30`  
+-   [AllowUnauthenticatedIds](#AllowUnauthenticatedIds) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [AuthorizationHeader](#AuthorizationHeader) - Optional - **Type:** string  
+    **Default:** `Authorization`  
 -   [OAuth](#OAuth)
-    -   [Scopes](#Scopes) - Optional - **Type:** array of string - **Default:** `openid`  
-    -   [Flows](#Flows) - Optional - **Type:** array of string - **Default:** `code`  
+    -   [Scopes](#Scopes) - Optional - **Type:** array of string  
+        **Default:** `openid`  
+    -   [Flows](#Flows) - Optional - **Type:** array of string  
+        **Default:** `code`  
 -   [PasswordPolicy](#PasswordPolicy)
-    -   [MinimumLength](#MinimumLength) - Optional - **Type:** number - **Default:** `10`  
-    -   [Lowercase](#Lowercase) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Uppercase](#Uppercase) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Numbers](#Numbers) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [SpecialCharacters](#SpecialCharacters) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [MinimumLength](#MinimumLength) - Optional - **Type:** number  
+        **Default:** `10`  
+    -   [Lowercase](#Lowercase) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [Uppercase](#Uppercase) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [Numbers](#Numbers) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [SpecialCharacters](#SpecialCharacters) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -381,28 +409,38 @@ Auto-Scaling IaaS with code deployment
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
--   [UseInitAsService](#UseInitAsService) - Optional - **Type:** boolean - **Default:** `false`  
+-   [UseInitAsService](#UseInitAsService) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [AutoScaling](#AutoScaling)
-    -   [WaitForSignal](#WaitForSignal) - Optional - **Type:** boolean - **Default:** `true`  
-        **Description:** Wait for a cfn-signal before treating the instances as alive
-    -   [MinUpdateInstances](#MinUpdateInstances) - Optional - **Type:** number - **Default:** `1`  
-        **Description:** The minimum number of instances which must be available during an update
-    -   [ReplaceCluster](#ReplaceCluster) - Optional - **Type:** boolean - **Default:** `false`  
-        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced
-    -   [UpdatePauseTime](#UpdatePauseTime) - Optional - **Type:** string - **Default:** `5M`  
-        **Description:** How long to pause betweeen updates of instances
-    -   [StartupTimeout](#StartupTimeout) - Optional - **Type:** string - **Default:** `15M`  
-        **Description:** How long to wait for a cfn-signal to be received from a host
-    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - Optional - **Type:** boolean - **Default:** `false`  
-        **Description:** Replace instances on every update action
-    -   [ActivityCooldown](#ActivityCooldown) - Optional - **Type:** number - **Default:** `30`  
--   [DockerHost](#DockerHost) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [WaitForSignal](#WaitForSignal) - Optional - **Type:** boolean  
+        **Default:** `true`  
+        **Description:** Wait for a cfn-signal before treating the instances as alive  
+    -   [MinUpdateInstances](#MinUpdateInstances) - Optional - **Type:** number  
+        **Default:** `1`  
+        **Description:** The minimum number of instances which must be available during an update  
+    -   [ReplaceCluster](#ReplaceCluster) - Optional - **Type:** boolean  
+        **Default:** `false`  
+        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
+    -   [UpdatePauseTime](#UpdatePauseTime) - Optional - **Type:** string  
+        **Default:** `5M`  
+        **Description:** How long to pause betweeen updates of instances  
+    -   [StartupTimeout](#StartupTimeout) - Optional - **Type:** string  
+        **Default:** `15M`  
+        **Description:** How long to wait for a cfn-signal to be received from a host  
+    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - Optional - **Type:** boolean  
+        **Default:** `false`  
+        **Description:** Replace instances on every update action  
+    -   [ActivityCooldown](#ActivityCooldown) - Optional - **Type:** number  
+        **Default:** `30`  
+-   [DockerHost](#DockerHost) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Ports](#Ports)
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
     -   [LB](#LB)
     -   [Tier](#Tier) - Required - **Type:** string  
     -   [Component](#Component) - Required - **Type:** string  
-    -   [LinkName](#LinkName) - Optional - **Type:** string - **Default:** `lb`  
+    -   [LinkName](#LinkName) - Optional - **Type:** string  
+          **Default:** `lb`  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
@@ -434,8 +472,10 @@ Hub for decentralised content hosting with centralised publishing
 ## Attribute Reference
 
 -   [Prefix](#Prefix) - Required - **Type:** string  
--   [Engine](#Engine) - Optional - **Type:** string - **Default:** `github`  
--   [Branch](#Branch) - Optional - **Type:** string - **Default:** `master`  
+-   [Engine](#Engine) - Optional - **Type:** string  
+    **Default:** `github`  
+-   [Branch](#Branch) - Optional - **Type:** string  
+    **Default:** `master`  
 -   [Repository](#Repository) - Optional - **Type:** string  
 
 * * *
@@ -499,17 +539,27 @@ Node for decentralised content hosting with centralised publishing
 
 -   [Path](#Path)
     -   [Host](#Host) - Optional - **Type:** string  
-    -   [Style](#Style) - Optional - **Type:** string - **Default:** `single`  
+    -   [Style](#Style) - Optional - **Type:** string  
+        **Default:** `single`  
     -   [IncludeInPath](#IncludeInPath)
-    -   [Product](#Product) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Environment](#Environment) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Solution](#Solution) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Segment](#Segment) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Tier](#Tier) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Component](#Component) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Instance](#Instance) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Version](#Version) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Host](#Host) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Product](#Product) - Optional - **Type:** boolean  
+          **Default:** `true`  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Solution](#Solution) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
+          **Default:** `true`  
+    -   [Tier](#Tier) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Component](#Component) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Instance](#Instance) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Version](#Version) - Optional - **Type:** boolean  
+          **Default:** `false`  
+    -   [Host](#Host) - Optional - **Type:** boolean  
+          **Default:** `false`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -583,10 +633,14 @@ Managed Data ETL Processing
 
 -   [Fragment](#Fragment) _(Container)_ - Optional - **Type:** string  
 -   [Permissions](#Permissions)
-    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppData](#AppData) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -654,7 +708,7 @@ A data aretefact that is managed in a similar way to a code unit
 ## Attribute Reference
 
 -   [Engine](#Engine) - Required - **Type:** string  
-    **Possible Values:** `[s3, rdsSnapshot]`
+    **Possible Values:** `[s3, rdsSnapshot]`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -736,8 +790,10 @@ A single virtual machine with no code deployment
 
 ## Attribute Reference
 
--   [FixedIP](#FixedIP) - Optional - **Type:** boolean - **Default:** `false`  
--   [DockerHost](#DockerHost) - Optional - **Type:** boolean - **Default:** `false`  
+-   [FixedIP](#FixedIP) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [DockerHost](#DockerHost) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Fragment](#Fragment) _(Container)_ - Optional - **Type:** string  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
@@ -763,7 +819,8 @@ A single virtual machine with no code deployment
     -   [LB](#LB)
     -   [Tier](#Tier) - Required - **Type:** string  
     -   [Component](#Component) - Required - **Type:** string  
-    -   [LinkName](#LinkName) - Optional - **Type:** string - **Default:** `lb`  
+    -   [LinkName](#LinkName) - Optional - **Type:** string  
+          **Default:** `lb`  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
@@ -847,10 +904,13 @@ An autoscaling container host cluster
 ## Attribute Reference
 
 -   [Fragment](#Fragment) _(Container)_ - Optional - **Type:** string  
--   [FixedIP](#FixedIP) - Optional - **Type:** boolean - **Default:** `false`  
--   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
-    **Possible Values:** `[awslogs, json-file, fluentd]`
--   [ClusterLogGroup](#ClusterLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
+-   [FixedIP](#FixedIP) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [LogDriver](#LogDriver) - Optional - **Type:** string  
+    **Possible Values:** `[awslogs, json-file, fluentd]`  
+    **Default:** `awslogs`  
+-   [ClusterLogGroup](#ClusterLogGroup) - Optional - **Type:** boolean  
+    **Default:** `true`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -871,19 +931,26 @@ An autoscaling container host cluster
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
 -   [AutoScaling](#AutoScaling)
-    -   [WaitForSignal](#WaitForSignal) - Optional - **Type:** boolean - **Default:** `true`  
-        **Description:** Wait for a cfn-signal before treating the instances as alive
-    -   [MinUpdateInstances](#MinUpdateInstances) - Optional - **Type:** number - **Default:** `1`  
-        **Description:** The minimum number of instances which must be available during an update
-    -   [ReplaceCluster](#ReplaceCluster) - Optional - **Type:** boolean - **Default:** `false`  
-        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced
-    -   [UpdatePauseTime](#UpdatePauseTime) - Optional - **Type:** string - **Default:** `5M`  
-        **Description:** How long to pause betweeen updates of instances
-    -   [StartupTimeout](#StartupTimeout) - Optional - **Type:** string - **Default:** `15M`  
-        **Description:** How long to wait for a cfn-signal to be received from a host
-    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - Optional - **Type:** boolean - **Default:** `false`  
-        **Description:** Replace instances on every update action
-    -   [ActivityCooldown](#ActivityCooldown) - Optional - **Type:** number - **Default:** `30`  
+    -   [WaitForSignal](#WaitForSignal) - Optional - **Type:** boolean  
+        **Default:** `true`  
+        **Description:** Wait for a cfn-signal before treating the instances as alive  
+    -   [MinUpdateInstances](#MinUpdateInstances) - Optional - **Type:** number  
+        **Default:** `1`  
+        **Description:** The minimum number of instances which must be available during an update  
+    -   [ReplaceCluster](#ReplaceCluster) - Optional - **Type:** boolean  
+        **Default:** `false`  
+        **Description:** When set to true a brand new cluster will be built, if false the instances in the current cluster will be replaced  
+    -   [UpdatePauseTime](#UpdatePauseTime) - Optional - **Type:** string  
+        **Default:** `5M`  
+        **Description:** How long to pause betweeen updates of instances  
+    -   [StartupTimeout](#StartupTimeout) - Optional - **Type:** string  
+        **Default:** `15M`  
+        **Description:** How long to wait for a cfn-signal to be received from a host  
+    -   [AlwaysReplaceOnUpdate](#AlwaysReplaceOnUpdate) - Optional - **Type:** boolean  
+        **Default:** `false`  
+        **Description:** Replace instances on every update action  
+    -   [ActivityCooldown](#ActivityCooldown) - Optional - **Type:** number  
+        **Default:** `30`  
 -   [DockerUsers](#DockerUsers)
     -   [UserName](#UserName) - Optional - **Type:** string  
     -   [UID](#UID) - Required - **Type:** number  
@@ -993,39 +1060,54 @@ An orchestrated container with always on scheduling
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
-    -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
-        **Possible Values:** `[awslogs, json-file, fluentd]`
-    -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [LogDriver](#LogDriver) - Optional - **Type:** string  
+        **Possible Values:** `[awslogs, json-file, fluentd]`  
+        **Default:** `awslogs`  
+    -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean  
+        **Default:** `false`  
     -   [RunCapabilities](#RunCapabilities) - Optional - **Type:** array of string  
-    -   [Privileged](#Privileged) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Privileged](#Privileged) - Optional - **Type:** boolean  
+        **Default:** `false`  
     -   [MaximumMemory](#MaximumMemory) _(MemoryMaximum, MaxMemory)_ - Optional  
-        **Types:** number  **Description:** Set to 0 to not set a maximum
+        **Types:** number  
+        **Description:** Set to 0 to not set a maximum  
     -   [MemoryReservation](#MemoryReservation) _(Memory, ReservedMemory)_ - Required - **Type:** number  
     -   [Ports](#Ports)
     -   [Container](#Container) - Optional  
-    -   [DynamicHostPort](#DynamicHostPort) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [DynamicHostPort](#DynamicHostPort) - Optional - **Type:** boolean  
+          **Default:** `false`  
     -   [LB](#LB)
     -   [Tier](#Tier) - Required - **Type:** string  
     -   [Component](#Component) - Required - **Type:** string  
-    -   [LinkName](#LinkName) - Optional - **Type:** string - **Default:** `lb`  
+    -   [LinkName](#LinkName) - Optional - **Type:** string  
+             **Default:** `lb`  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [ContainerNetworkLinks](#ContainerNetworkLinks) - Optional - **Type:** array of string  
--   [DesiredCount](#DesiredCount) - Optional - **Type:** number - **Default:** `-1`  
--   [UseTaskRole](#UseTaskRole) - Optional - **Type:** boolean - **Default:** `true`  
+-   [DesiredCount](#DesiredCount) - Optional - **Type:** number  
+    **Default:** `-1`  
+-   [UseTaskRole](#UseTaskRole) - Optional - **Type:** boolean  
+    **Default:** `true`  
 -   [Permissions](#Permissions)
-    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
--   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppData](#AppData) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean  
+        **Default:** `true`  
+-   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean  
+    **Default:** `true`  
 -   [NetworkMode](#NetworkMode) - Optional - **Type:** string  
-    **Possible Values:** `[none, bridge, awsvpc, host]`
--   [ContainerNetworkLinks](#ContainerNetworkLinks) - Optional - **Type:** boolean - **Default:** `false`  
+    **Possible Values:** `[none, bridge, awsvpc, host]`  
+-   [ContainerNetworkLinks](#ContainerNetworkLinks) - Optional - **Type:** boolean  
+    **Default:** `false`  
 
 * * *
 
@@ -1130,36 +1212,50 @@ A container defintion which is invoked on demand
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
-    -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
-        **Possible Values:** `[awslogs, json-file, fluentd]`
-    -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [LogDriver](#LogDriver) - Optional - **Type:** string  
+        **Possible Values:** `[awslogs, json-file, fluentd]`  
+        **Default:** `awslogs`  
+    -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean  
+        **Default:** `false`  
     -   [RunCapabilities](#RunCapabilities) - Optional - **Type:** array of string  
-    -   [Privileged](#Privileged) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Privileged](#Privileged) - Optional - **Type:** boolean  
+        **Default:** `false`  
     -   [MaximumMemory](#MaximumMemory) _(MemoryMaximum, MaxMemory)_ - Optional  
-        **Types:** number  **Description:** Set to 0 to not set a maximum
+        **Types:** number  
+        **Description:** Set to 0 to not set a maximum  
     -   [MemoryReservation](#MemoryReservation) _(Memory, ReservedMemory)_ - Required - **Type:** number  
     -   [Ports](#Ports)
     -   [Container](#Container) - Optional  
-    -   [DynamicHostPort](#DynamicHostPort) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [DynamicHostPort](#DynamicHostPort) - Optional - **Type:** boolean  
+          **Default:** `false`  
     -   [LB](#LB)
     -   [Tier](#Tier) - Required - **Type:** string  
     -   [Component](#Component) - Required - **Type:** string  
-    -   [LinkName](#LinkName) - Optional - **Type:** string - **Default:** `lb`  
+    -   [LinkName](#LinkName) - Optional - **Type:** string  
+             **Default:** `lb`  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [ContainerNetworkLinks](#ContainerNetworkLinks) - Optional - **Type:** array of string  
--   [UseTaskRole](#UseTaskRole) - Optional - **Type:** boolean - **Default:** `true`  
+-   [UseTaskRole](#UseTaskRole) - Optional - **Type:** boolean  
+    **Default:** `true`  
 -   [Permissions](#Permissions)
-    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
--   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
--   [FixedName](#FixedName) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppData](#AppData) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean  
+        **Default:** `true`  
+-   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean  
+    **Default:** `true`  
+-   [FixedName](#FixedName) - Optional - **Type:** boolean  
+    **Default:** `false`  
 
 * * *
 
@@ -1193,7 +1289,8 @@ A managed network attached file share
 
 ## Attribute Reference
 
--   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Encrypted](#Encrypted) - Optional - **Type:** boolean  
+    **Default:** `true`  
 
 * * *
 
@@ -1272,12 +1369,15 @@ A managed ElasticSearch instance
 
 ## Attribute Reference
 
--   [Authentication](#Authentication) - Optional - **Type:** string - **Default:** `IP`  
-    **Possible Values:** `[IP, SIG4ORIP, SIG4ANDIP]`
+-   [Authentication](#Authentication) - Optional - **Type:** string  
+    **Possible Values:** `[IP, SIG4ORIP, SIG4ANDIP]`  
+    **Default:** `IP`  
 -   [IPAddressGroups](#IPAddressGroups) - Required - **Type:** array of string  
 -   [AdvancedOptions](#AdvancedOptions) - Optional - **Type:** array of string  
--   [Version](#Version) - Optional - **Type:** string - **Default:** `2.3`  
--   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Version](#Version) - Optional - **Type:** string  
+    **Default:** `2.3`  
+-   [Encrypted](#Encrypted) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Snapshot](#Snapshot)
     -   [Hour](#Hour) - Optional - **Type:** string  
 -   [Links](#Links)
@@ -1505,38 +1605,61 @@ A specific entry point for the lambda deployment
     -   [Metric](#Metric)
     -   [Name](#Name) - Required - **Type:** string  
     -   [Type](#Type) - Required - **Type:** string  
-    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
-    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Threshold](#Threshold) - Optional - **Type:** number  
+        **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string  
+        **Default:** `Info`  
     -   [Namespace](#Namespace) - Optional - **Type:** string  
-    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
-    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
-    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
-    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
-    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
-    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
--   [Memory](#Memory) _(MemorySize)_ - Optional - **Type:** number - **Default:** `0`  
+    -   [Comparison](#Comparison) - Optional - **Type:** string  
+        **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string  
+        **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number  
+        **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number  
+        **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string  
+        **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string  
+        **Default:** `notBreaching`  
+-   [Memory](#Memory) _(MemorySize)_ - Optional - **Type:** number  
+    **Default:** `0`  
 -   [RunTime](#RunTime) - Required - **Type:** string  
-    **Possible Values:** `[nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x]`
+    **Possible Values:** `[nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x]`  
 -   [Schedules](#Schedules)
-    -   [Expression](#Expression) - Optional - **Type:** string - **Default:** `rate(6 minutes)`  
-    -   [InputPath](#InputPath) - Optional - **Type:** string - **Default:** `/healthcheck`  
+    -   [Expression](#Expression) - Optional - **Type:** string  
+        **Default:** `rate(6 minutes)`  
+    -   [InputPath](#InputPath) - Optional - **Type:** string  
+        **Default:** `/healthcheck`  
     -   [Input](#Input) - Optional - **Type:** object  
--   [Timeout](#Timeout) - Optional - **Type:** number - **Default:** `0`  
--   [VPCAccess](#VPCAccess) - Optional - **Type:** boolean - **Default:** `true`  
--   [UseSegmentKey](#UseSegmentKey) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Timeout](#Timeout) - Optional - **Type:** number  
+    **Default:** `0`  
+-   [VPCAccess](#VPCAccess) - Optional - **Type:** boolean  
+    **Default:** `true`  
+-   [UseSegmentKey](#UseSegmentKey) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Permissions](#Permissions)
-    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
--   [PredefineLogGroup](#PredefineLogGroup) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppData](#AppData) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean  
+        **Default:** `true`  
+-   [PredefineLogGroup](#PredefineLogGroup) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Environment](#Environment)
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `false`  
     -   [Json](#Json)
-    -   [Escaped](#Escaped) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Prefix](#Prefix) - Optional - **Type:** string - **Default:** `json`  
-          **Possible Values:** `[json, ]`
+    -   [Escaped](#Escaped) - Optional - **Type:** boolean  
+          **Default:** `true`  
+    -   [Prefix](#Prefix) - Optional - **Type:** string  
+          **Possible Values:** `[json, ]`  
+          **Default:** `json`  
 
 * * *
 
@@ -1581,12 +1704,16 @@ A load balancer for virtual network based components
 
 ## Attribute Reference
 
--   [Logs](#Logs) - Optional - **Type:** boolean - **Default:** `false`  
--   [Engine](#Engine) - Optional - **Type:** string - **Default:** `application`  
-    **Possible Values:** `[application, network, classic]`
+-   [Logs](#Logs) - Optional - **Type:** boolean  
+    **Default:** `false`  
+-   [Engine](#Engine) - Optional - **Type:** string  
+    **Possible Values:** `[application, network, classic]`  
+    **Default:** `application`  
 -   [Profiles](#Profiles)
-    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string - **Default:** `default`  
--   [IdleTimeout](#IdleTimeout) - Optional - **Type:** number - **Default:** `60`  
+    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string  
+        **Default:** `default`  
+-   [IdleTimeout](#IdleTimeout) - Optional - **Type:** number  
+    **Default:** `60`  
 -   [HealthCheckPort](#HealthCheckPort) - Optional - **Type:** string  
 
 * * *
@@ -1664,10 +1791,13 @@ A specifc listener based on the client side network port
 
 -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
 -   [Certificate](#Certificate) - Optional - **Type:** object  
--   [HostFilter](#HostFilter) - Optional - **Type:** boolean - **Default:** `false`  
+-   [HostFilter](#HostFilter) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [Mapping](#Mapping) - Optional - **Type:** string  
--   [Path](#Path) - Optional - **Type:** string - **Default:** `default`  
--   [Priority](#Priority) - Optional - **Type:** number - **Default:** `100`  
+-   [Path](#Path) - Optional - **Type:** string  
+    **Default:** `default`  
+-   [Priority](#Priority) - Optional - **Type:** number  
+    **Default:** `100`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -1688,26 +1818,41 @@ A specifc listener based on the client side network port
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
 -   [Authentication](#Authentication)
-    -   [SessionCookieName](#SessionCookieName) - Optional - **Type:** string - **Default:** `AWSELBAuthSessionCookie`  
-    -   [SessionTimeout](#SessionTimeout) - Optional - **Type:** number - **Default:** `604800`  
+    -   [SessionCookieName](#SessionCookieName) - Optional - **Type:** string  
+        **Default:** `AWSELBAuthSessionCookie`  
+    -   [SessionTimeout](#SessionTimeout) - Optional - **Type:** number  
+        **Default:** `604800`  
 -   [Redirect](#Redirect)
-    -   [Protocol](#Protocol) - Optional - **Type:** string - **Default:** `HTTPS`  
-        **Possible Values:** `[HTTPS, #{protocol}]`
-    -   [Port](#Port) - Optional - **Type:** string - **Default:** `443`  
-    -   [Host](#Host) - Optional - **Type:** string - **Default:** `#{host}`  
-    -   [Path](#Path) - Optional - **Type:** string - **Default:** `/#{path}`  
-    -   [Query](#Query) - Optional - **Type:** string - **Default:** `#{query}`  
-    -   [Permanent](#Permanent) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Protocol](#Protocol) - Optional - **Type:** string  
+        **Possible Values:** `[HTTPS, #{protocol}]`  
+        **Default:** `HTTPS`  
+    -   [Port](#Port) - Optional - **Type:** string  
+        **Default:** `443`  
+    -   [Host](#Host) - Optional - **Type:** string  
+        **Default:** `#{host}`  
+    -   [Path](#Path) - Optional - **Type:** string  
+        **Default:** `/#{path}`  
+    -   [Query](#Query) - Optional - **Type:** string  
+        **Default:** `#{query}`  
+    -   [Permanent](#Permanent) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Fixed](#Fixed)
-    -   [Message](#Message) - Optional - **Type:** string - **Default:** `This application is currently unavailable. Please try again later.`  
-    -   [ContentType](#ContentType) - Optional - **Type:** string - **Default:** `text/plain`  
-    -   [StatusCode](#StatusCode) - Optional - **Type:** string - **Default:** `404`  
+    -   [Message](#Message) - Optional - **Type:** string  
+        **Default:** `This application is currently unavailable. Please try again later.`  
+    -   [ContentType](#ContentType) - Optional - **Type:** string  
+        **Default:** `text/plain`  
+    -   [StatusCode](#StatusCode) - Optional - **Type:** string  
+        **Default:** `404`  
 -   [Forward](#Forward)
-    -   [TargetType](#TargetType) - Optional - **Type:** string - **Default:** `instance`  
-        **Possible Values:** `[instance, ip]`
-    -   [SlowStartTime](#SlowStartTime) - Optional - **Type:** number - **Default:** `-1`  
-    -   [StickinessTime](#StickinessTime) - Optional - **Type:** number - **Default:** `-1`  
-    -   [DeregistrationTimeout](#DeregistrationTimeout) - Optional - **Type:** number - **Default:** `30`  
+    -   [TargetType](#TargetType) - Optional - **Type:** string  
+        **Possible Values:** `[instance, ip]`  
+        **Default:** `instance`  
+    -   [SlowStartTime](#SlowStartTime) - Optional - **Type:** number  
+        **Default:** `-1`  
+    -   [StickinessTime](#StickinessTime) - Optional - **Type:** number  
+        **Default:** `-1`  
+    -   [DeregistrationTimeout](#DeregistrationTimeout) - Optional - **Type:** number  
+        **Default:** `30`  
 
 * * *
 
@@ -1785,10 +1930,12 @@ A managed mobile notification proxy
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
--   [SuccessSampleRate](#SuccessSampleRate) - Optional - **Type:** string - **Default:** `100`  
+-   [SuccessSampleRate](#SuccessSampleRate) - Optional - **Type:** string  
+    **Default:** `100`  
 -   [Credentials](#Credentials)
-    -   [EncryptionScheme](#EncryptionScheme) - Optional - **Type:** string - **Default:** `base64`  
-        **Possible Values:** `[base64]`
+    -   [EncryptionScheme](#EncryptionScheme) - Optional - **Type:** string  
+        **Possible Values:** `[base64]`  
+        **Default:** `base64`  
 
 * * *
 
@@ -1855,7 +2002,7 @@ A specific mobile platform notification proxy
 -   [SuccessSampleRate](#SuccessSampleRate) - Optional - **Type:** string  
 -   [Credentials](#Credentials)
     -   [EncryptionScheme](#EncryptionScheme) - Optional - **Type:** string  
-        **Possible Values:** `[base64]`
+        **Possible Values:** `[base64]`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -1921,17 +2068,24 @@ A managed SQL database instance
 -   [Engine](#Engine) - Required  
 -   [EngineVersion](#EngineVersion) - Optional - **Type:** string  
 -   [Port](#Port) - Optional - **Type:** string  
--   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Encrypted](#Encrypted) - Optional - **Type:** boolean  
+    **Default:** `false`  
 -   [GenerateCredentials](#GenerateCredentials)
-    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [MasterUserName](#MasterUserName) - Optional - **Type:** string - **Default:** `root`  
-    -   [CharacterLength](#CharacterLength) - Optional - **Type:** number - **Default:** `20`  
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [MasterUserName](#MasterUserName) - Optional - **Type:** string  
+        **Default:** `root`  
+    -   [CharacterLength](#CharacterLength) - Optional - **Type:** number  
+        **Default:** `20`  
     -   [EncryptionScheme](#EncryptionScheme) - Optional - **Type:** string  
-        **Possible Values:** `[base64]`
--   [Size](#Size) - Optional - **Type:** number - **Default:** `20`  
+        **Possible Values:** `[base64]`  
+-   [Size](#Size) - Optional - **Type:** number  
+    **Default:** `20`  
 -   [Backup](#Backup)
-    -   [RetentionPeriod](#RetentionPeriod) - Optional - **Type:** number - **Default:** `35`  
-    -   [SnapshotOnDeploy](#SnapshotOnDeploy) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [RetentionPeriod](#RetentionPeriod) - Optional - **Type:** number  
+        **Default:** `35`  
+    -   [SnapshotOnDeploy](#SnapshotOnDeploy) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [AutoMinorVersionUpgrade](#AutoMinorVersionUpgrade) - Optional - **Type:** boolean  
 -   [DatabaseName](#DatabaseName) - Optional - **Type:** string  
 -   [DBParameters](#DBParameters) - Optional - **Type:** object  
@@ -1980,21 +2134,28 @@ HTTP based object storage service
 
 -   [Lifecycle](#Lifecycle)
     -   [Expiration](#Expiration) - Optional  
-        **Types:** string, number  **Description:** Provide either a date or a number of days
+        **Types:** string, number  
+        **Description:** Provide either a date or a number of days  
     -   [Offline](#Offline) - Optional  
-        **Types:** string, number  **Description:** Provide either a date or a number of days
-    -   [Versioning](#Versioning) - Optional - **Type:** boolean - **Default:** `false`  
+        **Types:** string, number  
+        **Description:** Provide either a date or a number of days  
+    -   [Versioning](#Versioning) - Optional - **Type:** boolean  
+        **Default:** `false`  
 -   [Website](#Website)
-    -   [Index](#Index) - Optional - **Type:** string - **Default:** `index.html`  
+    -   [Index](#Index) - Optional - **Type:** string  
+        **Default:** `index.html`  
     -   [Error](#Error) - Optional - **Type:** string  
 -   [PublicAccess](#PublicAccess)
-    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
-    -   [Permissions](#Permissions) - Optional - **Type:** string - **Default:** `ro`  
-        **Possible Values:** `[ro, wo, rw]`
-    -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string - **Default:** `_localnet`  
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean  
+        **Default:** `false`  
+    -   [Permissions](#Permissions) - Optional - **Type:** string  
+        **Possible Values:** `[ro, wo, rw]`  
+        **Default:** `ro`  
+    -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
+        **Default:** `_localnet`  
     -   [Prefix](#Prefix) - Optional - **Type:** string  
 -   [Style](#Style) - Optional - **Type:** string  
-    **Description:** TODO(mfl): Think this can be removed
+    **Description:** TODO(mfl): Think this can be removed  
 -   [Notifications](#Notifications) - Optional - **Type:** object  
 -   [CORSBehaviours](#CORSBehaviours) - Optional - **Type:** array of string  
 
@@ -2051,26 +2212,36 @@ Object stored hosted web application with content distribution management
 -   [Links](#Links) - Optional - **Type:** object  
 -   [WAF](#WAF)
     -   [IPAddressGroups](#IPAddressGroups) - Required - **Type:** array of string  
-    -   [Default](#Default) - Optional - **Type:** string - **Default:** `BLOCK`  
-        **Possible Values:** `[ALLOW, BLOCK]`
-    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string - **Default:** `ALLOW`  
-        **Possible Values:** `[ALLOW, BLOCK]`
+    -   [Default](#Default) - Optional - **Type:** string  
+        **Possible Values:** `[ALLOW, BLOCK]`  
+        **Default:** `BLOCK`  
+    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string  
+        **Possible Values:** `[ALLOW, BLOCK]`  
+        **Default:** `ALLOW`  
 -   [CloudFront](#CloudFront)
-    -   [AssumeSNI](#AssumeSNI) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [EnableLogging](#EnableLogging) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [AssumeSNI](#AssumeSNI) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [EnableLogging](#EnableLogging) - Optional - **Type:** boolean  
+        **Default:** `true`  
     -   [CountryGroups](#CountryGroups) - Optional - **Type:** array of string  
-    -   [ErrorPage](#ErrorPage) - Optional - **Type:** string - **Default:** `/index.html`  
+    -   [ErrorPage](#ErrorPage) - Optional - **Type:** string  
+        **Default:** `/index.html`  
     -   [DeniedPage](#DeniedPage) - Optional - **Type:** string  
     -   [NotFoundPage](#NotFoundPage) - Optional - **Type:** string  
     -   [CachingTTL](#CachingTTL)
-    -   [Default](#Default) - Optional - **Type:** number - **Default:** `600`  
-    -   [Maximum](#Maximum) - Optional - **Type:** number - **Default:** `31536000`  
-    -   [Minimum](#Minimum) - Optional - **Type:** number - **Default:** `0`  
-    -   [Compress](#Compress) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Default](#Default) - Optional - **Type:** number  
+          **Default:** `600`  
+    -   [Maximum](#Maximum) - Optional - **Type:** number  
+          **Default:** `31536000`  
+    -   [Minimum](#Minimum) - Optional - **Type:** number  
+          **Default:** `0`  
+    -   [Compress](#Compress) - Optional - **Type:** boolean  
+        **Default:** `true`  
 -   [Certificate](#Certificate)
     -   [\*](#*) - Optional  
 -   [Profiles](#Profiles)
-    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string - **Default:** `default`  
+    -   [SecurityProfile](#SecurityProfile) - Optional - **Type:** string  
+        **Default:** `default`  
 
 * * *
 
@@ -2107,7 +2278,8 @@ Managed worker queue engine
 -   [MessageRetentionPeriod](#MessageRetentionPeriod) - Optional - **Type:** number  
 -   [ReceiveMessageWaitTimeSeconds](#ReceiveMessageWaitTimeSeconds) - Optional - **Type:** number  
 -   [DeadLetterQueue](#DeadLetterQueue)
-    -   [MaxReceives](#MaxReceives) - Optional - **Type:** number - **Default:** `0`  
+    -   [MaxReceives](#MaxReceives) - Optional - **Type:** number  
+        **Default:** `0`  
 -   [VisibilityTimeout](#VisibilityTimeout) - Optional - **Type:** number  
 
 * * *
@@ -2189,15 +2361,21 @@ A user with permissions on components deployed in the solution
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
 -   [GenerateCredentials](#GenerateCredentials)
-    -   [Formats](#Formats) - Optional - **Type:** array of string - **Default:** `system`  
-        **Possible Values:** `[system, console]`
+    -   [Formats](#Formats) - Optional - **Type:** array of string  
+        **Possible Values:** `[system, console]`  
+        **Default:** `system`  
     -   [EncryptionScheme](#EncryptionScheme) - Optional - **Type:** string  
-        **Possible Values:** `[base64]`
-    -   [CharacterLength](#CharacterLength) - Optional - **Type:** number - **Default:** `20`  
+        **Possible Values:** `[base64]`  
+    -   [CharacterLength](#CharacterLength) - Optional - **Type:** number  
+        **Default:** `20`  
 -   [Permissions](#Permissions)
-    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Decrypt](#Decrypt) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AsFile](#AsFile) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppData](#AppData) - Optional - **Type:** boolean  
+        **Default:** `true`  
+    -   [AppPublic](#AppPublic) - Optional - **Type:** boolean  
+        **Default:** `true`  
 
 * * *
