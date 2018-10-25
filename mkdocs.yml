@@ -22,7 +22,9 @@ nav:
     - 'Encrypt Secrets' : './getting-started/encrypt-secrets.md'
     - 'Deploy Product Components' : './getting-started/deploy-product-components.md'
     - 'Accessing Jenkins' : './getting-started/accessing-jenkins.md'
-  - 'About' :
-    - 'Release Process' : './about/versioning.md'
   - 'Reference' : 
     - 'Components' : './reference/component-reference.md'
+  - 'Development' : 
+    - 'Introduction' : './development/index.md'
+    - 'Versioning' : './development/versioning.md'
+    - 'Create a Release' : './development/creating-a-release.md'
