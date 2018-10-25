@@ -4,7 +4,7 @@ This section is for people interested in working on the CodeOnTap Framework itse
 
 ## Components
 
-CodeOnTap is made up of a collection of Github Hosted repositories, docker images and readthedocs sites. When creating a new release the following components need to be updated
+CodeOnTap is made up of a collection of Github Hosted repositories, docker images and readthedocs sites
 
 | Name | Type | Function | URL | Notes |
 | -- | -- | -- | -- | -- |
