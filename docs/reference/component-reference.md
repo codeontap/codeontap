@@ -8,33 +8,32 @@ consideration is the handling of the host header. They reflect the
 changes and improvements AWS have made to the API Gateway over time.
 For whitelisted APIs, mode 4 is the recommended one now.
 
-1) Multi-domain cloudfront + EDGE endpoint
-    \- waf based IP whitelisting
-    \- multiple cloudfront aliases
-    \- host header blocked
-    \- EDGE based API Gateway
-    \- signing based on AWS API domain name
-    \- API-KEY used as shared secret between cloudfront and the API
-2) Single domain cloudfront + EDGE endpoint
-    \- waf based IP whitelisting
-    \- single cloudfront alias
-    \- host header blocked
-    \- EDGE based API Gateway
-    \- signing based on "sig4-" + alias
-    \- API-KEY used as shared secret between cloudfront and the API
-3) Multi-domain cloudfront + REGIONAL endpoint
-    \- waf based IP whitelisting
-    \- multiple cloudfront aliases
-    \- host header passed through to endpoint
-    \- REGIONAL based API Gateway
-
--   signing based on any of the aliases
-        \- API-KEY used as shared secret between cloudfront and the API
-    4) API endpoint
-        \- policy based IP whitelisting
-        \- multiple aliases
-        \- EDGE or REGIONAL
--   signing based on any of the aliases
+1.  Multi-domain cloudfront + EDGE endpoint
+    -   waf based IP whitelisting
+    -   multiple cloudfront aliases
+    -   host header blocked
+    -   EDGE based API Gateway
+    -   signing based on AWS API domain name
+    -   API-KEY used as shared secret between cloudfront and the API
+2.  Single domain cloudfront + EDGE endpoint
+    -   waf based IP whitelisting
+    -   single cloudfront alias
+    -   host header blocked
+    -   EDGE based API Gateway
+    -   signing based on "sig4-" + alias
+    -   API-KEY used as shared secret between cloudfront and the API
+3.  Multi-domain cloudfront + REGIONAL endpoint
+    -   waf based IP whitelisting
+    -   multiple cloudfront aliases
+    -   host header passed through to endpoint
+    -   REGIONAL based API Gateway
+    -   signing based on any of the aliases
+    -   API-KEY used as shared secret between cloudfront and the API
+4.  API endpoint
+    -   policy based IP whitelisting
+    -   multiple aliases
+    -   EDGE or REGIONAL
+    -   signing based on any of the aliases
     -   API-KEY can be used for client metering
 
 If multiple domains are provided, the primary domain is used to provide the
