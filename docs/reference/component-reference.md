@@ -403,7 +403,7 @@ Managed identity service
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Notes
+**Notes**
 
 !!! warning
     Requires second deployment to complete configuration
@@ -1009,7 +1009,7 @@ An autoscaling container host cluster
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Sub Components
+**Sub Components**
 
 -   [service](#service)
     -   **Component Attribute** - Services
@@ -1411,7 +1411,7 @@ A managed network attached file share
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Sub Components
+**Sub Components**
 
 -   [efsMount](#efsMount)
     -   **Component Attribute** - Mounts
@@ -1550,7 +1550,7 @@ Container for a Function as a Service deployment
 -   **Available Providers** - aws
 -   **Component Level** - application
 
-## Sub Components
+**Sub Components**
 
 -   [function](#function)
     -   **Component Attribute** - Functions
@@ -1788,12 +1788,12 @@ A load balancer for virtual network based components
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Notes
+**Notes**
 
 !!! warning
     Requires second deployment to complete configuration
 
-## Sub Components
+**Sub Components**
 
 -   [lbport](#lbport)
     -   **Component Attribute** - PortMappings
@@ -1991,7 +1991,7 @@ A managed mobile notification proxy
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Sub Components
+**Sub Components**
 
 -   [mobilenotiferplatform](#mobilenotiferplatform)
     -   **Component Attribute** - Platforms
@@ -2072,7 +2072,7 @@ A specific mobile platform notification proxy
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
-## Notes
+**Notes**
 
 !!! warning
     SMS Engine requires account level configuration for AWS provider
