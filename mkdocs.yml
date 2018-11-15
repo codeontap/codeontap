@@ -28,3 +28,4 @@ nav:
     - 'Introduction' : './development/index.md'
     - 'Versioning' : './development/versioning.md'
     - 'Create a Release' : './development/creating-a-release.md'
+    - 'Creating References' : './development/creatinng-references.md'
