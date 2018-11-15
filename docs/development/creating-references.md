@@ -12,11 +12,11 @@ The following reference types are available
 ## Generating a Reference
 
 !!! info Pre-requisites
-    To generate the reference you will need to be setup to run CodeOnTap
-        - A clone of the [generation repo](https://github.com/codeontap/gen3)
-        - A cloen of the [documentation repo](https://github.com/codeontap/codeontap)
-        - `GENERATION_DIR` environment variable configured to the clone location
-        - Access to docker for the markdown clean-up process
+    To generate the reference you will need to be setup to run CodeOnTap  
+    - A clone of the [generation repo](https://github.com/codeontap/gen3)  
+    - A cloen of the [documentation repo](https://github.com/codeontap/codeontap)  
+    - `GENERATION_DIR` environment variable configured to the clone location  
+    - Access to docker for the markdown clean-up process  
     This process does not require a cmdb or `ACCOUNT` configured
 
 1. cd into the `GENERATION_DIR`
