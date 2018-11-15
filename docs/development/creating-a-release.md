@@ -4,10 +4,10 @@
 2. Generate [reference documentation](./creating-references.md)
 3. Tag Gen3 repositories with release tag and push to Github. Annotated tags must be used :-
 
-```bash
-git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
-git push --tags
-```
+    ```bash
+    git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
+    git push --tags
+    ```
 
     [Repositories](./index.md) to be tagged are 
 
