@@ -12,7 +12,7 @@ The train release is the stable product release which is the recommended release
 
 ### Tram
 
-The tram release is a rollup of the work completed between train releases. The tram release is intended for the testing of new features which are intended for the next tram but with less risk of running into issues with actively developed work. The trams are scheduled to run every two weeks and will be treated as release candidates for the next train release.
+The tram release is a rollup of the work completed between train releases. The tram release is intended for the testing of new features which are intended for the next train but with less risk of running into issues with actively developed work. The trams are scheduled to run every two weeks and will be treated as release candidates for the next train release.
 
 ### Unicycle
 
