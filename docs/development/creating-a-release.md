@@ -5,15 +5,15 @@
 3. Tag Gen3 repositories with release tag and push to Github. Annotated tags must be used :-
 
 ```bash
-git tag -a v<Version>
+git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
 git push --tags
 ```
 
 [Repositories](./index.md) to be tagged are 
 
-3.1 Gen3 Generation
-3.2 Gen3 Automation
-3.3 Gen3 Startup
+    1. Gen3 Generation
+    2. Gen3 Automation
+    3. Gen3 Startup
 
 Next edit the [train config file](https://github.com/codeontap/docker-gen3/blob/train/base/config.json), update the version references to the desired train release tag, and push to Github.
 
