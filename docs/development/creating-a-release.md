@@ -9,6 +9,8 @@
     git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
     git push --tags
     ```
+    
+    NOTE: To align with the readthedocs treatment of version tags, the tag used for the CodeOnTap repo MUST omit the "v" prefix. 
 
     [Repositories](./index.md) to be tagged and pushed (in the order shown) are 
 
