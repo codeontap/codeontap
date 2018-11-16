@@ -2,10 +2,10 @@
 
 1. Determine the version based on our [versioning strategy](./versioning.md)
 2. Generate [reference documentation](./creating-references.md)
-3. Edit the [train config file](https://github.com/codeontap/docker-gen3/blob/train/base/config.json)and update the version references to the desired train release tag.
+3. Edit the [train config file](https://github.com/codeontap/docker-gen3/blob/train/base/config.json) and update the version references to the desired train release tag.
 4. Tag Gen3 repositories with release tag and push to Github. Annotated tags must be used :-
 
-    ```bash
+    ```
     git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
     git push --tags
     ```
