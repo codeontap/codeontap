@@ -10,7 +10,7 @@
     git push --tags
     ```
 
-    NOTE: Readthedocs expects tags to comply with [PEP 440](https://www.python.org/dev/peps/pep-0440/#version-scheme). Thus the tag used for the CodeOnTap repo MUST omit the "v" prefix, and release candidate suffixes should omit the dash, e.g. ```v5.3.0rc1```.
+    NOTE: Readthedocs expects tags to comply with [PEP 440](https://www.python.org/dev/peps/pep-0440/#version-scheme). Thus the tag used for the CodeOnTap repo MUST omit the "v" prefix.
 
     [Repositories](./index.md) to be tagged and pushed (in the order shown) are
 
@@ -21,4 +21,5 @@
     5. CodeOnTap
 
 6. Confirm that the DockerHub Images have built. Tagging the repositories should trigger DockerHub builds for each of the Images which are listed as Docker Images
-7. Activate the Read The Docs Version . Head to the CodeOnTap Docs Admin site and under versions there should be an entry for your version listed in the Inactive Versions list. Click edit on the Version and then tick Active to publish the new version and update the version references to the train release tag, and push to Github.
+7. Activate the Read The Docs Version. Head to the CodeOnTap Docs Admin site and under Versions there should be an entry for your version listed in the Inactive Versions list. Click edit on the Version and then tick Active to publish the new version.
+
