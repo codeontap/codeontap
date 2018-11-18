@@ -9,10 +9,10 @@
     git tag -a v<Version> -m "Q? 20?? Train|Tram Release"
     git push --tags
     ```
-    
-    NOTE: To align with the readthedocs treatment of version tags, the tag used for the CodeOnTap repo MUST omit the "v" prefix. 
 
-    [Repositories](./index.md) to be tagged and pushed (in the order shown) are 
+    NOTE: Readthedocs expects tags to comply with [PEP 440](https://www.python.org/dev/peps/pep-0440/#version-scheme). Thus the tag used for the CodeOnTap repo MUST omit the "v" prefix, and release candidate suffixes should omit the dash, e.g. ```v5.3.0rc1```.
+
+    [Repositories](./index.md) to be tagged and pushed (in the order shown) are
 
     1. Gen3 Generation
     2. Gen3 Automation
