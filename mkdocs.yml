@@ -22,6 +22,9 @@ nav:
     - 'Encrypt Secrets' : './getting-started/encrypt-secrets.md'
     - 'Deploy Product Components' : './getting-started/deploy-product-components.md'
     - 'Accessing Jenkins' : './getting-started/accessing-jenkins.md'
+  - 'Developer Guides':
+    - 'Introduction' : './developer-guides/index.md'
+    - 'AWS Data Pipelines' : './developer-guides/aws-data-pipeline.md'
   - 'Reference' : 
     - 'Components' : './reference/component-reference.md'
   - 'Development' : 
