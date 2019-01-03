@@ -16,18 +16,37 @@ If you have a process that needs to be run periodically and take data from say a
 
 Since the nature of a Data Pipeline in itself is so open, it's hard to say specifics regarding how to specifically develop for one. The best place to start is to see what (if any) prebuilt Data Pipeline activities can be used for your process, see [the list of AWS Data Pipeline activities](https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-concepts-activities.html), also be aware of what databases are supported (or datasets from an S3 bucket) [here](https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-concepts-databases.html).
 
-Knowing what activites you can use in your Data Pipeline means you can work toward implementing them using their individual control sets (via cli/api calls), for any other custom processes, such as needing to run a container or the like, you will need to resort to shell scripts and or other scripts to execute such tasks. At it's core Data Pipeline is an EC2 instance that is run (executed) periodically, which generally mounts a dataset from either an S3 bucket, database or similar data store service, it then performs an operation to the data (whether that be manipulation or something similar) and then exports it either back to the same medium or another medium before being considered "complete".
+Knowing what activities you can use in your Data Pipeline means you can work toward implementing them using their individual control sets (via cli/api calls), for any other custom processes, such as needing to run a container or the like, you will need to resort to shell scripts and or other scripts to execute such tasks. At it's core Data Pipeline is an EC2 instance that is run (executed) periodically, which generally mounts a dataset from either an S3 bucket, database or similar data store service, it then performs an operation to the data (whether that be manipulation or something similar) and then exports it either back to the same medium or another medium before being considered "complete".
 
 As most of the built-in "AWS supported" Data pipeline activities are generally just around moving data from one medium to another, for any actual data manipulation (eg. ogr2ogr or similar) we need to write custom processes to handle this task and execute them using the EC2 containers shell (which is initially executed using a shell command from the pipeline's definition).
 
 So, taking a step back, from beginning to end a data pipeline should:
 
-1. be definied by a pipeline definition
+1. be defined by a pipeline definition
 1. take inputs from a values file (parameter values for the pipeline definition)
 1. execute something as part of the definition (generally a shell command/script)
 1. perform an operation when run
 1. save manipulated data "somewhere"
 1. and close
+
+### Running a pipeline
+
+When developing a pipeline the easiest way to test the pipeline is to deploy the pipeline into an AWS account. When submitting a pipeline to the AWS API it will be validated and you will receive a reasonably good error response if anything fails. Deploying the pipeline does not activate the pipeline so you can still look through the visualisation of your developed pipeline to confirm everything is ok before executing it.
+
+To deploy a pipeline with the aws cli
+
+1. Create the Pipeline. This just adds an empty pipeline which you will add config to
+    ```bash
+    aws --region "${region}" datapipeline create-pipeline --name "<Name for the pipeline>" --unique-id "< A unique Id for the pipeline>"
+    ```
+2. Update the pipeline with your configuration. You will need to have a complete pipeline values file with the appropriate variables setup for S3 buckets etc 
+    ```bash
+    aws --region "${region}" datapipeline put-pipeline-definition --pipeline-id "<The Id returned from the create>" --pipeline-definition "file://<Path to pipeline-definition.json>" --parameter-objects "file://<Path to pipeline-parameters.json>" --parameter-values-uri "file://<Path to values.json>"
+    ```
+3. This will validate the pipeline and provide you with any feed back on the definition itself. If you make updates to the pipeline you just need to re-run step 2 
+4. You can then access the pipeline from the AWS console. The visual editor will show you how your pipeline will look and should give you an idea of what will happen.
+
+For further information on pipeline management the AWS guide is the best to go from https://docs.aws.amazon.com/data-pipeline/index.html
 
 ### In more detail and actual practice
 
