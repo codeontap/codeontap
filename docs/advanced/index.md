@@ -1,6 +1,6 @@
-# CodeOnTap Development
+# Advanced
 
-This section is for people interested in working on the CodeOnTap Framework itself.
+This section is for people interested in contributing to the CodeOnTap framework
 
 ## Components
 
