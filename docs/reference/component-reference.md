@@ -115,7 +115,34 @@ documentation, the others used to redirect to the primary.
 			"IncludeStage" : true
 		},
 		"Profiles" : {
+			"Deployment" : "<string>",
 			"Security" : "default"
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
 		}
 	}
 }
@@ -183,7 +210,27 @@ documentation, the others used to redirect to the primary.
 -   [Mapping](#Mapping)
     -   [IncludeStage](#IncludeStage) - Optional - **Type:** boolean - **Default:** `true`  
 -   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
     -   [Security](#Security) - Optional - **Type:** string - **Default:** `default`  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
 
 * * *
 
@@ -290,6 +337,9 @@ An bastion instance to manage vpc only components
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"AutoScaling" : {
 			"DetailedMetrics" : true,
 			"WaitForSignal" : true,
@@ -335,6 +385,8 @@ An bastion instance to manage vpc only components
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [AutoScaling](#AutoScaling)
     -   [DetailedMetrics](#DetailedMetrics) - Optional - **Type:** boolean - **Default:** `true`  
            **Description:** Enable the collection of autoscale group detailed metrics
@@ -378,6 +430,13 @@ Managed in-memory cache services
 		"Port" : "<string>",
 		"Backup" : {
 			"RetentionPeriod" : "<string>"
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Hibernate" : {
+			"Enabled" : false,
+			"StartUpMode" : "replace"
 		}
 	}
 }
@@ -390,6 +449,12 @@ Managed in-memory cache services
 -   [Port](#Port) - Optional - **Type:** string  
 -   [Backup](#Backup)
     -   [RetentionPeriod](#RetentionPeriod) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Hibernate](#Hibernate)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [StartUpMode](#StartUpMode) - Optional - **Type:** string - **Default:** `replace`  
+           **Possible Values:** `[replace]`
 
 * * *
 
@@ -461,6 +526,9 @@ Managed identity service
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"Schema" : {
 			"example" : {
 				"DataType" : "String",
@@ -512,6 +580,8 @@ Managed identity service
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [Schema](#Schema)
     -   [DataType](#DataType) - Optional - **Type:** string - **Default:** `String`  
            **Possible Values:** `[String, Number, DateTime, Boolean]`
@@ -556,6 +626,9 @@ Auto-Scaling IaaS with code deployment
 				"Direction" : "<string>",
 				"Type" : "<string>"
 			}
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
 		},
 		"UseInitAsService" : false,
 		"AutoScaling" : {
@@ -608,6 +681,8 @@ Auto-Scaling IaaS with code deployment
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [UseInitAsService](#UseInitAsService) - Optional - **Type:** boolean - **Default:** `false`  
 -   [AutoScaling](#AutoScaling)
     -   [DetailedMetrics](#DetailedMetrics) - Optional - **Type:** boolean - **Default:** `true`  
@@ -803,6 +878,9 @@ Managed Data ETL Processing
 				"Direction" : "<string>",
 				"Type" : "<string>"
 			}
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
 		}
 	}
 }
@@ -835,6 +913,8 @@ Managed Data ETL Processing
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 
 * * *
 
@@ -875,7 +955,8 @@ A data aretefact that is managed in a similar way to a code unit
 				"Type" : "<string>"
 			}
 		},
-		"Prefix" : "<string>"
+		"Prefix" : "<string>",
+		"BuildEnvironment" : "<array of string>"
 	}
 }
 ```
@@ -883,7 +964,7 @@ A data aretefact that is managed in a similar way to a code unit
 **Attribute Reference**
 
 -   [Engine](#Engine) - Required - **Type:** string  
-    **Possible Values:** `[s3, rdsSnapshot]`
+    **Possible Values:** `[s3, rds]`
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
     -   [Tenant](#Tenant) - Optional - **Type:** string  
@@ -904,6 +985,8 @@ A data aretefact that is managed in a similar way to a code unit
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
 -   [Prefix](#Prefix) - Optional - **Type:** string  
+-   [BuildEnvironment](#BuildEnvironment) - Required - **Type:** array of string  
+    **Description:** The environments used to build the dataset
 
 * * *
 
@@ -946,6 +1029,9 @@ A single virtual machine with no code deployment
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"Ports" : {
 			"example" : {
 				"IPAddressGroups" : "<array of string>",
@@ -987,6 +1073,8 @@ A single virtual machine with no code deployment
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [Ports](#Ports)
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
     -   [LB](#LB)
@@ -1048,6 +1136,9 @@ An autoscaling container host cluster
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"AutoScaling" : {
 			"DetailedMetrics" : true,
 			"WaitForSignal" : true,
@@ -1063,6 +1154,36 @@ An autoscaling container host cluster
 				"UserName" : "<string>",
 				"UID" : "<number>"
 			}
+		},
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
+		"Hibernate" : {
+			"Enabled" : false,
+			"StartUpMode" : "replace"
 		},
 		"Services" : {
 			"example" : "< instance of service>"
@@ -1100,6 +1221,8 @@ An autoscaling container host cluster
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [AutoScaling](#AutoScaling)
     -   [DetailedMetrics](#DetailedMetrics) - Optional - **Type:** boolean - **Default:** `true`  
            **Description:** Enable the collection of autoscale group detailed metrics
@@ -1119,6 +1242,29 @@ An autoscaling container host cluster
 -   [DockerUsers](#DockerUsers)
     -   [UserName](#UserName) - Optional - **Type:** string  
     -   [UID](#UID) - Required - **Type:** number  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+-   [Hibernate](#Hibernate)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [StartUpMode](#StartUpMode) - Optional - **Type:** string - **Default:** `replace`  
+           **Possible Values:** `[replace]`
 
 * * *
 
@@ -1163,6 +1309,32 @@ An orchestrated container with always on scheduling
 				},
 				"LocalLogging" : false,
 				"LogDriver" : "awslogs",
+				"LogMetrics" : {
+					"example" : {
+						"LogFilter" : "<string>"
+					}
+				},
+				"Alerts" : {
+					"example" : {
+						"Description" : "unknown",
+						"Name" : "<string>",
+						"Resource" : {
+							"Id" : "<string>",
+							"Type" : "<string>"
+						},
+						"Metric" : "<string>",
+						"Threshold" : 1,
+						"Severity" : "Info",
+						"Namespace" : "<string>",
+						"Comparison" : "Threshold",
+						"Operator" : "GreaterThanOrEqualToThreshold",
+						"Time" : 300,
+						"Periods" : 1,
+						"Statistic" : "Sum",
+						"ReportOk" : false,
+						"MissingData" : "notBreaching"
+					}
+				},
 				"ContainerLogGroup" : false,
 				"RunCapabilities" : "<array of string>",
 				"Privileged" : false,
@@ -1196,10 +1368,39 @@ An orchestrated container with always on scheduling
 			"AppPublic" : true
 		},
 		"TaskLogGroup" : true,
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
 		"NetworkMode" : "<string>",
 		"ContainerNetworkLinks" : false,
 		"Placement" : {
 			"Strategy" : "<string>"
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
 		}
 	}
 }
@@ -1231,6 +1432,25 @@ An orchestrated container with always on scheduling
     -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean - **Default:** `false`  
     -   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
            **Possible Values:** `[awslogs, json-file, fluentd]`
+    -   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+    -   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
     -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean - **Default:** `false`  
     -   [RunCapabilities](#RunCapabilities) - Optional - **Type:** array of string  
     -   [Privileged](#Privileged) - Optional - **Type:** boolean - **Default:** `false`  
@@ -1258,12 +1478,33 @@ An orchestrated container with always on scheduling
     -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
     -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
 -   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 -   [NetworkMode](#NetworkMode) - Optional - **Type:** string  
     **Possible Values:** `[none, bridge, awsvpc, host]`
 -   [ContainerNetworkLinks](#ContainerNetworkLinks) - Optional - **Type:** boolean - **Default:** `false`  
 -   [Placement](#Placement)
     -   [Strategy](#Strategy) - Optional - **Type:** string  
            **Possible Values:** `[, daemon]`  **Description:** How to place containers on the cluster
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 
 * * *
 
@@ -1308,6 +1549,32 @@ A container defintion which is invoked on demand
 				},
 				"LocalLogging" : false,
 				"LogDriver" : "awslogs",
+				"LogMetrics" : {
+					"example" : {
+						"LogFilter" : "<string>"
+					}
+				},
+				"Alerts" : {
+					"example" : {
+						"Description" : "unknown",
+						"Name" : "<string>",
+						"Resource" : {
+							"Id" : "<string>",
+							"Type" : "<string>"
+						},
+						"Metric" : "<string>",
+						"Threshold" : 1,
+						"Severity" : "Info",
+						"Namespace" : "<string>",
+						"Comparison" : "Threshold",
+						"Operator" : "GreaterThanOrEqualToThreshold",
+						"Time" : 300,
+						"Periods" : 1,
+						"Statistic" : "Sum",
+						"ReportOk" : false,
+						"MissingData" : "notBreaching"
+					}
+				},
 				"ContainerLogGroup" : false,
 				"RunCapabilities" : "<array of string>",
 				"Privileged" : false,
@@ -1340,7 +1607,42 @@ A container defintion which is invoked on demand
 			"AppPublic" : true
 		},
 		"TaskLogGroup" : true,
-		"FixedName" : false
+		"LogMetrics" : {
+			"example" : {
+				"LogFilter" : "<string>"
+			}
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
+		"FixedName" : false,
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Schedules" : {
+			"example" : {
+				"Expression" : "rate(1 hours)",
+				"TaskCount" : 1
+			}
+		}
 	}
 }
 ```
@@ -1371,6 +1673,25 @@ A container defintion which is invoked on demand
     -   [LocalLogging](#LocalLogging) - Optional - **Type:** boolean - **Default:** `false`  
     -   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
            **Possible Values:** `[awslogs, json-file, fluentd]`
+    -   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+    -   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
     -   [ContainerLogGroup](#ContainerLogGroup) - Optional - **Type:** boolean - **Default:** `false`  
     -   [RunCapabilities](#RunCapabilities) - Optional - **Type:** array of string  
     -   [Privileged](#Privileged) - Optional - **Type:** boolean - **Default:** `false`  
@@ -1397,7 +1718,32 @@ A container defintion which is invoked on demand
     -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
     -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
 -   [TaskLogGroup](#TaskLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
+-   [LogMetrics](#LogMetrics)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 -   [FixedName](#FixedName) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Schedules](#Schedules)
+    -   [Expression](#Expression) - Optional - **Type:** string - **Default:** `rate(1 hours)`  
+    -   [TaskCount](#TaskCount) - Optional - **Type:** number - **Default:** `1`  
+           **Description:** The number of tasks to run on the schedule
 
 * * *
 
@@ -1422,6 +1768,9 @@ A managed network attached file share
 {
 	"efs" : {
 		"Encrypted" : true,
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"Mounts" : {
 			"example" : "< instance of efsMount>"
 		}
@@ -1432,6 +1781,8 @@ A managed network attached file share
 **Attribute Reference**
 
 -   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 
 * * *
 
@@ -1503,6 +1854,9 @@ A managed ElasticSearch instance
 				"Direction" : "<string>",
 				"Type" : "<string>"
 			}
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
 		}
 	}
 }
@@ -1537,6 +1891,8 @@ A managed ElasticSearch instance
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 
 * * *
 
@@ -1560,6 +1916,7 @@ Container for a Function as a Service deployment
 ```json
 {
 	"lambda" : {
+		"DeploymentType" : "REGIONAL",
 		"Functions" : {
 			"example" : "< instance of function>"
 		}
@@ -1568,6 +1925,9 @@ Container for a Function as a Service deployment
 ```
 
 **Attribute Reference**
+
+-   [DeploymentType](#DeploymentType) - Optional - **Type:** string - **Default:** `REGIONAL`  
+    **Possible Values:** `[EDGE, REGIONAL]`
 
 * * *
 
@@ -1609,6 +1969,9 @@ A specific entry point for the lambda deployment
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"LogMetrics" : {
 			"example" : {
 				"LogFilter" : "<string>"
@@ -1645,10 +2008,11 @@ A specific entry point for the lambda deployment
 			"example" : {
 				"Description" : "unknown",
 				"Name" : "<string>",
-				"Metric" : {
-					"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
 					"Type" : "<string>"
 				},
+				"Metric" : "<string>",
 				"Threshold" : 1,
 				"Severity" : "Info",
 				"Namespace" : "<string>",
@@ -1686,6 +2050,9 @@ A specific entry point for the lambda deployment
 				"Escaped" : true,
 				"Prefix" : "json"
 			}
+		},
+		"FixedCodeVersion" : {
+			"CodeHash" : "<unknown>"
 		}
 	}
 }
@@ -1714,6 +2081,8 @@ A specific entry point for the lambda deployment
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [LogMetrics](#LogMetrics)
     -   [LogFilter](#LogFilter) - Required - **Type:** string  
 -   [LogWatchers](#LogWatchers)
@@ -1740,9 +2109,10 @@ A specific entry point for the lambda deployment
 -   [Alerts](#Alerts)
     -   [Description](#Description) - Optional  
     -   [Name](#Name) - Required - **Type:** string  
-    -   [Metric](#Metric)
-    -   [Name](#Name) - Required - **Type:** string  
-    -   [Type](#Type) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
     -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
     -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
     -   [Namespace](#Namespace) - Optional - **Type:** string  
@@ -1775,6 +2145,9 @@ A specific entry point for the lambda deployment
     -   [Escaped](#Escaped) - Optional - **Type:** boolean - **Default:** `true`  
     -   [Prefix](#Prefix) - Optional - **Type:** string - **Default:** `json`  
                   **Possible Values:** `[json, ]`
+-   [FixedCodeVersion](#FixedCodeVersion)
+    -   [CodeHash](#CodeHash) - Optional  
+           **Description:** A sha256 hash of the code zip file
 
 * * *
 
@@ -1806,6 +2179,7 @@ A load balancer for virtual network based components
 		"Logs" : false,
 		"Engine" : "application",
 		"Profiles" : {
+			"Deployment" : "<string>",
 			"Security" : "default"
 		},
 		"IdleTimeout" : 60,
@@ -1823,6 +2197,7 @@ A load balancer for virtual network based components
 -   [Engine](#Engine) - Optional - **Type:** string - **Default:** `application`  
     **Possible Values:** `[application, network, classic]`
 -   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
     -   [Security](#Security) - Optional - **Type:** string - **Default:** `default`  
 -   [IdleTimeout](#IdleTimeout) - Optional - **Type:** number - **Default:** `60`  
 -   [HealthCheckPort](#HealthCheckPort) - Optional - **Type:** string  
@@ -2110,9 +2485,33 @@ A specific mobile platform notification proxy
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"LogMetrics" : {
 			"example" : {
 				"LogFilter" : "<string>"
+			}
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
 			}
 		}
 	}
@@ -2145,8 +2544,27 @@ A specific mobile platform notification proxy
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [LogMetrics](#LogMetrics)
     -   [LogFilter](#LogFilter) - Required - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
@@ -2177,11 +2595,19 @@ A managed SQL database instance
 		"Size" : 20,
 		"Backup" : {
 			"RetentionPeriod" : 35,
-			"SnapshotOnDeploy" : true
+			"SnapshotOnDeploy" : true,
+			"DeleteAutoBackups" : true
 		},
 		"AutoMinorVersionUpgrade" : "<boolean>",
 		"DatabaseName" : "<string>",
-		"DBParameters" : "<object>"
+		"DBParameters" : "<object>",
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Hibernate" : {
+			"Enabled" : false,
+			"StartUpMode" : "restore"
+		}
 	}
 }
 ```
@@ -2202,9 +2628,17 @@ A managed SQL database instance
 -   [Backup](#Backup)
     -   [RetentionPeriod](#RetentionPeriod) - Optional - **Type:** number - **Default:** `35`  
     -   [SnapshotOnDeploy](#SnapshotOnDeploy) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [DeleteAutoBackups](#DeleteAutoBackups) - Optional - **Type:** boolean - **Default:** `true`  
+           **Description:** Delete automated snapshots when the instance is deleted
 -   [AutoMinorVersionUpgrade](#AutoMinorVersionUpgrade) - Optional - **Type:** boolean  
 -   [DatabaseName](#DatabaseName) - Optional - **Type:** string  
 -   [DBParameters](#DBParameters) - Optional - **Type:** object  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Hibernate](#Hibernate)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [StartUpMode](#StartUpMode) - Optional - **Type:** string - **Default:** `restore`  
+           **Possible Values:** `[restore, replace]`
 
 * * *
 
@@ -2243,7 +2677,38 @@ HTTP based object storage service
 		},
 		"Style" : "<string>",
 		"Notifications" : "<object>",
-		"CORSBehaviours" : "<array of string>"
+		"CORSBehaviours" : "<array of string>",
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Replication" : {
+			"Prefixes" : [
+				""
+			],
+			"Enabled" : true
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		}
 	}
 }
 ```
@@ -2269,6 +2734,30 @@ HTTP based object storage service
     **Description:** TODO(mfl): Think this can be removed
 -   [Notifications](#Notifications) - Optional - **Type:** object  
 -   [CORSBehaviours](#CORSBehaviours) - Optional - **Type:** array of string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Replication](#Replication)
+    -   [Prefixes](#Prefixes) - Optional - **Type:** array of string - **Default:** `null`  
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
 
 * * *
 
@@ -2305,7 +2794,20 @@ Object stored hosted web application with content distribution management
 				"Maximum" : 31536000,
 				"Minimum" : 0
 			},
-			"Compress" : true
+			"Compress" : true,
+			"RedirectAliases" : {
+				"RedirectVersion" : "v1"
+			},
+			"EventHandlers" : {
+				"example" : {
+					"Tier" : "<string>",
+					"Component" : "<string>",
+					"Function" : "<string>",
+					"Instance" : "<string>",
+					"Version" : "<string>",
+					"Action" : "<string>"
+				}
+			}
 		},
 		"Certificate" : {
 			"Qualifiers" : "<object>",
@@ -2326,6 +2828,7 @@ Object stored hosted web application with content distribution management
 			}
 		},
 		"Profiles" : {
+			"Deployment" : "<string>",
 			"Security" : "default"
 		}
 	}
@@ -2354,6 +2857,16 @@ Object stored hosted web application with content distribution management
     -   [Maximum](#Maximum) - Optional - **Type:** number - **Default:** `31536000`  
     -   [Minimum](#Minimum) - Optional - **Type:** number - **Default:** `0`  
     -   [Compress](#Compress) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [RedirectAliases](#RedirectAliases)
+    -   [RedirectVersion](#RedirectVersion) - Optional - **Type:** string - **Default:** `v1`  
+    -   [EventHandlers](#EventHandlers)
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Required - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Action](#Action) - Required - **Type:** string  
+                  **Possible Values:** `[viewer-request, viewer-response, origin-request, origin-response]`
 -   [Certificate](#Certificate)
     -   [Qualifiers](#Qualifiers) - Optional - **Type:** object  
     -   [External](#External) - Optional - **Type:** boolean  
@@ -2371,6 +2884,7 @@ Object stored hosted web application with content distribution management
     -   [Version](#Version) - Optional - **Type:** boolean  
     -   [Host](#Host) - Optional - **Type:** boolean  
 -   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
     -   [Security](#Security) - Optional - **Type:** string - **Default:** `default`  
 
 * * *
@@ -2396,7 +2910,31 @@ Managed worker queue engine
 		"DeadLetterQueue" : {
 			"MaxReceives" : 0
 		},
-		"VisibilityTimeout" : "<number>"
+		"VisibilityTimeout" : "<number>",
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		}
 	}
 }
 ```
@@ -2410,6 +2948,25 @@ Managed worker queue engine
 -   [DeadLetterQueue](#DeadLetterQueue)
     -   [MaxReceives](#MaxReceives) - Optional - **Type:** number - **Default:** `0`  
 -   [VisibilityTimeout](#VisibilityTimeout) - Optional - **Type:** number  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
@@ -2450,6 +3007,9 @@ A user with permissions on components deployed in the solution
 				"Type" : "<string>"
 			}
 		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
 		"GenerateCredentials" : {
 			"Formats" : [
 				"system"
@@ -2489,6 +3049,8 @@ A user with permissions on components deployed in the solution
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
 -   [GenerateCredentials](#GenerateCredentials)
     -   [Formats](#Formats) - Optional - **Type:** array of string - **Default:** `system`  
            **Possible Values:** `[system, console]`
