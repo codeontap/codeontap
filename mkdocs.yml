@@ -25,10 +25,13 @@ nav:
   - 'Developer Guides':
     - 'Introduction' : './developer-guides/index.md'
     - 'AWS Data Pipelines' : './developer-guides/aws-data-pipeline.md'
+  - 'Release Management':
+    - 'Introduction' : './release-management/index.md'
   - 'Reference' : 
     - 'Components' : './reference/component-reference.md'
-  - 'Development' : 
-    - 'Introduction' : './development/index.md'
-    - 'Versioning' : './development/versioning.md'
-    - 'Create a Release' : './development/creating-a-release.md'
-    - 'Creating References' : './development/creating-references.md'
+    - 'Configuration Management Database' : './reference/cmdb-reference.md'
+  - 'Advanced' : 
+    - 'Introduction' : './advanced/index.md'
+    - 'Versioning' : './advanced/versioning.md'
+    - 'Create a Release' : './advanced/creating-a-release.md'
+    - 'Creating References' : './advanced/creating-references.md'
