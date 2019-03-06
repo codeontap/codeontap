@@ -437,6 +437,27 @@ Managed in-memory cache services
 		"Hibernate" : {
 			"Enabled" : false,
 			"StartUpMode" : "replace"
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
 		}
 	}
 }
@@ -455,6 +476,23 @@ Managed in-memory cache services
     -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
     -   [StartUpMode](#StartUpMode) - Optional - **Type:** string - **Default:** `replace`  
            **Possible Values:** `[replace]`
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
@@ -1857,6 +1895,27 @@ A managed ElasticSearch instance
 		},
 		"Profiles" : {
 			"Deployment" : "<string>"
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
 		}
 	}
 }
@@ -1893,6 +1952,23 @@ A managed ElasticSearch instance
     -   [Type](#Type) - Optional - **Type:** string  
 -   [Profiles](#Profiles)
     -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
@@ -2184,6 +2260,27 @@ A load balancer for virtual network based components
 		},
 		"IdleTimeout" : 60,
 		"HealthCheckPort" : "<string>",
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
 		"PortMappings" : {
 			"example" : "< instance of lbport>"
 		}
@@ -2201,6 +2298,23 @@ A load balancer for virtual network based components
     -   [Security](#Security) - Optional - **Type:** string - **Default:** `default`  
 -   [IdleTimeout](#IdleTimeout) - Optional - **Type:** number - **Default:** `60`  
 -   [HealthCheckPort](#HealthCheckPort) - Optional - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
@@ -2607,6 +2721,27 @@ A managed SQL database instance
 		"Hibernate" : {
 			"Enabled" : false,
 			"StartUpMode" : "restore"
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
 		}
 	}
 }
@@ -2639,6 +2774,23 @@ A managed SQL database instance
     -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
     -   [StartUpMode](#StartUpMode) - Optional - **Type:** string - **Default:** `restore`  
            **Possible Values:** `[restore, replace]`
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
 
 * * *
 
