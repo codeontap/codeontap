@@ -4,7 +4,7 @@ Application level API proxy
 
 There are multiple modes of deployment offered for the API Gateway, mainly to
 support use of product domains for endpoints. The key
-consideration is the handling of the host header. They reflect the
+consideration is the handling of the host header. The modes reflect the
 changes and improvements AWS have made to the API Gateway over time.
 For whitelisted APIs, mode 4 is the recommended one now.
 
@@ -13,7 +13,7 @@ For whitelisted APIs, mode 4 is the recommended one now.
     -   multiple cloudfront aliases
     -   host header blocked
     -   EDGE based API Gateway
-    -   signing based on AWS API domain name
+    -   signing based on AWS assigned API domain name
     -   API-KEY used as shared secret between cloudfront and the API
 2.  Single domain cloudfront + EDGE endpoint
     -   waf based IP whitelisting
@@ -30,15 +30,15 @@ For whitelisted APIs, mode 4 is the recommended one now.
     -   signing based on any of the aliases
     -   API-KEY used as shared secret between cloudfront and the API
 4.  API endpoint
-    -   policy based IP whitelisting
-    -   multiple aliases
+    -   waf or policy based IP whitelisting
+    -   multiple aliases or AWS assigned domain
     -   EDGE or REGIONAL
     -   signing based on any of the aliases
     -   API-KEY can be used for client metering
 
 If multiple domains are provided, the primary domain is used to provide the
 endpoint for the the API documentation and for the gateway attributes. For
-documentation, the others used to redirect to the primary.
+documentation, the others redirect to the primary.
 
 **Deployment Properties**
 
@@ -66,6 +66,13 @@ documentation, the others used to redirect to the primary.
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -75,8 +82,7 @@ documentation, the others used to redirect to the primary.
 		},
 		"WAF" : {
 			"IPAddressGroups" : "<array of string>",
-			"Default" : "BLOCK",
-			"RuleDefault" : "ALLOW"
+			"OWASP" : false
 		},
 		"EndpointType" : "EDGE",
 		"IPAddressGroups" : "<array of string>",
@@ -105,11 +111,64 @@ documentation, the others used to redirect to the primary.
 				"Instance" : "<boolean>",
 				"Version" : "<boolean>",
 				"Host" : "<boolean>"
+			},
+			"IncludeInDomain" : {
+				"Product" : "<boolean>",
+				"Environment" : "<boolean>",
+				"Segment" : "<boolean>"
 			}
 		},
 		"Publish" : {
 			"DnsNamePrefix" : "docs",
 			"IPAddressGroups" : "<array of string>"
+		},
+		"Publishers" : {
+			"example" : {
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				},
+				"Path" : {
+					"Host" : "<string>",
+					"Style" : "single",
+					"IncludeInPath" : {
+						"Product" : true,
+						"Environment" : false,
+						"Solution" : false,
+						"Segment" : true,
+						"Tier" : false,
+						"Component" : false,
+						"Instance" : false,
+						"Version" : false,
+						"Host" : false
+					}
+				}
+			}
 		},
 		"Mapping" : {
 			"IncludeStage" : true
@@ -165,6 +224,13 @@ documentation, the others used to redirect to the primary.
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -172,10 +238,7 @@ documentation, the others used to redirect to the primary.
     -   [Type](#Type) - Optional - **Type:** string  
 -   [WAF](#WAF)
     -   [IPAddressGroups](#IPAddressGroups) - Required - **Type:** array of string  
-    -   [Default](#Default) - Optional - **Type:** string - **Default:** `BLOCK`  
-           **Possible Values:** `[ALLOW, BLOCK]`
-    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string - **Default:** `ALLOW`  
-           **Possible Values:** `[ALLOW, BLOCK]`
+    -   [OWASP](#OWASP) - Optional - **Type:** boolean - **Default:** `false`  
 -   [EndpointType](#EndpointType) - Optional - **Type:** string - **Default:** `EDGE`  
     **Possible Values:** `[EDGE, REGIONAL]`
 -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
@@ -204,9 +267,53 @@ documentation, the others used to redirect to the primary.
     -   [Instance](#Instance) - Optional - **Type:** boolean  
     -   [Version](#Version) - Optional - **Type:** boolean  
     -   [Host](#Host) - Optional - **Type:** boolean  
+    -   [IncludeInDomain](#IncludeInDomain)
+    -   [Product](#Product) - Optional - **Type:** boolean  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
 -   [Publish](#Publish)
     -   [DnsNamePrefix](#DnsNamePrefix) - Optional - **Type:** string - **Default:** `docs`  
     -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
+-   [Publishers](#Publishers)
+    -   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Path](#Path)
+    -   [Host](#Host) - Optional - **Type:** string  
+    -   [Style](#Style) - Optional - **Type:** string - **Default:** `single`  
+    -   [IncludeInPath](#IncludeInPath)
+    -   [Product](#Product) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Environment](#Environment) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Solution](#Solution) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Segment](#Segment) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Tier](#Tier) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Component](#Component) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Instance](#Instance) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Version](#Version) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [Host](#Host) - Optional - **Type:** boolean - **Default:** `false`  
 -   [Mapping](#Mapping)
     -   [IncludeStage](#IncludeStage) - Optional - **Type:** boolean - **Default:** `true`  
 -   [Profiles](#Profiles)
@@ -263,6 +370,13 @@ provides a metered link between an API gateway and an invoking client
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -290,11 +404,223 @@ provides a metered link between an API gateway and an invoking client
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
     -   [Direction](#Direction) - Optional - **Type:** string  
     -   [Type](#Type) - Optional - **Type:** string  
+
+* * *
+
+# baseline
+
+A set of resources required for every segment deployment
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Sub Components**
+
+-   [baselinedata](#baselinedata)
+    -   **Component Attribute** - DataBuckets
+    -   **Link Attribute** - DataBucket
+
+**Component Format**
+
+```json
+{
+	"baseline" : {
+		"Active" : false,
+		"Seed" : {
+			"Length" : 10
+		},
+		"DataBuckets" : {
+			"example" : "< instance of baselinedata>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Seed](#Seed)
+    -   [Length](#Length) - Optional - **Type:** number - **Default:** `10`  
+
+* * *
+
+# baselinedata
+
+A segment shared data store
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Component Format**
+
+```json
+{
+	"baselinedata" : {
+		"Role" : "<string>",
+		"Lifecycles" : {
+			"example" : {
+				"Prefix" : "<unknown>",
+				"Expiration" : "_operations",
+				"Offline" : "_operations"
+			}
+		},
+		"Versioning" : false,
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Notifications" : {
+			"example" : {
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				},
+				"Prefix" : "<string>",
+				"Suffix" : "<string>",
+				"Events" : [
+					"create"
+				]
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Role](#Role) - Required - **Type:** string  
+    **Possible Values:** `[appdata, operations]`
+-   [Lifecycles](#Lifecycles)
+    -   [Prefix](#Prefix) - Optional  
+           **Types:** string  **Description:** The prefix to apply the lifecycle to
+    -   [Expiration](#Expiration) - Optional - **Default:** `_operations`  
+           **Types:** string, number  **Description:** Provide either a date or a number of days
+    -   [Offline](#Offline) - Optional - **Default:** `_operations`  
+           **Types:** string, number  **Description:** Provide either a date or a number of days
+-   [Versioning](#Versioning) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [Notifications](#Notifications)
+    -   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Prefix](#Prefix) - Optional - **Type:** string  
+    -   [Suffix](#Suffix) - Optional - **Type:** string  
+    -   [Events](#Events) - Optional - **Type:** array of string - **Default:** `create`  
+           **Possible Values:** `[create, remove, restore, reducedredundancy]`
 
 * * *
 
@@ -330,6 +656,13 @@ An bastion instance to manage vpc only components
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -380,6 +713,13 @@ An bastion instance to manage vpc only components
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -496,138 +836,6 @@ Managed in-memory cache services
 
 * * *
 
-# userpool
-
-Managed identity service
-
-**Deployment Properties**
-
--   **Available Providers** - aws
--   **Component Level** - solution
-
-**Notes**
-
-!!! warning
-    Requires second deployment to complete configuration
-
-**Component Format**
-
-```json
-{
-	"userpool" : {
-		"MFA" : false,
-		"AdminCreatesUser" : true,
-		"UnusedAccountTimeout" : 7,
-		"VerifyEmail" : true,
-		"VerifyPhone" : false,
-		"LoginAliases" : [
-			"email"
-		],
-		"ClientGenerateSecret" : false,
-		"ClientTokenValidity" : 30,
-		"AllowUnauthenticatedIds" : false,
-		"AuthorizationHeader" : "Authorization",
-		"OAuth" : {
-			"Scopes" : [
-				"openid"
-			],
-			"Flows" : [
-				"code"
-			]
-		},
-		"PasswordPolicy" : {
-			"MinimumLength" : 10,
-			"Lowercase" : true,
-			"Uppercase" : true,
-			"Numbers" : true,
-			"SpecialCharacters" : true
-		},
-		"Links" : {
-			"example" : {
-				"Any" : "<string>",
-				"Tenant" : "<string>",
-				"Product" : "<string>",
-				"Environment" : "<string>",
-				"Segment" : "<string>",
-				"Tier" : "<string>",
-				"Component" : "<string>",
-				"Function" : "<string>",
-				"Service" : "<string>",
-				"Task" : "<string>",
-				"PortMapping" : "<string>",
-				"Mount" : "<string>",
-				"Platform" : "<string>",
-				"Instance" : "<string>",
-				"Version" : "<string>",
-				"Role" : "<string>",
-				"Direction" : "<string>",
-				"Type" : "<string>"
-			}
-		},
-		"Profiles" : {
-			"Deployment" : "<string>"
-		},
-		"Schema" : {
-			"example" : {
-				"DataType" : "String",
-				"Mutable" : true,
-				"Required" : true
-			}
-		}
-	}
-}
-```
-
-**Attribute Reference**
-
--   [MFA](#MFA) - Optional - **Type:** boolean - **Default:** `false`  
--   [AdminCreatesUser](#AdminCreatesUser) - Optional - **Type:** boolean - **Default:** `true`  
--   [UnusedAccountTimeout](#UnusedAccountTimeout) - Optional - **Type:** number - **Default:** `7`  
--   [VerifyEmail](#VerifyEmail) - Optional - **Type:** boolean - **Default:** `true`  
--   [VerifyPhone](#VerifyPhone) - Optional - **Type:** boolean - **Default:** `false`  
--   [LoginAliases](#LoginAliases) - Optional - **Type:** array of string - **Default:** `email`  
--   [ClientGenerateSecret](#ClientGenerateSecret) - Optional - **Type:** boolean - **Default:** `false`  
--   [ClientTokenValidity](#ClientTokenValidity) - Optional - **Type:** number - **Default:** `30`  
--   [AllowUnauthenticatedIds](#AllowUnauthenticatedIds) - Optional - **Type:** boolean - **Default:** `false`  
--   [AuthorizationHeader](#AuthorizationHeader) - Optional - **Type:** string - **Default:** `Authorization`  
--   [OAuth](#OAuth)
-    -   [Scopes](#Scopes) - Optional - **Type:** array of string - **Default:** `openid`  
-    -   [Flows](#Flows) - Optional - **Type:** array of string - **Default:** `code`  
--   [PasswordPolicy](#PasswordPolicy)
-    -   [MinimumLength](#MinimumLength) - Optional - **Type:** number - **Default:** `10`  
-    -   [Lowercase](#Lowercase) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Uppercase](#Uppercase) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Numbers](#Numbers) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [SpecialCharacters](#SpecialCharacters) - Optional - **Type:** boolean - **Default:** `true`  
--   [Links](#Links)
-    -   [Any](#Any) - Optional - **Type:** string  
-    -   [Tenant](#Tenant) - Optional - **Type:** string  
-    -   [Product](#Product) - Optional - **Type:** string  
-    -   [Environment](#Environment) - Optional - **Type:** string  
-    -   [Segment](#Segment) - Optional - **Type:** string  
-    -   [Tier](#Tier) - Required - **Type:** string  
-    -   [Component](#Component) - Required - **Type:** string  
-    -   [Function](#Function) - Optional - **Type:** string  
-    -   [Service](#Service) - Optional - **Type:** string  
-    -   [Task](#Task) - Optional - **Type:** string  
-    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
-    -   [Mount](#Mount) - Optional - **Type:** string  
-    -   [Platform](#Platform) - Optional - **Type:** string  
-    -   [Instance](#Instance) - Optional - **Type:** string  
-    -   [Version](#Version) - Optional - **Type:** string  
-    -   [Role](#Role) - Optional - **Type:** string  
-    -   [Direction](#Direction) - Optional - **Type:** string  
-    -   [Type](#Type) - Optional - **Type:** string  
--   [Profiles](#Profiles)
-    -   [Deployment](#Deployment) - Optional - **Type:** string  
--   [Schema](#Schema)
-    -   [DataType](#DataType) - Optional - **Type:** string - **Default:** `String`  
-           **Possible Values:** `[String, Number, DateTime, Boolean]`
-    -   [Mutable](#Mutable) - Optional - **Type:** boolean - **Default:** `true`  
-    -   [Required](#Required) - Optional - **Type:** boolean - **Default:** `true`  
-
-* * *
-
 # computecluster
 
 Auto-Scaling IaaS with code deployment
@@ -658,6 +866,13 @@ Auto-Scaling IaaS with code deployment
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -714,6 +929,13 @@ Auto-Scaling IaaS with code deployment
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -748,6 +970,156 @@ Auto-Scaling IaaS with code deployment
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+
+* * *
+
+# configstore
+
+A configuration store to provide dynamic attributes
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Sub Components**
+
+-   [configbranch](#configbranch)
+    -   **Component Attribute** - Branches
+    -   **Link Attribute** - Branch
+
+**Component Format**
+
+```json
+{
+	"configstore" : {
+		"Fragment" : "<string>",
+		"Table" : {
+			"Billing" : "provisioned",
+			"Capacity" : {
+				"Read" : 1,
+				"Write" : 1
+			},
+			"Backup" : {
+				"Enabled" : false
+			},
+			"Stream" : {
+				"Enabled" : false,
+				"ViewType" : "NEW_IMAGE"
+			}
+		},
+		"Branches" : {
+			"example" : "< instance of configbranch>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Fragment](#Fragment) _(Container)_ - Optional - **Type:** string  
+-   [Table](#Table)
+    -   [Billing](#Billing) - Optional - **Type:** string - **Default:** `provisioned`  
+           **Description:** The billing mode for the table  **Possible Values:** `[provisioned, per-request]`
+    -   [Capacity](#Capacity)
+    -   [Read](#Read) - Optional - **Type:** number - **Default:** `1`  
+                  **Description:** When using provisioned billing the maximum RCU of the table
+    -   [Write](#Write) - Optional - **Type:** number - **Default:** `1`  
+                  **Description:** When using provisioned billing the maximum WCU of the table
+    -   [Backup](#Backup)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
+                  **Description:** Enables point in time recovery on the table
+    -   [Stream](#Stream)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `false`  
+                  **Description:** Enables dynamodb event stream
+    -   [ViewType](#ViewType) - Optional - **Type:** string - **Default:** `NEW_IMAGE`  
+                  **Possible Values:** `[KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES]`
+
+* * *
+
+# configbranch
+
+A branch of configuration which belongs to a config store
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Component Format**
+
+```json
+{
+	"configbranch" : {
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"States" : {
+			"example" : {
+				"InitialValue" : "-"
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [States](#States)
+    -   [InitialValue](#InitialValue) - Optional - **Type:** string - **Default:** `-`  
+           **Description:** The initial value that will be applied to the state
 
 * * *
 
@@ -826,6 +1198,13 @@ Node for decentralised content hosting with centralised publishing
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -866,6 +1245,13 @@ Node for decentralised content hosting with centralised publishing
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -910,6 +1296,13 @@ Managed Data ETL Processing
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -946,6 +1339,13 @@ Managed Data ETL Processing
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -986,6 +1386,13 @@ A data aretefact that is managed in a similar way to a code unit
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -1017,6 +1424,13 @@ A data aretefact that is managed in a similar way to a code unit
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1025,6 +1439,61 @@ A data aretefact that is managed in a similar way to a code unit
 -   [Prefix](#Prefix) - Optional - **Type:** string  
 -   [BuildEnvironment](#BuildEnvironment) - Required - **Type:** array of string  
     **Description:** The environments used to build the dataset
+
+* * *
+
+# datavolume
+
+A persistant disk volume independent of compute
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Component Format**
+
+```json
+{
+	"datavolume" : {
+		"Engine" : "ebs",
+		"Encrypted" : false,
+		"Size" : 20,
+		"VolumeType" : "gp2",
+		"ProvisionedIops" : 100,
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"Backup" : {
+			"Enabled" : true,
+			"Schedule" : "rate(1 day)",
+			"ScheduleTimeZone" : "Etc/UTC",
+			"RetentionPeriod" : 35
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Engine](#Engine) - Optional - **Type:** string - **Default:** `ebs`  
+    **Possible Values:** `[ebs]`
+-   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Size](#Size) - Optional - **Type:** number - **Default:** `20`  
+-   [VolumeType](#VolumeType) - Optional - **Type:** string - **Default:** `gp2`  
+    **Possible Values:** `[standard, io1, gp2, sc1, st1]`
+-   [ProvisionedIops](#ProvisionedIops) - Optional - **Type:** number - **Default:** `100`  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [Backup](#Backup)
+    -   [Enabled](#Enabled) - Optional - **Type:** boolean - **Default:** `true`  
+           **Description:** Create scheduled snapshots of the data volume
+    -   [Schedule](#Schedule) - Optional - **Type:** string - **Default:** `rate(1 day)`  
+           **Description:** Schedule in rate() or cron() formats
+    -   [ScheduleTimeZone](#ScheduleTimeZone) - Optional - **Type:** string - **Default:** `Etc/UTC`  
+           **Description:** When using a cron expression in Schedule sets the time zone to base it from
+    -   [RetentionPeriod](#RetentionPeriod) - Optional - **Type:** number - **Default:** `35`  
+           **Description:** How long to keep snapshot for in days
 
 * * *
 
@@ -1060,6 +1529,13 @@ A single virtual machine with no code deployment
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -1106,6 +1582,13 @@ A single virtual machine with no code deployment
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1151,6 +1634,7 @@ An autoscaling container host cluster
 		"Fragment" : "<string>",
 		"FixedIP" : false,
 		"LogDriver" : "awslogs",
+		"VolumeDrivers" : "<array of string>",
 		"ClusterLogGroup" : true,
 		"Links" : {
 			"example" : {
@@ -1167,6 +1651,13 @@ An autoscaling container host cluster
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -1239,6 +1730,8 @@ An autoscaling container host cluster
 -   [FixedIP](#FixedIP) - Optional - **Type:** boolean - **Default:** `false`  
 -   [LogDriver](#LogDriver) - Optional - **Type:** string - **Default:** `awslogs`  
     **Possible Values:** `[awslogs, json-file, fluentd]`
+-   [VolumeDrivers](#VolumeDrivers) - Optional - **Type:** array of string  
+    **Possible Values:** `[ebs]`
 -   [ClusterLogGroup](#ClusterLogGroup) - Optional - **Type:** boolean - **Default:** `true`  
 -   [Links](#Links)
     -   [Any](#Any) - Optional - **Type:** string  
@@ -1254,6 +1747,13 @@ An autoscaling container host cluster
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1320,6 +1820,7 @@ An orchestrated container with always on scheduling
 ```json
 {
 	"service" : {
+		"Engine" : "ec2",
 		"Containers" : {
 			"example" : {
 				"Cpu" : "<number>",
@@ -1338,6 +1839,13 @@ An orchestrated container with always on scheduling
 						"PortMapping" : "<string>",
 						"Mount" : "<string>",
 						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
 						"Instance" : "<string>",
 						"Version" : "<string>",
 						"Role" : "<string>",
@@ -1446,6 +1954,8 @@ An orchestrated container with always on scheduling
 
 **Attribute Reference**
 
+-   [Engine](#Engine) - Optional - **Type:** string - **Default:** `ec2`  
+    **Possible Values:** `[ec2, fargate]`
 -   [Containers](#Containers)
     -   [Cpu](#Cpu) - Optional - **Type:** number  
     -   [Links](#Links)
@@ -1462,6 +1972,13 @@ An orchestrated container with always on scheduling
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1560,6 +2077,7 @@ A container defintion which is invoked on demand
 ```json
 {
 	"task" : {
+		"Engine" : "ec2",
 		"Containers" : {
 			"example" : {
 				"Cpu" : "<number>",
@@ -1578,6 +2096,13 @@ A container defintion which is invoked on demand
 						"PortMapping" : "<string>",
 						"Mount" : "<string>",
 						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
 						"Instance" : "<string>",
 						"Version" : "<string>",
 						"Role" : "<string>",
@@ -1671,6 +2196,7 @@ A container defintion which is invoked on demand
 				"MissingData" : "notBreaching"
 			}
 		},
+		"NetworkMode" : "<string>",
 		"FixedName" : false,
 		"Profiles" : {
 			"Deployment" : "<string>"
@@ -1687,6 +2213,8 @@ A container defintion which is invoked on demand
 
 **Attribute Reference**
 
+-   [Engine](#Engine) - Optional - **Type:** string - **Default:** `ec2`  
+    **Possible Values:** `[ec2, fargate]`
 -   [Containers](#Containers)
     -   [Cpu](#Cpu) - Optional - **Type:** number  
     -   [Links](#Links)
@@ -1703,6 +2231,13 @@ A container defintion which is invoked on demand
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1775,6 +2310,8 @@ A container defintion which is invoked on demand
     -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
     -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
     -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+-   [NetworkMode](#NetworkMode) - Optional - **Type:** string  
+    **Possible Values:** `[none, bridge, awsvpc, host]`
 -   [FixedName](#FixedName) - Optional - **Type:** boolean - **Default:** `false`  
 -   [Profiles](#Profiles)
     -   [Deployment](#Deployment) - Optional - **Type:** string  
@@ -1858,6 +2395,12 @@ A managed ElasticSearch instance
 -   **Available Providers** - aws
 -   **Component Level** - solution
 
+**Sub Components**
+
+-   [esfeed](#esfeed)
+    -   **Component Attribute** - DataFeeds
+    -   **Link Attribute** - DataFeed
+
 **Component Format**
 
 ```json
@@ -1886,6 +2429,13 @@ A managed ElasticSearch instance
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -1916,6 +2466,9 @@ A managed ElasticSearch instance
 				"ReportOk" : false,
 				"MissingData" : "notBreaching"
 			}
+		},
+		"DataFeeds" : {
+			"example" : "< instance of esfeed>"
 		}
 	}
 }
@@ -1945,6 +2498,13 @@ A managed ElasticSearch instance
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -1969,6 +2529,215 @@ A managed ElasticSearch instance
     -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
     -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
     -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+
+* * *
+
+# esfeed
+
+A service which feeds data into the ES index currently based on kineses data firehose
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Component Format**
+
+```json
+{
+	"esfeed" : {
+		"IndexPrefix" : "<string>",
+		"IndexRotation" : "OneMonth",
+		"DocumentType" : "<string>",
+		"Buffering" : {
+			"Interval" : 60,
+			"Size" : 1
+		},
+		"Logging" : true,
+		"Encrypted" : false,
+		"Backup" : {
+			"FailureDuration" : 3600,
+			"Policy" : "FailedDocumentsOnly"
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Alerts" : {
+			"example" : {
+				"Description" : "unknown",
+				"Name" : "<string>",
+				"Resource" : {
+					"Id" : "<string>",
+					"Type" : "<string>"
+				},
+				"Metric" : "<string>",
+				"Threshold" : 1,
+				"Severity" : "Info",
+				"Namespace" : "<string>",
+				"Comparison" : "Threshold",
+				"Operator" : "GreaterThanOrEqualToThreshold",
+				"Time" : 300,
+				"Periods" : 1,
+				"Statistic" : "Sum",
+				"ReportOk" : false,
+				"MissingData" : "notBreaching"
+			}
+		},
+		"LogWatchers" : {
+			"example" : {
+				"LogFilter" : "<string>",
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [IndexPrefix](#IndexPrefix) - Required - **Type:** string  
+    **Description:** The prefix applied to generate the index name ( if not using roll over this will be the index name)
+-   [IndexRotation](#IndexRotation) - Optional - **Type:** string - **Default:** `OneMonth`  
+    **Description:** When to rotate the index ( the timestamp will be appended to the indexprefix)  **Possible Values:** `[NoRotation, OneDay, OneHour, OneMonth, OneWeek]`
+-   [DocumentType](#DocumentType) - Required - **Type:** string  
+    **Description:** The document type used when creating the document
+-   [Buffering](#Buffering)
+    -   [Interval](#Interval) - Optional - **Type:** number - **Default:** `60`  
+           **Description:** The time in seconds before data should be delivered
+    -   [Size](#Size) - Optional - **Type:** number - **Default:** `1`  
+           **Description:** The size in MB before data should be delivered
+-   [Logging](#Logging) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Encrypted](#Encrypted) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Backup](#Backup)
+    -   [FailureDuration](#FailureDuration) - Optional - **Type:** number - **Default:** `3600`  
+           **Description:** The time in seconds that the data feed will attempt to deliver the data before it is sent to backup
+    -   [Policy](#Policy) - Optional - **Type:** string - **Default:** `FailedDocumentsOnly`  
+           **Description:** The backup policy to apply to records  **Possible Values:** `[AllDocuments, FailedDocumentsOnly]`
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [Alerts](#Alerts)
+    -   [Description](#Description) - Optional  
+    -   [Name](#Name) - Required - **Type:** string  
+    -   [Resource](#Resource)
+    -   [Id](#Id) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Metric](#Metric) - Required - **Type:** string  
+    -   [Threshold](#Threshold) - Optional - **Type:** number - **Default:** `1`  
+    -   [Severity](#Severity) - Optional - **Type:** string - **Default:** `Info`  
+    -   [Namespace](#Namespace) - Optional - **Type:** string  
+    -   [Comparison](#Comparison) - Optional - **Type:** string - **Default:** `Threshold`  
+    -   [Operator](#Operator) - Optional - **Type:** string - **Default:** `GreaterThanOrEqualToThreshold`  
+    -   [Time](#Time) - Optional - **Type:** number - **Default:** `300`  
+    -   [Periods](#Periods) - Optional - **Type:** number - **Default:** `1`  
+    -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
+    -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
+    -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+-   [LogWatchers](#LogWatchers)
+    -   [LogFilter](#LogFilter) - Required - **Type:** string  
+    -   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
 
 * * *
 
@@ -2038,6 +2807,13 @@ A specific entry point for the lambda deployment
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -2071,6 +2847,13 @@ A specific entry point for the lambda deployment
 						"PortMapping" : "<string>",
 						"Mount" : "<string>",
 						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
 						"Instance" : "<string>",
 						"Version" : "<string>",
 						"Role" : "<string>",
@@ -2152,6 +2935,13 @@ A specific entry point for the lambda deployment
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2177,6 +2967,13 @@ A specific entry point for the lambda deployment
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2349,6 +3146,11 @@ A specifc listener based on the client side network port
 				"Instance" : "<boolean>",
 				"Version" : "<boolean>",
 				"Host" : "<boolean>"
+			},
+			"IncludeInDomain" : {
+				"Product" : "<boolean>",
+				"Environment" : "<boolean>",
+				"Segment" : "<boolean>"
 			}
 		},
 		"HostFilter" : false,
@@ -2370,6 +3172,13 @@ A specifc listener based on the client side network port
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -2423,6 +3232,10 @@ A specifc listener based on the client side network port
     -   [Instance](#Instance) - Optional - **Type:** boolean  
     -   [Version](#Version) - Optional - **Type:** boolean  
     -   [Host](#Host) - Optional - **Type:** boolean  
+    -   [IncludeInDomain](#IncludeInDomain)
+    -   [Product](#Product) - Optional - **Type:** boolean  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
 -   [HostFilter](#HostFilter) - Optional - **Type:** boolean - **Default:** `false`  
 -   [Mapping](#Mapping) - Optional - **Type:** string  
 -   [Path](#Path) - Optional - **Type:** string - **Default:** `default`  
@@ -2441,6 +3254,13 @@ A specifc listener based on the client side network port
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2467,6 +3287,95 @@ A specifc listener based on the client side network port
     -   [SlowStartTime](#SlowStartTime) - Optional - **Type:** number - **Default:** `-1`  
     -   [StickinessTime](#StickinessTime) - Optional - **Type:** number - **Default:** `-1`  
     -   [DeregistrationTimeout](#DeregistrationTimeout) - Optional - **Type:** number - **Default:** `30`  
+
+* * *
+
+# mobileapp
+
+mobile apps with over the air update hosting
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - application
+
+**Component Format**
+
+```json
+{
+	"mobileapp" : {
+		"Engine" : "expo",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"BuildFormats" : [
+			"ios",
+			"android"
+		],
+		"Fragment" : "<string>"
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Engine](#Engine) - Optional - **Type:** string - **Default:** `expo`  
+    **Possible Values:** `[expo]`
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [BuildFormats](#BuildFormats) - Optional - **Type:** array of string - **Default:** `ios, android`  
+    **Possible Values:** `[ios, android]`
+-   [Fragment](#Fragment) _(Container)_ - Optional - **Type:** string  
 
 * * *
 
@@ -2505,6 +3414,13 @@ A managed mobile notification proxy
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -2539,6 +3455,13 @@ A managed mobile notification proxy
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2592,6 +3515,13 @@ A specific mobile platform notification proxy
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -2653,6 +3583,13 @@ A specific mobile platform notification proxy
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2679,6 +3616,281 @@ A specific mobile platform notification proxy
     -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
     -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
     -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+
+* * *
+
+# network
+
+A virtual network segment used by private resources
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Sub Components**
+
+-   [networkroute](#networkroute)
+    -   **Component Attribute** - RouteTables
+    -   **Link Attribute** - RouteTable
+-   [networkacl](#networkacl)
+    -   **Component Attribute** - NetworkACLs
+    -   **Link Attribute** - NetworkACL
+
+**Component Format**
+
+```json
+{
+	"network" : {
+		"Active" : false,
+		"Logging" : {
+			"EnableFlowLogs" : true
+		},
+		"DNS" : {
+			"UseProvider" : true,
+			"GenerateHostNames" : true
+		},
+		"Address" : {
+			"CIDR" : "10.0.0.0/16"
+		},
+		"RouteTables" : {
+			"example" : "< instance of networkroute>"
+		},
+		"NetworkACLs" : {
+			"example" : "< instance of networkacl>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Logging](#Logging)
+    -   [EnableFlowLogs](#EnableFlowLogs) - Optional - **Type:** boolean - **Default:** `true`  
+-   [DNS](#DNS)
+    -   [UseProvider](#UseProvider) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [GenerateHostNames](#GenerateHostNames) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Address](#Address)
+    -   [CIDR](#CIDR) - Optional - **Type:** string - **Default:** `10.0.0.0/16`  
+
+* * *
+
+# networkroute
+
+A network routing table providing acess to resources outside of the network
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Component Format**
+
+```json
+{
+	"networkroute" : {
+		"Active" : false,
+		"Public" : false,
+		"Profiles" : {
+			"Deployment" : "<string>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Public](#Public) - Optional - **Type:** boolean - **Default:** `false`  
+    **Description:** Does the route table require Public IP internet access
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+
+* * *
+
+# networkacl
+
+A tier/subnet level network access control policy
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Component Format**
+
+```json
+{
+	"networkacl" : {
+		"Active" : false,
+		"Rules" : {
+			"example" : {
+				"Priority" : "<number>",
+				"Action" : "deny",
+				"Source" : {
+					"IPAddressGroups" : "<array of string>",
+					"Port" : "ephemeraltcp"
+				},
+				"Destination" : {
+					"IPAddressGroups" : "<array of string>",
+					"Port" : "<string>"
+				},
+				"ReturnTraffic" : true
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Rules](#Rules)
+    -   [Priority](#Priority) - Optional - **Type:** number  
+           **Required:** true
+    -   [Action](#Action) - Optional - **Type:** string - **Default:** `deny`  
+           **Possible Values:** `[allow, deny]`
+    -   [Source](#Source)
+    -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
+                  **Required:** true
+    -   [Port](#Port) - Optional - **Type:** string - **Default:** `ephemeraltcp`  
+                  **Description:** Port or port range the source is coming from
+    -   [Destination](#Destination)
+    -   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
+                  **Required:** true
+    -   [Port](#Port) - Optional - **Type:** string  
+                  **Description:** Port or port range the source is trying to access  **Required:** true
+    -   [ReturnTraffic](#ReturnTraffic) - Optional - **Type:** boolean - **Default:** `true`  
+           **Description:** If ACL is stateless add a return rule
+
+* * *
+
+# gateway
+
+A service providing a route to another network
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Sub Components**
+
+-   [gatewaydestination](#gatewaydestination)
+    -   **Component Attribute** - Destinations
+    -   **Link Attribute** - Destination
+
+**Component Format**
+
+```json
+{
+	"gateway" : {
+		"Active" : false,
+		"Engine" : "<string>",
+		"SourceIPAddressGroups" : [
+			"_localnet"
+		],
+		"Destinations" : {
+			"example" : "< instance of gatewaydestination>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [Engine](#Engine) - Optional - **Type:** string  
+    **Possible Values:** `[natgw, igw, vpcendpoint]`  **Required:** true
+-   [SourceIPAddressGroups](#SourceIPAddressGroups) - Optional - **Type:** array of string - **Default:** `_localnet`  
+    **Description:** IP Address Groups which can access this gateway
+
+* * *
+
+# gatewaydestination
+
+A network destination offerred by the Gateway
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - segment
+
+**Component Format**
+
+```json
+{
+	"gatewaydestination" : {
+		"Active" : false,
+		"IPAddressGroups" : "<array of string>",
+		"NetworkEndpointGroups" : "<array of string>",
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Active](#Active) - Optional - **Type:** boolean - **Default:** `false`  
+-   [IPAddressGroups](#IPAddressGroups) - Optional - **Type:** array of string  
+    **Description:** An IP Address Group reference
+-   [NetworkEndpointGroups](#NetworkEndpointGroups) - Optional - **Type:** array of string  
+    **Description:** A cloud provider service group reference
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
 
 * * *
 
@@ -2710,7 +3922,9 @@ A managed SQL database instance
 		"Backup" : {
 			"RetentionPeriod" : 35,
 			"SnapshotOnDeploy" : true,
-			"DeleteAutoBackups" : true
+			"DeleteAutoBackups" : true,
+			"DeletionPolicy" : "Snapshot",
+			"UpdateReplacePolicy" : "Snapshot"
 		},
 		"AutoMinorVersionUpgrade" : "<boolean>",
 		"DatabaseName" : "<string>",
@@ -2742,7 +3956,37 @@ A managed SQL database instance
 				"ReportOk" : false,
 				"MissingData" : "notBreaching"
 			}
-		}
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"AlwaysCreateFromSnapshot" : false
 	}
 }
 ```
@@ -2765,6 +4009,10 @@ A managed SQL database instance
     -   [SnapshotOnDeploy](#SnapshotOnDeploy) - Optional - **Type:** boolean - **Default:** `true`  
     -   [DeleteAutoBackups](#DeleteAutoBackups) - Optional - **Type:** boolean - **Default:** `true`  
            **Description:** Delete automated snapshots when the instance is deleted
+    -   [DeletionPolicy](#DeletionPolicy) - Optional - **Type:** string - **Default:** `Snapshot`  
+           **Possible Values:** `[Snapshot, Delete, Retain]`
+    -   [UpdateReplacePolicy](#UpdateReplacePolicy) - Optional - **Type:** string - **Default:** `Snapshot`  
+           **Possible Values:** `[Snapshot, Delete, Retain]`
 -   [AutoMinorVersionUpgrade](#AutoMinorVersionUpgrade) - Optional - **Type:** boolean  
 -   [DatabaseName](#DatabaseName) - Optional - **Type:** string  
 -   [DBParameters](#DBParameters) - Optional - **Type:** object  
@@ -2791,6 +4039,34 @@ A managed SQL database instance
     -   [Statistic](#Statistic) - Optional - **Type:** string - **Default:** `Sum`  
     -   [ReportOk](#ReportOk) - Optional - **Type:** boolean - **Default:** `false`  
     -   [MissingData](#MissingData) - Optional - **Type:** string - **Default:** `notBreaching`  
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [AlwaysCreateFromSnapshot](#AlwaysCreateFromSnapshot) - Optional - **Type:** boolean - **Default:** `false`  
+    **Description:** Always create the database from a snapshot
 
 * * *
 
@@ -2828,7 +4104,44 @@ HTTP based object storage service
 			}
 		},
 		"Style" : "<string>",
-		"Notifications" : "<object>",
+		"Notifications" : {
+			"example" : {
+				"Links" : {
+					"example" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					}
+				},
+				"Prefix" : "<string>",
+				"Suffix" : "<string>",
+				"Events" : [
+					"create"
+				]
+			}
+		},
 		"CORSBehaviours" : "<array of string>",
 		"Profiles" : {
 			"Deployment" : "<string>"
@@ -2854,6 +4167,13 @@ HTTP based object storage service
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -2884,7 +4204,37 @@ HTTP based object storage service
     -   [Paths](#Paths) - Optional - **Type:** array of string  
 -   [Style](#Style) - Optional - **Type:** string  
     **Description:** TODO(mfl): Think this can be removed
--   [Notifications](#Notifications) - Optional - **Type:** object  
+-   [Notifications](#Notifications)
+    -   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [Prefix](#Prefix) - Optional - **Type:** string  
+    -   [Suffix](#Suffix) - Optional - **Type:** string  
+    -   [Events](#Events) - Optional - **Type:** array of string - **Default:** `create`  
+           **Possible Values:** `[create, remove, restore, reducedredundancy]`
 -   [CORSBehaviours](#CORSBehaviours) - Optional - **Type:** array of string  
 -   [Profiles](#Profiles)
     -   [Deployment](#Deployment) - Optional - **Type:** string  
@@ -2905,6 +4255,13 @@ HTTP based object storage service
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -2931,8 +4288,7 @@ Object stored hosted web application with content distribution management
 		"Links" : "<object>",
 		"WAF" : {
 			"IPAddressGroups" : "<array of string>",
-			"Default" : "BLOCK",
-			"RuleDefault" : "ALLOW"
+			"OWASP" : false
 		},
 		"CloudFront" : {
 			"AssumeSNI" : true,
@@ -2959,6 +4315,44 @@ Object stored hosted web application with content distribution management
 					"Version" : "<string>",
 					"Action" : "<string>"
 				}
+			},
+			"Paths" : {
+				"example" : {
+					"PathPattern" : "<string>",
+					"Link" : {
+						"Any" : "<string>",
+						"Tenant" : "<string>",
+						"Product" : "<string>",
+						"Environment" : "<string>",
+						"Segment" : "<string>",
+						"Tier" : "<string>",
+						"Component" : "<string>",
+						"Function" : "<string>",
+						"Service" : "<string>",
+						"Task" : "<string>",
+						"PortMapping" : "<string>",
+						"Mount" : "<string>",
+						"Platform" : "<string>",
+						"RouteTable" : "<string>",
+						"NetworkACL" : "<string>",
+						"DataBucket" : "<string>",
+						"Branch" : "<string>",
+						"Client" : "<string>",
+						"AuthProvider" : "<string>",
+						"DataFeed" : "<string>",
+						"Instance" : "<string>",
+						"Version" : "<string>",
+						"Role" : "<string>",
+						"Direction" : "<string>",
+						"Type" : "<string>"
+					},
+					"CachingTTL" : {
+						"Default" : 600,
+						"Maximum" : 31536000,
+						"Minimum" : 0
+					},
+					"Compress" : false
+				}
 			}
 		},
 		"Certificate" : {
@@ -2977,6 +4371,11 @@ Object stored hosted web application with content distribution management
 				"Instance" : "<boolean>",
 				"Version" : "<boolean>",
 				"Host" : "<boolean>"
+			},
+			"IncludeInDomain" : {
+				"Product" : "<boolean>",
+				"Environment" : "<boolean>",
+				"Segment" : "<boolean>"
 			}
 		},
 		"Profiles" : {
@@ -2993,10 +4392,7 @@ Object stored hosted web application with content distribution management
 -   [Links](#Links) - Optional - **Type:** object  
 -   [WAF](#WAF)
     -   [IPAddressGroups](#IPAddressGroups) - Required - **Type:** array of string  
-    -   [Default](#Default) - Optional - **Type:** string - **Default:** `BLOCK`  
-           **Possible Values:** `[ALLOW, BLOCK]`
-    -   [RuleDefault](#RuleDefault) - Optional - **Type:** string - **Default:** `ALLOW`  
-           **Possible Values:** `[ALLOW, BLOCK]`
+    -   [OWASP](#OWASP) - Optional - **Type:** boolean - **Default:** `false`  
 -   [CloudFront](#CloudFront)
     -   [AssumeSNI](#AssumeSNI) - Optional - **Type:** boolean - **Default:** `true`  
     -   [EnableLogging](#EnableLogging) - Optional - **Type:** boolean - **Default:** `true`  
@@ -3019,6 +4415,39 @@ Object stored hosted web application with content distribution management
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Action](#Action) - Required - **Type:** string  
                   **Possible Values:** `[viewer-request, viewer-response, origin-request, origin-response]`
+    -   [Paths](#Paths)
+    -   [PathPattern](#PathPattern) - Required - **Type:** string  
+    -   [Link](#Link)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+    -   [CachingTTL](#CachingTTL)
+    -   [Default](#Default) - Optional - **Type:** number - **Default:** `600`  
+    -   [Maximum](#Maximum) - Optional - **Type:** number - **Default:** `31536000`  
+    -   [Minimum](#Minimum) - Optional - **Type:** number - **Default:** `0`  
+    -   [Compress](#Compress) - Optional - **Type:** boolean - **Default:** `false`  
 -   [Certificate](#Certificate)
     -   [Qualifiers](#Qualifiers) - Optional - **Type:** object  
     -   [External](#External) - Optional - **Type:** boolean  
@@ -3035,6 +4464,10 @@ Object stored hosted web application with content distribution management
     -   [Instance](#Instance) - Optional - **Type:** boolean  
     -   [Version](#Version) - Optional - **Type:** boolean  
     -   [Host](#Host) - Optional - **Type:** boolean  
+    -   [IncludeInDomain](#IncludeInDomain)
+    -   [Product](#Product) - Optional - **Type:** boolean  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
 -   [Profiles](#Profiles)
     -   [Deployment](#Deployment) - Optional - **Type:** string  
     -   [Security](#Security) - Optional - **Type:** string - **Default:** `default`  
@@ -3152,6 +4585,13 @@ A user with permissions on components deployed in the solution
 				"PortMapping" : "<string>",
 				"Mount" : "<string>",
 				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
 				"Instance" : "<string>",
 				"Version" : "<string>",
 				"Role" : "<string>",
@@ -3196,6 +4636,13 @@ A user with permissions on components deployed in the solution
     -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
     -   [Mount](#Mount) - Optional - **Type:** string  
     -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
     -   [Instance](#Instance) - Optional - **Type:** string  
     -   [Version](#Version) - Optional - **Type:** string  
     -   [Role](#Role) - Optional - **Type:** string  
@@ -3214,5 +4661,357 @@ A user with permissions on components deployed in the solution
     -   [AsFile](#AsFile) - Optional - **Type:** boolean - **Default:** `true`  
     -   [AppData](#AppData) - Optional - **Type:** boolean - **Default:** `true`  
     -   [AppPublic](#AppPublic) - Optional - **Type:** boolean - **Default:** `true`  
+
+* * *
+
+# userpool
+
+Managed identity service
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Notes**
+
+!!! warning
+    Make sure to plan your schema before initial deployment. Updating shema attributes causes a replaccement of the userpool
+!!! warning
+    Please read <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html> before enabling custom domains on userpool hosted UI. An A Record is required in your base domain
+
+**Sub Components**
+
+-   [userpoolclient](#userpoolclient)
+    -   **Component Attribute** - Clients
+    -   **Link Attribute** - Client
+-   [userpoolauthprovider](#userpoolauthprovider)
+    -   **Component Attribute** - AuthProviders
+    -   **Link Attribute** - AuthProvider
+
+**Component Format**
+
+```json
+{
+	"userpool" : {
+		"MFA" : false,
+		"AdminCreatesUser" : true,
+		"UnusedAccountTimeout" : 7,
+		"VerifyEmail" : true,
+		"VerifyPhone" : false,
+		"LoginAliases" : [
+			"email"
+		],
+		"AllowUnauthenticatedIds" : false,
+		"AuthorizationHeader" : "Authorization",
+		"PasswordPolicy" : {
+			"MinimumLength" : 10,
+			"Lowercase" : true,
+			"Uppercase" : true,
+			"Numbers" : true,
+			"SpecialCharacters" : true
+		},
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		},
+		"Profiles" : {
+			"Deployment" : "<string>"
+		},
+		"DefaultClient" : true,
+		"Schema" : {
+			"example" : {
+				"DataType" : "String",
+				"Mutable" : true,
+				"Required" : true
+			}
+		},
+		"HostedUI" : {
+			"Certificate" : {
+				"Qualifiers" : "<object>",
+				"External" : "<boolean>",
+				"Wildcard" : "<boolean>",
+				"Domain" : "<string>",
+				"Host" : "<string>",
+				"HostParts" : "<array of string>",
+				"IncludeInHost" : {
+					"Product" : "<boolean>",
+					"Environment" : "<boolean>",
+					"Segment" : "<boolean>",
+					"Tier" : "<boolean>",
+					"Component" : "<boolean>",
+					"Instance" : "<boolean>",
+					"Version" : "<boolean>",
+					"Host" : "<boolean>"
+				},
+				"IncludeInDomain" : {
+					"Product" : "<boolean>",
+					"Environment" : "<boolean>",
+					"Segment" : "<boolean>"
+				}
+			}
+		},
+		"Clients" : {
+			"example" : "< instance of userpoolclient>"
+		},
+		"AuthProviders" : {
+			"example" : "< instance of userpoolauthprovider>"
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [MFA](#MFA) - Optional - **Type:** boolean - **Default:** `false`  
+-   [AdminCreatesUser](#AdminCreatesUser) - Optional - **Type:** boolean - **Default:** `true`  
+-   [UnusedAccountTimeout](#UnusedAccountTimeout) - Optional - **Type:** number - **Default:** `7`  
+-   [VerifyEmail](#VerifyEmail) - Optional - **Type:** boolean - **Default:** `true`  
+-   [VerifyPhone](#VerifyPhone) - Optional - **Type:** boolean - **Default:** `false`  
+-   [LoginAliases](#LoginAliases) - Optional - **Type:** array of string - **Default:** `email`  
+-   [AllowUnauthenticatedIds](#AllowUnauthenticatedIds) - Optional - **Type:** boolean - **Default:** `false`  
+-   [AuthorizationHeader](#AuthorizationHeader) - Optional - **Type:** string - **Default:** `Authorization`  
+-   [PasswordPolicy](#PasswordPolicy)
+    -   [MinimumLength](#MinimumLength) - Optional - **Type:** number - **Default:** `10`  
+    -   [Lowercase](#Lowercase) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Uppercase](#Uppercase) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Numbers](#Numbers) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [SpecialCharacters](#SpecialCharacters) - Optional - **Type:** boolean - **Default:** `true`  
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+-   [Profiles](#Profiles)
+    -   [Deployment](#Deployment) - Optional - **Type:** string  
+-   [DefaultClient](#DefaultClient) - Optional - **Type:** boolean - **Default:** `true`  
+    **Description:** Enable default client mode which creates app client for the user pool and aligns with legacy config
+-   [Schema](#Schema)
+    -   [DataType](#DataType) - Optional - **Type:** string - **Default:** `String`  
+           **Possible Values:** `[String, Number, DateTime, Boolean]`
+    -   [Mutable](#Mutable) - Optional - **Type:** boolean - **Default:** `true`  
+    -   [Required](#Required) - Optional - **Type:** boolean - **Default:** `true`  
+-   [HostedUI](#HostedUI)
+    -   [Certificate](#Certificate)
+    -   [Qualifiers](#Qualifiers) - Optional - **Type:** object  
+    -   [External](#External) - Optional - **Type:** boolean  
+    -   [Wildcard](#Wildcard) - Optional - **Type:** boolean  
+    -   [Domain](#Domain) - Optional - **Type:** string  
+    -   [Host](#Host) - Optional - **Type:** string  
+    -   [HostParts](#HostParts) - Optional - **Type:** array of string  
+    -   [IncludeInHost](#IncludeInHost)
+    -   [Product](#Product) - Optional - **Type:** boolean  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
+    -   [Tier](#Tier) - Optional - **Type:** boolean  
+    -   [Component](#Component) - Optional - **Type:** boolean  
+    -   [Instance](#Instance) - Optional - **Type:** boolean  
+    -   [Version](#Version) - Optional - **Type:** boolean  
+    -   [Host](#Host) - Optional - **Type:** boolean  
+    -   [IncludeInDomain](#IncludeInDomain)
+    -   [Product](#Product) - Optional - **Type:** boolean  
+    -   [Environment](#Environment) - Optional - **Type:** boolean  
+    -   [Segment](#Segment) - Optional - **Type:** boolean  
+
+* * *
+
+# userpoolclient
+
+A oauth app client which belongs to the userpool
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Component Format**
+
+```json
+{
+	"userpoolclient" : {
+		"OAuth" : {
+			"Scopes" : [
+				"email",
+				"openid"
+			],
+			"Flows" : [
+				"code"
+			]
+		},
+		"ClientGenerateSecret" : false,
+		"ClientTokenValidity" : 30,
+		"IdentityPoolAccess" : true,
+		"AuthProviders" : [
+			"COGNITO"
+		],
+		"Links" : {
+			"example" : {
+				"Any" : "<string>",
+				"Tenant" : "<string>",
+				"Product" : "<string>",
+				"Environment" : "<string>",
+				"Segment" : "<string>",
+				"Tier" : "<string>",
+				"Component" : "<string>",
+				"Function" : "<string>",
+				"Service" : "<string>",
+				"Task" : "<string>",
+				"PortMapping" : "<string>",
+				"Mount" : "<string>",
+				"Platform" : "<string>",
+				"RouteTable" : "<string>",
+				"NetworkACL" : "<string>",
+				"DataBucket" : "<string>",
+				"Branch" : "<string>",
+				"Client" : "<string>",
+				"AuthProvider" : "<string>",
+				"DataFeed" : "<string>",
+				"Instance" : "<string>",
+				"Version" : "<string>",
+				"Role" : "<string>",
+				"Direction" : "<string>",
+				"Type" : "<string>"
+			}
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [OAuth](#OAuth)
+    -   [Scopes](#Scopes) - Optional - **Type:** array of string - **Default:** `email, openid`  
+           **Possible Values:** `[phone, email, openid, aws.cognito.signin.user.admin, profile]`
+    -   [Flows](#Flows) - Optional - **Type:** array of string - **Default:** `code`  
+           **Possible Values:** `[code, implicit, client_credentials]`
+-   [ClientGenerateSecret](#ClientGenerateSecret) - Optional - **Type:** boolean - **Default:** `false`  
+    **Description:** Generate a client secret which musht be provided in auth calls
+-   [ClientTokenValidity](#ClientTokenValidity) - Optional - **Type:** number - **Default:** `30`  
+    **Description:** Time in days that the refresh token is valid for
+-   [IdentityPoolAccess](#IdentityPoolAccess) - Optional - **Type:** boolean - **Default:** `true`  
+    **Description:** Enable the use of the identity pool for this client
+-   [AuthProviders](#AuthProviders) - Optional - **Type:** array of string - **Default:** `COGNITO`  
+    **Description:** A list of user pool auth providers which can use this client
+-   [Links](#Links)
+    -   [Any](#Any) - Optional - **Type:** string  
+    -   [Tenant](#Tenant) - Optional - **Type:** string  
+    -   [Product](#Product) - Optional - **Type:** string  
+    -   [Environment](#Environment) - Optional - **Type:** string  
+    -   [Segment](#Segment) - Optional - **Type:** string  
+    -   [Tier](#Tier) - Required - **Type:** string  
+    -   [Component](#Component) - Required - **Type:** string  
+    -   [Function](#Function) - Optional - **Type:** string  
+    -   [Service](#Service) - Optional - **Type:** string  
+    -   [Task](#Task) - Optional - **Type:** string  
+    -   [PortMapping](#PortMapping) _(Port)_ - Optional - **Type:** string  
+    -   [Mount](#Mount) - Optional - **Type:** string  
+    -   [Platform](#Platform) - Optional - **Type:** string  
+    -   [RouteTable](#RouteTable) - Optional - **Type:** string  
+    -   [NetworkACL](#NetworkACL) - Optional - **Type:** string  
+    -   [DataBucket](#DataBucket) - Optional - **Type:** string  
+    -   [Branch](#Branch) - Optional - **Type:** string  
+    -   [Client](#Client) - Optional - **Type:** string  
+    -   [AuthProvider](#AuthProvider) - Optional - **Type:** string  
+    -   [DataFeed](#DataFeed) - Optional - **Type:** string  
+    -   [Instance](#Instance) - Optional - **Type:** string  
+    -   [Version](#Version) - Optional - **Type:** string  
+    -   [Role](#Role) - Optional - **Type:** string  
+    -   [Direction](#Direction) - Optional - **Type:** string  
+    -   [Type](#Type) - Optional - **Type:** string  
+
+* * *
+
+# userpoolauthprovider
+
+An external auth provider which will federate with the user pool
+
+**Deployment Properties**
+
+-   **Available Providers** - aws
+-   **Component Level** - solution
+
+**Component Format**
+
+```json
+{
+	"userpoolauthprovider" : {
+		"Engine" : "<string>",
+		"AttributeMappings" : {
+			"example" : {
+				"UserPoolAttribute" : "<string>",
+				"ProviderAttribute" : "<string>"
+			}
+		},
+		"IDPIdentifiers" : "<array of string>",
+		"SAML" : {
+			"MetadataUrl" : "<string>",
+			"EnableIDPSignOut" : true
+		}
+	}
+}
+```
+
+**Attribute Reference**
+
+-   [Engine](#Engine) - Required - **Type:** string  
+    **Description:** The authentication provider type  **Possible Values:** `[SAML, OIDC]`
+-   [AttributeMappings](#AttributeMappings)
+    -   [UserPoolAttribute](#UserPoolAttribute) - Optional - **Type:** string  
+           **Description:** The name of the attribute in the user pool schema - the id of the mapping will be used if not provided
+    -   [ProviderAttribute](#ProviderAttribute) - Required - **Type:** string  
+           **Description:** The provider attribute which will be mapped
+-   [IDPIdentifiers](#IDPIdentifiers) - Optional - **Type:** array of string  
+    **Description:** A list of identifiers that can be used to automatically pick the IDP - E.g. email domain
+-   [SAML](#SAML)
+    -   [MetadataUrl](#MetadataUrl) - Optional - **Type:** string  
+           **Description:** The SAML metadataUrl endpoint
+    -   [EnableIDPSignOut](#EnableIDPSignOut) - Optional - **Type:** boolean - **Default:** `true`  
+           **Description:** Enable the IDP Signout Flow
 
 * * *
