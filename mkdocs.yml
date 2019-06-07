@@ -30,6 +30,7 @@ nav:
   - 'Reference' : 
     - 'Components' : './reference/component-reference.md'
     - 'Configuration Management Database' : './reference/cmdb-reference.md'
+  - 'Release Notes': './changelog.md'
   - 'Advanced' : 
     - 'Introduction' : './advanced/index.md'
     - 'Versioning' : './advanced/versioning.md'
