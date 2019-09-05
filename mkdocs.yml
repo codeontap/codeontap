@@ -31,8 +31,8 @@ nav:
     - 'Components' : './reference/component-reference.md'
     - 'Configuration Management Database' : './reference/cmdb-reference.md'
   - 'Release Notes' :
-    - '5.5' : '.change-logs/5.5.md'
-    - '6.0' : '.change-logs/6.0.md'
+    - '5.5' : './change-logs/5.5.md'
+    - '6.0' : './change-logs/6.0.md'
   - 'Advanced' : 
     - 'Introduction' : './advanced/index.md'
     - 'Versioning' : './advanced/versioning.md'
