@@ -49,7 +49,7 @@ export ACCOUNT=<account id>
 
 Repeat the following steps for the following deployment units
 
-- **cmk** - deploys an AWS KMS key along with a ssh-key with a private key that will be encrypted with the KMS key
+- **baseline** - deploys an AWS KMS key along with a ssh-key with a private key that will be encrypted with the KMS key
 
 Generate the templates used to deploy the services
 

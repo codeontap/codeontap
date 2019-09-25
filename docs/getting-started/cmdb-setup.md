@@ -100,6 +100,7 @@ Key files are:
 Now that we have a product we need to configure its domain name in the enterprise domain register
 
 Edit the domains.json file `/var/opt/codeontap/accounts/<tenantname>/domains.json`
+
 ```diff
 {
     "Domains" : {

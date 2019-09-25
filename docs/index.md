@@ -1,6 +1,6 @@
 # Welcome to CodeOnTap
 
-CodeOnTap is an opinionated devops platform which provides a enterprise focused CICD pipeline based on the infrastructure as code methodology
+CodeOnTap is an opinionated devops platform that provides an enterprise focused CICD pipeline based on the infrastructure as code methodology
 
 ## What's in the box
 

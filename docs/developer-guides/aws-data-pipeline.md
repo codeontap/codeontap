@@ -6,7 +6,7 @@ As a result the easier way to think for developing a [AWS Data Pipeline](https:/
 
 ## Should I be using an AWS Data Pipeline
 
-If the task you are wishing to perform is simply that "a task" and not "a service" per'se, this is the best place to begin. Data Pipeline is targeted at repeatitive data processing jobs, of generally "larger" datasets and not micro transactions (we're talking hundreds of MB and up per process).
+If the task you are wishing to perform is simply that "a task" and not "a service" per'se, this is the best place to begin. Data Pipeline is targeted at repetitive data processing jobs, of generally "larger" datasets and not micro transactions (we're talking hundreds of MB and up per process).
 
 If you have a process that needs to be run periodically and take data from say an S3 bucket, manipulate it and then write the processed data somewhere, then chances are you want to use an AWS Data Pipeline.
 
@@ -36,14 +36,18 @@ When developing a pipeline the easiest way to test the pipeline is to deploy the
 To deploy a pipeline with the aws cli
 
 1. Create the Pipeline. This just adds an empty pipeline which you will add config to
+
     ```bash
     aws --region "${region}" datapipeline create-pipeline --name "<Name for the pipeline>" --unique-id "< A unique Id for the pipeline>"
     ```
-2. Update the pipeline with your configuration. You will need to have a complete pipeline values file with the appropriate variables setup for S3 buckets etc 
+
+2. Update the pipeline with your configuration. You will need to have a complete pipeline values file with the appropriate variables setup for S3 buckets etc
+
     ```bash
     aws --region "${region}" datapipeline put-pipeline-definition --pipeline-id "<The Id returned from the create>" --pipeline-definition "file://<Path to pipeline-definition.json>" --parameter-objects "file://<Path to pipeline-parameters.json>" --parameter-values-uri "file://<Path to values.json>"
     ```
-3. This will validate the pipeline and provide you with any feed back on the definition itself. If you make updates to the pipeline you just need to re-run step 2 
+
+3. This will validate the pipeline and provide you with any feed back on the definition itself. If you make updates to the pipeline you just need to re-run step 2
 4. You can then access the pipeline from the AWS console. The visual editor will show you how your pipeline will look and should give you an idea of what will happen.
 
 For further information on pipeline management the AWS guide is the best to go from https://docs.aws.amazon.com/data-pipeline/index.html
@@ -64,7 +68,7 @@ When developing a shell based operation, we recommend that you use the predefine
 
 The result being of the layout:
 
-```
+```plaintext
 /aws_pipeline/src/pipeline-definition.json
 /aws_pipeline/src/pipeline-parameters.json
 /aws_pipeline/src/values.json
@@ -76,7 +80,7 @@ The result being of the layout:
 
 Required files/directories associated with any operation script can also be placed/located in the numbered/named `./0x_name/` directory, such that:
 
-```
+```plaintext
 /aws_pipeline/src/14_database_setup/init.sh
 /aws_pipeline/src/14_database_setup/configuration_defaults.yaml
 /aws_pipeline/src/14_database_setup/some_other_required_file_or_dir
@@ -90,7 +94,7 @@ The `/aws_pipeline/src/00_init/init.sh` script is notably the first script execu
 
 #### Disk Size
 
-When using an EC2 instance in a data pipeline if you use the default Ec2 ami type the S3 staging directory (the location on the instance where the S3 bucket data is initially placed before performing any operations) only has minimal disk space. We have a defined *rinse-and-repeat* pipeline-definition that contains a preprocessing step that attaches a new block-device (disk) to the staging location to increase the staging location volume size. This may need to be implemented and/or configured based on your requirements (anything greater than 5GB). When used in a COT (Code on Tap) implementation, the disks are only used during the data pipeline execution so overprovisioning the disk size is a non-issue.
+When using an EC2 instance in a data pipeline if you use the default Ec2 ami type the S3 staging directory (the location on the instance where the S3 bucket data is initially placed before performing any operations) only has minimal disk space. We have a defined *rinse-and-repeat* pipeline-definition that contains a preprocessing step that attaches a new block-device (disk) to the staging location to increase the staging location volume size. This may need to be implemented and/or configured based on your requirements (anything greater than 5GB). When used in a COT (Code on Tap) implementation, the disks are only used during the data pipeline execution so over provisioning the disk size is a non-issue.
 
 ##### AWS CLI
 

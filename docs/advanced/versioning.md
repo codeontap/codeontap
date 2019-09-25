@@ -12,15 +12,15 @@ The train release is the stable product release which is the recommended release
 
 ### Tram
 
-The tram release is a rollup of the work completed between train releases. The tram release is intended for the testing of new features which are intended for the next train but with less risk of running into issues with actively developed work. The trams are scheduled to run every two weeks and will be treated as release candidates for the next train release.
+The tram release is a rollup of the work completed between train releases. The tram release is intended for the testing of new features for the next train but with less risk of running into issues with actively developed work. The trams are scheduled to run every two weeks and will be treated as release candidates for the next train release.
 
 ### Unicycle
 
-The unicylce release is our latest development code and is generally the master branch of code in the CodeOnTap code repositories. Builds of the unicylce release are triggered on each commit to the code repositories.
+The unicycle release is our latest development code and is generally the master branch of code in the CodeOnTap code repositories. Builds of the unicycle release are triggered on each commit to the code repositories.
 
 ### Patch Releases
 
-Patch releases releases are bugfix releases for a train release. They are not scheduled and will be released when possible.
+Patch releases releases are bugfix releases for a train release. They are not scheduled and will be released as required.
 
 ## Feature Tags
 

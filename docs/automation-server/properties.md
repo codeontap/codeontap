@@ -1,19 +1,20 @@
 # Jenkins Property Files
 
-The Repositories (AccountsCMDB, ProductCMDB, and Code ) are linked together in the application lifecyle management service (ALM).
+The Repositories (AccountsCMDB, ProductCMDB, and Code ) are linked together in the application life cycle management service (ALM).
 The Gen3 framework establishes the environmental configuration based on the location of the process calling the framework, when running as a Jenkins job the location is determined using 2 methods, the location of the Job in the job folder structure and properties files which, combined with the EnvInjector plugin which inserts environment variables into the run time of the job.
 
 ## Properties Files
 
-The properties files follow a heirachy structure, with a server level properties folder and a properties file per product.
+The properties files follow a hierarchy structure, with a server level properties folder and a properties file per product.
 These are stored in
 
 ```text
 /var/opt/codeontap
 ```
 
-### site.properties 
-The site.properties file contains the overall configuration required for the deployment of a product to any environment. 
+### site.properties
+
+The site.properties file contains the overall configuration required for the deployment of a product to any environment.
 
 The following settings should be set in the site.properties file
 

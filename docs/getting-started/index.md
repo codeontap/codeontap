@@ -5,8 +5,8 @@ This getting started guide uses codeontap to deploy the application life-cycle m
 The service deployed in the getting started guide has the following components:
 
 - AWS ECS cluster
-    - A Jenkins container deployed as a service
-    - Jenkins integration with ECS to deploy container based Jenkins agents
+  - A Jenkins container deployed as a service
+  - Jenkins integration with ECS to deploy container based Jenkins agents
 - AWS EFS Filesystem to host the Jenkins home drive
 - AWS ELB load balancer with SSL offload configured
 

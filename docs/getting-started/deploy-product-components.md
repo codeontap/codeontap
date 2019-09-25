@@ -14,10 +14,13 @@ export ACCOUNT=<account id>
 
 Repeat the following steps for the listed deployment units
 
+- **iam** - Deploys authentication roles which can be used by other components
+- **lg** - Deploys log groups which can be used by other components
 - **vpc** - Deploys the private network infrastructure that our container hosts wil use
-- **s3** - Deploys a set of S3 buckets which can be used by components deployed into this segment
 - **eip** - Reserves a set of static elastic IPs' which will be used for our NAT gateway and SSH Service
+- **igw** - Deploys an Internet gateway for the VPC to provide internet access
 - **nat** - Deploys a Network Address Translation (NAT) and updates the vpc route tables to use it where appropriate. This provides outbound only initiated access to the internet
+- **vpcednpoint** - Deploys vpcendpoints which offer dedicated network links to the cloud provider
 - **ssh** - Creates an ssh auto-scale group which provides an ec2 Instance on a know IP address for management and troubleshooting
 
 Generate the templates used to deploy the services
