@@ -20,13 +20,13 @@ Repeat the following steps for the listed deployment units
 - **eip** - Reserves a set of static elastic IPs' which will be used for our NAT gateway and SSH Service
 - **igw** - Deploys an Internet gateway for the VPC to provide internet access
 - **nat** - Deploys a Network Address Translation (NAT) and updates the vpc route tables to use it where appropriate. This provides outbound only initiated access to the internet
-- **vpcednpoint** - Deploys vpcendpoints which offer dedicated network links to the cloud provider
+- **vpcednpoint** *Optional* - Deploys vpcendpoints which offer dedicated network links to the cloud provider
 - **ssh** - Creates an ssh auto-scale group which provides an ec2 Instance on a know IP address for management and troubleshooting
 
 Generate the templates used to deploy the services
 
 ```bash
-${GENERATION_DIR}/createSegmentTemplate.sh -u <deployment unit>
+${GENERATION_DIR}/createTemplate.sh -l segment -u <deployment unit>
 ```
 
 This should go through a few steps where we generate the cloudformation templates and scripts required to deploy the components
@@ -45,7 +45,7 @@ Repeat these steps for each deployment unit listed above
 
 Now that we have the shared resources deployed, we can look at the product specific infrastructure. A solution component is product specific infrastructure that doesn't have product specific code to deploy. This includes services like object stores (s3), databases (rds), file shares (efs) and container hosts (ecs).
 
-From the segment context, repeat the following steps for listed deployment units 
+From the segment context, repeat the following steps for listed deployment units
 
 - **iam** - Deploy permissions and roles for the solution components that will be deployed. This allows for the security configuration to be separated from the infrastructure deployment
 - **lg** - Deploy the log groups that will be used by the components to log their system level information. This allows for the resources to be recreated without recreating the logs and losing old log data
@@ -54,7 +54,7 @@ From the segment context, repeat the following steps for listed deployment units
 - **alm-ecs** - The infrastructure required to run an Elastic Container Service cluster ( auto-scalegroup, launch profile for instances, and an ecs cluster instance)
 
 ```bash
-${GENERATION_DIR}/createSolutionTemplate.sh -u <deployment unit>
+${GENERATION_DIR}/createTemplate.sh -l solution -u <deployment unit>
 ```
 
 This should go through a few steps where we generate the cloudformation templates and scripts required to deploy the components
@@ -98,7 +98,7 @@ The docker image will be pulled to your local docker instance then pushed to the
 
 ## Application Components
 
-Now that we have all of the infrastructure in place and the containers staged we can deploy the application components. Application components are generally deployed with the product specific code which is built as part of your CICD process. Since the automation components are already built, we can skip the build process and just deploy the components. 
+Now that we have all of the infrastructure in place and the containers staged we can deploy the application components. Application components are generally deployed with the product specific code which is built as part of your CICD process. Since the automation components are already built, we can skip the build process and just deploy the components.
 
 From the segment context, repeat the following steps for listed deployment units
 
@@ -108,7 +108,7 @@ From the segment context, repeat the following steps for listed deployment units
 - **jenkins** - Deploys an ECS service which ensures that a single instance of the Jenkins container is running at all times, along with a redirector instance
 
 ```bash
-${GENERATION_DIR}/createApplicationTemplate.sh -u <deployment unit>
+${GENERATION_DIR}/createTemplate.sh -l application -u <deployment unit>
 ```
 
 This should go through a few steps where we generate the cloudformation templates and scripts required to deploy the components

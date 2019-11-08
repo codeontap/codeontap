@@ -1,6 +1,6 @@
 # Local Environment Setup
 
-The first thing we need to is create a CMDB, the CMDB is the core of CodeOnTap and is used to define your product and how it is deployed. We have a set of templates available to get you started.
+The first thing we need to is create a CMDB, the CMDB is the core of CodeOnTap and is used to define your product and how it is deployed. We have a set of predefined templates to get you started
 
 Create a directory that will be used to store the CMDB and change into it
 

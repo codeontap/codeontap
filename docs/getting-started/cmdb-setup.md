@@ -2,7 +2,7 @@
 
 Now we need to create our CMDB, we will use [cookie cutter](https://github.com/audreyr/cookiecutter) to bootstrap this process.
 
-We will be creating two CMDBs, during a deployment these CMDBs are combined to gather the information required to deploy the product
+We will be creating two CMDBs, during a deployment these CMDBs are combined to build the information required to deploy the product
 
 ## Accounts
 
@@ -18,7 +18,7 @@ This contains the configuration for the ALM product itself.
 cookiecutter /opt/codeontap/patterns/cmdb/tenant
 ```
 
-Follow the prompts to create your Accounts CMDB and the tenant  
+Follow the prompts to create your Accounts CMDB and the tenant
 
 - **tenant_id** - This is a short ID of your overall enterprise
 - **tenant_name** - This is a longer name of your enterprise
@@ -62,7 +62,7 @@ cd /var/opt/codeontap
 Run the ALM cookie cutter template
 
 ```bash
-cookiecutter /opt/codeontap/patterns/products/application-lifecylce-management
+cookiecutter /opt/codeontap/patterns/products/app-lifecylce-mgmt
 ```
 
 Follow through the prompts to generate the CMDB. Leave any predefined values as they are for now
@@ -76,7 +76,7 @@ Follow through the prompts to generate the CMDB. Leave any predefined values as 
 - **source_ip_network** - IP Address Filtering for access to the jenkins server
 - **certificate_arn** - The ARN of the AWS ACM Certificate you created earlier
 - **certificate_cn** - The CN of the ACM Certificate you created `*.<domainname>`
-- **certificate_region** - The region the ACM Certificate was created in 
+- **certificate_region** - The region the ACM Certificate was created in
 - **slave_provider** - The container service that will be used to build Jenkins Agents
 - **ecs_instance_type** - If you are using ECS what instance type would you like to use
 - **security_realm** - The authentication provider that users will use to log into Jenkins - Select local for now
