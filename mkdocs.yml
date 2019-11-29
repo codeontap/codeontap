@@ -3,7 +3,7 @@ docs_dir: docs
 
 repo_url: https://github.com/codeontap/codeontap/
 
-theme: 
+theme:
   name: readthedocs
   titles_only: true
 
@@ -12,9 +12,9 @@ markdown_extensions:
   - toc:
       permalink: true
 
-nav: 
+nav:
   - 'Introduction': './index.md'
-  - 'Getting Started' : 
+  - 'Getting Started' :
     - 'Introduction' : './getting-started/index.md'
     - 'Local Environment Setup' : './getting-started/local-env-setup.md'
     - 'Create CMDB' : './getting-started/cmdb-setup.md'
@@ -27,13 +27,15 @@ nav:
     - 'AWS Data Pipelines' : './developer-guides/aws-data-pipeline.md'
   - 'Release Management':
     - 'Introduction' : './release-management/index.md'
-  - 'Reference' : 
+  - 'Architecture':
+    - 'Introduction' : './architecture/index.md'
+  - 'Reference' :
     - 'Components' : './reference/component-reference.md'
     - 'Configuration Management Database' : './reference/cmdb-reference.md'
   - 'Release Notes' :
     - '5.5' : './change-logs/5.5.md'
     - '6.0' : './change-logs/6.0.md'
-  - 'Advanced' : 
+  - 'Advanced' :
     - 'Introduction' : './advanced/index.md'
     - 'Versioning' : './advanced/versioning.md'
     - 'Create a Release' : './advanced/creating-a-release.md'
