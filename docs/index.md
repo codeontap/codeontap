@@ -25,4 +25,4 @@ The structure of the CMDB is based on series of files and folders which create a
 ## How do I use it
 
 - To see CodeOnTap in action you can work through the [getting started guide](./getting-started/index.md)
-- For more information on the CMDB structure check out the [CMDB Reference](./reference/cmdb.md)
+- For more information on the CMDB structure check out the [CMDB Reference](./reference/cmdb-reference.md)

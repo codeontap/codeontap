@@ -11,31 +11,49 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+
+extra_javascript:
+  - https://unpkg.com/mermaid@8.4.3/dist/mermaid.min.js
 
 nav:
-  - 'Introduction': './index.md'
+  - 'Introduction' : './index.md'
   - 'Getting Started' :
     - 'Introduction' : './getting-started/index.md'
-    - 'Local Environment Setup' : './getting-started/local-env-setup.md'
-    - 'Create CMDB' : './getting-started/cmdb-setup.md'
-    - 'Deploy Basic Components' : './getting-started/deploy-basic-components.md'
-    - 'Encrypt Secrets' : './getting-started/encrypt-secrets.md'
-    - 'Deploy Product Components' : './getting-started/deploy-product-components.md'
-    - 'Accessing Jenkins' : './getting-started/accessing-jenkins.md'
-  - 'Developer Guides':
+  - 'Architecture' :
+    - 'Introduction' : './architecture/index.md'
+    - 'Engine' : './architecture/engine.md'
+
+  - 'Automation' :
+    - 'Introduction' : './automation/index.md'
+    - 'Release Management' : './automation/release-management.md'
+    - 'Jenkins Pipeline' :
+      - 'Introduction': './automation/jenkins-setup/index.md'
+      - 'Local Environment Setup' : './automation/jenkins-setup/local-env-setup.md'
+      - 'Create CMDB' : './automation/jenkins-setup/cmdb-setup.md'
+      - 'Deploy Basic Components' : './automation/jenkins-setup/deploy-basic-components.md'
+      - 'Encrypt Secrets' : './automation/jenkins-setup/encrypt-secrets.md'
+      - 'Deploy Product Components' : './automation/jenkins-setup/deploy-product-components.md'
+      - 'Accessing Jenkins' : './automation/jenkins-setup/accessing-jenkins.md'
+      - 'Properties Files' : './automation/properties.md'
+
+  - 'Developer Guides' :
     - 'Introduction' : './developer-guides/index.md'
     - 'AWS Data Pipelines' : './developer-guides/aws-data-pipeline.md'
-  - 'Release Management':
-    - 'Introduction' : './release-management/index.md'
-  - 'Architecture':
-    - 'Introduction' : './architecture/index.md'
+
   - 'Reference' :
     - 'Components' : './reference/component-reference.md'
     - 'Configuration Management Database' : './reference/cmdb-reference.md'
+
   - 'Release Notes' :
     - '5.5' : './change-logs/5.5.md'
     - '6.0' : './change-logs/6.0.md'
-  - 'Advanced' :
+
+  - 'Development' :
     - 'Introduction' : './advanced/index.md'
     - 'Versioning' : './advanced/versioning.md'
     - 'Create a Release' : './advanced/creating-a-release.md'
