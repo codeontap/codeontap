@@ -8,12 +8,10 @@ version: 2
 mkdocs:
   configuration: mkdocs.yml
 
-formats: all
-
 build:
-  image: stable
+  image: latest
 
 python:
-  version: 3.7
+  version: 3.6
   install:
     - requirements: requirements.txt
