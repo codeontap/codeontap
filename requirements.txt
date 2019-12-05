@@ -1,2 +1,2 @@
 mkdocs>=1.0.0,<1.1.0
-pymdown-extensions
+pymdown-extensions>=6.0.0,<7.0.0
