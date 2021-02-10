@@ -1,3 +1,7 @@
+**This repo has been archived**
+
+CodeOnTap is now hamlet - https://github.com/hamlet-io - https://hamlet.io
+
 # CodeOnTap
 
 Welcome to CodeOnTap
